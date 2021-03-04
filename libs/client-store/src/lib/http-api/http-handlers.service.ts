@@ -3,14 +3,14 @@ import { Inject, Injectable } from '@angular/core';
 import { ApolloLink, split } from '@apollo/client/core';
 import { ErrorResponse, onError } from '@apollo/client/link/error';
 import { getMainDefinition } from '@apollo/client/utilities';
-import { TranslateService } from '@ngx-translate/core';
-import { Store } from '@ngxs/store';
 import {
   HTTP_STATUS,
   IWebClientAppEnvironment,
   WEB_CLIENT_APP_ENV,
   WINDOW,
-} from '@nx-ng-starter/client-util';
+} from '@mono/client-util';
+import { TranslateService } from '@ngx-translate/core';
+import { Store } from '@ngxs/store';
 import { HttpLink, HttpLinkHandler } from 'apollo-angular/http';
 import { createUploadLink } from 'apollo-upload-client';
 import { ExecutionResult, GraphQLError } from 'graphql';

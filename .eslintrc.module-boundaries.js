@@ -72,7 +72,7 @@ const clientConstraints = [
   },
   {
     sourceTag: 'scope:client-unit-testing',
-    onlyDependOnLibsWithTags: ['*'], // TODO: remove all library imports from client-unit-testing
+    onlyDependOnLibsWithTags: ['scope:client-util', 'scope:client-material'],
   },
   {
     sourceTag: 'scope:client-material',
@@ -108,20 +108,6 @@ const clientConstraints = [
     ],
   },
   {
-    sourceTag: 'scope:client-gql',
-    onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:proto', 'scope:client-util'],
-  },
-  {
-    sourceTag: 'scope:client-chatbot',
-    onlyDependOnLibsWithTags: [
-      'scope:client-unit-testing',
-      'scope:proto',
-      'scope:client-material',
-      'scope:client-store',
-      'scope:client-translate',
-    ],
-  },
-  {
     sourceTag: 'scope:client-util',
     onlyDependOnLibsWithTags: [],
   },
@@ -134,10 +120,8 @@ const clientConstraints = [
     onlyDependOnLibsWithTags: [
       'scope:client-unit-testing',
       'scope:proto',
-      'scope:client-gql',
       'scope:client-store',
       'scope:client-services',
-      'scope:client-chatbot',
       'scope:client-components',
       'scope:client-core',
       'scope:client-material',

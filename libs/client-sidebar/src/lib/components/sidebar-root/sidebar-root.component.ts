@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AppSidebarService } from '@mono/client-store';
 import { Navigate } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
-import { AppSidebarService } from '@nx-ng-starter/client-store';
 
 @Component({
   selector: 'app-sidebar-root',

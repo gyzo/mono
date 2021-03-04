@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
-import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@nx-ng-starter/client-util';
+import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@mono/client-util';
 
 @Component({
   selector: 'app-navbar',

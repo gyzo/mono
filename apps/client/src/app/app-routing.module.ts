@@ -5,19 +5,12 @@ export const APP_ROUTES: Route[] = [
   {
     path: '',
     loadChildren: () =>
-      import('@nx-ng-starter/client-components').then(mod => mod.AppClientComponentsModule),
+      import('@mono/client-components').then(mod => mod.AppClientComponentsModule),
   },
   {
     path: '',
     outlet: 'sidebar',
-    loadChildren: () =>
-      import('@nx-ng-starter/client-sidebar').then(mod => mod.AppClientSidebarModule),
-  },
-  {
-    path: '',
-    outlet: 'chatbot',
-    loadChildren: () =>
-      import('@nx-ng-starter/client-chatbot').then(mod => mod.AppClientChatbotModule),
+    loadChildren: () => import('@mono/client-sidebar').then(mod => mod.AppClientSidebarModule),
   },
   { path: '**', redirectTo: '' },
 ];

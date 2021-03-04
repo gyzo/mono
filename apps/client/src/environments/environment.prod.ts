@@ -1,5 +1,5 @@
 import { Capacitor } from '@capacitor/core';
-import { IWebClientAppEnvironment } from '@nx-ng-starter/client-util';
+import { IWebClientAppEnvironment } from '@mono/client-util';
 
 const platform: string = Capacitor.getPlatform();
 

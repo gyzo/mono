@@ -5,7 +5,7 @@ import {
   newTestBedMetadata,
   setupJestSpiesFor,
   TClassMemberSpiesObject,
-} from '@nx-ng-starter/client-unit-testing';
+} from '@mono/client-unit-testing';
 
 import { AppInfoPage } from './info-page.component';
 

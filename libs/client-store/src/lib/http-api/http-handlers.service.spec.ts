@@ -1,14 +1,14 @@
 import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
 import { HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
-import { Store } from '@ngxs/store';
-import { AppClientTranslateModule } from '@nx-ng-starter/client-translate';
+import { AppClientTranslateModule } from '@mono/client-translate';
 import {
   AppLocalStorageMock,
   getTestBedConfig,
   newTestBedMetadata,
-} from '@nx-ng-starter/client-unit-testing';
-import { HTTP_STATUS } from '@nx-ng-starter/client-util';
+} from '@mono/client-unit-testing';
+import { HTTP_STATUS } from '@mono/client-util';
+import { Store } from '@ngxs/store';
 import { Apollo } from 'apollo-angular';
 import { ExecutionResult, GraphQLError } from 'graphql';
 import { cold, getTestScheduler } from 'jasmine-marbles';

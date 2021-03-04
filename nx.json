@@ -17,7 +17,7 @@
     },
     "tsconfig.json": "*"
   },
-  "npmScope": "nx-ng-starter",
+  "npmScope": "mono",
   "projects": {
     "api": {
       "tags": ["scope:api", "type:application"]
@@ -27,9 +27,6 @@
     },
     "client": {
       "tags": ["scope:client", "type:application"]
-    },
-    "client-chatbot": {
-      "tags": ["scope:client-chatbot", "type:feature"]
     },
     "client-components": {
       "tags": ["scope:client-components", "type:feature"]
@@ -44,9 +41,6 @@
     "client-e2e": {
       "implicitDependencies": ["client"],
       "tags": ["scope:client-e2e", "type:e2e"]
-    },
-    "client-gql": {
-      "tags": ["scope:client-gql", "type:data-access"]
     },
     "client-material": {
       "tags": ["scope:client-material", "type:ui"]
@@ -76,20 +70,6 @@
       "implicitDependencies": ["documentation"],
       "tags": ["scope:documentation-e2e", "type:e2e"]
     },
-    "elements": {
-      "tags": ["scope:elements", "type:application"]
-    },
-    "elements-e2e": {
-      "implicitDependencies": ["elements"],
-      "tags": ["scope:elements-e2e", "type:e2e"]
-    },
-    "elements-testing": {
-      "tags": ["scope:elements-testing", "type:application"]
-    },
-    "elements-testing-e2e": {
-      "implicitDependencies": ["elements-testing"],
-      "tags": ["scope:elements-testing-e2e", "type:e2e"]
-    },
     "proto": {
       "tags": ["scope:proto", "type:data-access"]
     },
@@ -100,7 +80,7 @@
   "tasksRunnerOptions": {
     "default": {
       "options": {
-        "cacheDirectory": "/tmp/nx/nx-ng-starter",
+        "cacheDirectory": "/tmp/nx/mono",
         "cacheableOperations": ["build", "lint", "test", "e2e", "build-storybook"],
         "runtimeCacheInputs": ["node -v", "echo $IMPORTANT_ENV_VAR"]
       },

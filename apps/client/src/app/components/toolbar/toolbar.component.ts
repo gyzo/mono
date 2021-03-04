@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { AppSidebarService, chatbotActions } from '@mono/client-store';
 import { Store } from '@ngxs/store';
-import { AppSidebarService, chatbotActions } from '@nx-ng-starter/client-store';
 
 @Component({
   selector: 'app-toolbar',
