@@ -1,6 +1,6 @@
 import { InjectionToken } from '@angular/core';
+import { IActionPayload } from '@mono/client-util';
 import { StateToken } from '@ngxs/store';
-import { IActionPayload } from '@nx-ng-starter/client-util';
 import { Observable } from 'rxjs';
 import { WebSocketSubjectConfig } from 'rxjs/webSocket';
 

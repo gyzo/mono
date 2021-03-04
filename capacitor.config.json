@@ -1,6 +1,6 @@
 {
-  "appId": "app.web.nx_ng_starter",
-  "appName": "nx-ng-starter",
+  "appId": "app.web.client",
+  "appName": "mono",
   "bundledWebRuntime": false,
   "npmClient": "yarn",
   "webDir": "dist/apps/client",

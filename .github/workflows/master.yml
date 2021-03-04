@@ -79,24 +79,19 @@ jobs:
       - name: Build all (production)
         run: npx nx run-many --target=build --all --configuration production
 
-      - name: Deploy client app
-        run: bash tools/shell/firebase-deploy.sh "$FIREBASE_DEPLOY_TOKEN" client || exit 1
-        env:
-          FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
-
-      - name: Deploy elements app
-        run: |
-          bash tools/shell/generate-elements-bootstrap-script.sh ./dist/apps elements
-          bash tools/shell/firebase-deploy.sh "$FIREBASE_DEPLOY_TOKEN" elements || exit 1
-        env:
-          FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
+      # TODO: configure client app deployment
+      #- name: Deploy client app
+      #  run: bash tools/shell/firebase-deploy.sh "$FIREBASE_DEPLOY_TOKEN" client || exit 1
+      #  env:
+      #    FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
 
       - name: Build documentation
         run: |
           npx cypress install
           yarn build:documentation:prod
 
-      - name: Deploy documentation app
-        run: bash tools/shell/firebase-deploy.sh "$FIREBASE_DEPLOY_TOKEN" documentation || exit 1
-        env:
-          FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
+      # TODO: configure documentation deployment
+      #- name: Deploy documentation app
+      #  run: bash tools/shell/firebase-deploy.sh "$FIREBASE_DEPLOY_TOKEN" documentation || exit 1
+      #  env:
+      #    FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}

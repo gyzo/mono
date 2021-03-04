@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
+import { actionPayloadConstructor } from '@mono/client-util';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
-import { actionPayloadConstructor } from '@nx-ng-starter/client-util';
 
 import {
   HTTP_PROGRESS_STATE_TOKEN,

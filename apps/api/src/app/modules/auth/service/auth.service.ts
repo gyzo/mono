@@ -1,4 +1,3 @@
-import { Injectable } from '@nestjs/common';
 import {
   Message,
   UserContacts,
@@ -6,7 +5,8 @@ import {
   UserLogoutCredentials,
   UserName,
   UserProfile,
-} from '@nx-ng-starter/api-interface';
+} from '@mono/api-interface';
+import { Injectable } from '@nestjs/common';
 
 import { ApiAuthUtilsService } from '../../auth-utils/service/auth-utils.service';
 

@@ -1,14 +1,14 @@
 import { HttpTestingController } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppClientTranslateModule } from '@nx-ng-starter/client-translate';
+import { AppClientTranslateModule } from '@mono/client-translate';
 import {
   flushHttpRequests,
   getTestBedConfig,
   newTestBedMetadata,
   setupJestSpiesFor,
   TClassMemberSpiesObject,
-} from '@nx-ng-starter/client-unit-testing';
+} from '@mono/client-unit-testing';
 
 import { AppInfoComponent } from './info.component';
 

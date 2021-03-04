@@ -1,8 +1,8 @@
 import { HttpRequest } from '@angular/common/http';
 import { HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
-import { AppClientTranslateModule } from '@nx-ng-starter/client-translate';
-import { getTestBedConfig, newTestBedMetadata } from '@nx-ng-starter/client-unit-testing';
+import { AppClientTranslateModule } from '@mono/client-translate';
+import { getTestBedConfig, newTestBedMetadata } from '@mono/client-unit-testing';
 import { Apollo } from 'apollo-angular';
 import { of } from 'rxjs';
 

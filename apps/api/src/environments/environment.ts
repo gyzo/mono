@@ -1,4 +1,4 @@
-import { ApiEnvironment } from '@nx-ng-starter/api-interface';
+import { ApiEnvironment } from '@mono/api-interface';
 
 /**
  * Development environment variables.

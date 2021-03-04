@@ -1,3 +1,4 @@
+import { defaultWsPort } from '@mono/api-interface';
 import {
   OnGatewayConnection,
   OnGatewayDisconnect,
@@ -6,7 +7,6 @@ import {
   WebSocketServer,
   WsResponse,
 } from '@nestjs/websockets';
-import { defaultWsPort } from '@nx-ng-starter/api-interface';
 import { BehaviorSubject, Observable, timer } from 'rxjs';
 import { map, takeWhile } from 'rxjs/operators';
 import { Server } from 'ws';

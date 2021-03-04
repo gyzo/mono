@@ -6,16 +6,16 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { NgxsFormPluginModule } from '@ngxs/form-plugin';
-import { NgxsModule } from '@ngxs/store';
-import { AppClientMaterialModule } from '@nx-ng-starter/client-material';
+import { AppClientMaterialModule } from '@mono/client-material';
 import {
   documentFactory,
   IWebClientAppEnvironment,
   WEB_CLIENT_APP_ENV,
   WINDOW,
   windowFactory,
-} from '@nx-ng-starter/client-util';
+} from '@mono/client-util';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+import { NgxsModule } from '@ngxs/store';
 import { HttpLink } from 'apollo-angular/http';
 
 import { AppDummyComponent } from './components/dummy/dummy.component.mock';

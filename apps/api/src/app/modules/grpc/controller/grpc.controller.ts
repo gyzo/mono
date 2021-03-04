@@ -1,6 +1,6 @@
 import { Controller, Get, Inject, OnModuleInit, Param } from '@nestjs/common';
 import { ClientGrpc, GrpcMethod, GrpcStreamMethod } from '@nestjs/microservices';
-import { nxngstarter } from '@nx-ng-starter/proto';
+import { nxngstarter } from '@mono/proto';
 import { from, Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { toArray } from 'rxjs/operators';
 import { NXNGSTARTER_PACKAGE } from '../grpc-client.options';

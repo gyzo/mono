@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AppSidebarService } from '@nx-ng-starter/client-store';
+import { AppSidebarService } from '@mono/client-store';
 
 @Component({
   selector: 'app-content',

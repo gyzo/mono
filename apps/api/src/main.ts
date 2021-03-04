@@ -1,10 +1,10 @@
+import { defaultWsPort } from '@mono/api-interface';
 import { ValidationPipe } from '@nestjs/common';
 import { CorsOptions } from '@nestjs/common/interfaces/external/cors-options.interface';
 import { NestFactory } from '@nestjs/core';
 import { MicroserviceOptions } from '@nestjs/microservices';
 import { ExpressAdapter } from '@nestjs/platform-express';
 import { WsAdapter } from '@nestjs/platform-ws';
-import { defaultWsPort } from '@nx-ng-starter/api-interface';
 import e from 'express';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
