@@ -1,10 +1,10 @@
-# NxNgStarter
+# Mono
 
-Angular NestJS Nx starter project with workflow automation.
+Nx + Angular + NestJS monorepository.
 
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
-![Master](https://github.com/rfprod/nx-ng-starter/workflows/Master/badge.svg) ![PR validation](https://github.com/rfprod/nx-ng-starter/workflows/PR%20validation/badge.svg)
+![Master](https://github.com/rfprod/mono/workflows/Master/badge.svg) ![PR validation](https://github.com/rfprod/mono/workflows/PR%20validation/badge.svg)
 
 ## Requirements
 
@@ -61,7 +61,7 @@ Applications as well as generated documentation, testing reports, and a custom c
 
 ### Webapp
 
-- [Nx Ng Starter](https://nx-ng-starter.web.app)
+- [Portfolio](https://rfprod.tk)
 
 ### Elements webapp
 

@@ -1,5 +1,9 @@
 {
   "projects": {
-    "default": "nx-ng-starter"
+    "default": "rfprod-2cda1"
+  },
+  "hosting": {
+    "site": "mono-documentation",
+    "public": "dist/apps/documentation",
   }
 }
