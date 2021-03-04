@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "module": "commonjs",
+    "outDir": "../../dist/out-tsc/api-interface",
+    "types": ["jest", "node"]
+  },
+  "extends": "./tsconfig.json",
+  "include": ["**/*.spec.ts", "**/*.spec.tsx", "**/*.spec.js", "**/*.spec.jsx", "**/*.d.ts"]
+}
