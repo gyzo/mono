@@ -79,9 +79,9 @@ jobs:
       - name: Build all (production)
         run: npx nx run-many --target=build --all --configuration production
 
-      # TODO: configure client app deployment
-      #- name: Deploy client app
-      #  run: bash tools/shell/firebase-deploy.sh "$FIREBASE_DEPLOY_TOKEN" client || exit 1
+      # TODO: configure portfolio app deployment
+      #- name: Deploy portfolio app
+      #  run: bash tools/shell/firebase-deploy.sh "$FIREBASE_DEPLOY_TOKEN" portfolio || exit 1
       #  env:
       #    FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
 

@@ -7,6 +7,7 @@ import { Component } from '@angular/core';
  */
 @Component({
   selector: 'app-dummy-component',
-  template: '<span>dummy component</span>',
+  template: ` <span appAutoscroll>dummy component</span>
+    <input appAutofocus value="input" />`,
 })
 export class AppDummyComponent {}

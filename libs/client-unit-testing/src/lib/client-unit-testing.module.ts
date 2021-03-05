@@ -1,4 +1,4 @@
-import { APP_BASE_HREF, DOCUMENT } from '@angular/common';
+import { APP_BASE_HREF, DatePipe, DOCUMENT } from '@angular/common';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ModuleWithProviders, NgModule, NgZone, Provider } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -16,10 +16,10 @@ import {
 } from '@mono/client-util';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsModule } from '@ngxs/store';
-import { HttpLink } from 'apollo-angular/http';
 
 import { AppDummyComponent } from './components/dummy/dummy.component.mock';
 import { dialogRefMockProvider } from './refs/dialog-ref.mock';
+import { overlayContainerMock } from './refs/overlay-container.mock';
 import { overlayRefMockProvider } from './refs/overlay-ref.mock';
 import { matSnackbarRefMockProvider } from './refs/snackbar-ref.mock';
 
@@ -34,9 +34,9 @@ export const testingEnvironment: IWebClientAppEnvironment = {
 };
 
 export const mocksCoreModuleProviders: Provider[] = [
-  HttpLink,
   dialogRefMockProvider,
   overlayRefMockProvider,
+  overlayContainerMock,
   matSnackbarRefMockProvider,
   {
     provide: APP_BASE_HREF,
@@ -53,6 +53,7 @@ export const mocksCoreModuleProviders: Provider[] = [
     useFactory: () =>
       new NgZone({ enableLongStackTrace: false, shouldCoalesceEventChangeDetection: false }),
   },
+  DatePipe,
 ];
 
 @NgModule({

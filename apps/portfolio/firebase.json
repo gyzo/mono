@@ -1,14 +1,11 @@
 {
-  "functions": {
-    "predeploy": "npm --prefix functions run dist:get"
-  },
   "hosting": {
     "headers": [
       {
         "headers": [
           {
             "key": "Access-Control-Allow-Origin",
-            "value": "https://nx-ng-starter.firebaseapp.com https://nx-ng-starter.web.app"
+            "value": "https://rfprod-2cda1.firebaseapp.com https://rfprod-2cda1.web.app https://rfprod.tk"
           },
           {
             "key": "Access-Control-Allow-Methods",
@@ -37,52 +34,41 @@
             "value": "-1"
           },
           {
-            "key": "Pragma",
+            "key": "Pragme",
             "value": "no-cache"
           }
         ],
-        "source": "/(client|documentation|api)"
+        "source": "/api/(githubAccessToken|sendEmail|githubUser|githubUserRepos|githubUserReposLanguages)"
       }
     ],
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**", "**/src/**"],
-    "public": "./dist/apps/client",
+    "public": "dist",
     "rewrites": [
       {
-        "function": "ping",
-        "source": "/api/ping"
+        "function": "githubAccessToken",
+        "source": "/api/githubAccessToken"
       },
       {
-        "function": "login",
-        "source": "/api/login"
+        "function": "sendEmail",
+        "source": "/api/sendEmail"
       },
       {
-        "function": "logout",
-        "source": "/api/logout"
+        "function": "githubUser",
+        "source": "/api/githubUser"
       },
       {
-        "function": "signup",
-        "source": "/api/signup"
+        "function": "githubUserRepos",
+        "source": "/api/githubUserRepos"
       },
       {
-        "function": "graphql",
-        "source": "/api/graphql"
-      },
-      {
-        "function": "grpc",
-        "source": "/api/grpc"
+        "function": "githubUserReposLanguages",
+        "source": "/api/githubUserReposLanguages"
       },
       {
         "destination": "/index.html",
-        "source": "/client"
-      },
-      {
-        "destination": "/documentation/index.html",
-        "source": "/documentation"
-      },
-      {
-        "destination": "/index.html",
-        "source": "**/!(*.*|api|documentation|client)"
+        "source": "**/!(*.*|githubAccessToken|sendEmail|githubUser|githubUserRepos|githubUserReposLanguages)"
       }
-    ]
+    ],
+    "site": "rfprod-2cda1"
   }
 }
