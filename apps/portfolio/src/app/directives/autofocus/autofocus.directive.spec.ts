@@ -1,25 +1,25 @@
 import { DebugElement } from '@angular/core';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
-import { DummyComponent } from 'src/app/mocks/components/dummy.component';
+import { AppDummyComponent } from '@mono/client-unit-testing';
 
-import { AutofocusDirective } from './autofocus.directive';
+import { AppAutofocusDirective } from './autofocus.directive';
 
-describe('AutofocusDirective', () => {
-  let fixture: ComponentFixture<DummyComponent>;
+describe('AppAutofocusDirective', () => {
+  let fixture: ComponentFixture<AppDummyComponent>;
   let debugElement: DebugElement;
-  let directive: AutofocusDirective;
+  let directive: AppAutofocusDirective;
 
   beforeEach(
     waitForAsync(() => {
       void TestBed.configureTestingModule({
-        declarations: [DummyComponent, AutofocusDirective],
+        declarations: [AppDummyComponent, AppAutofocusDirective],
       })
         .compileComponents()
         .then(() => {
-          fixture = TestBed.createComponent(DummyComponent);
-          debugElement = fixture.debugElement.query(By.directive(AutofocusDirective));
-          directive = debugElement.injector.get(AutofocusDirective);
+          fixture = TestBed.createComponent(AppDummyComponent);
+          debugElement = fixture.debugElement.query(By.directive(AppAutofocusDirective));
+          directive = debugElement.injector.get(AppAutofocusDirective);
         });
     }),
   );

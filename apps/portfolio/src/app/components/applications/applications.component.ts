@@ -1,12 +1,12 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
+import { sidebarUiActions } from '@mono/client-store';
 import { Store } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 
 import { IFlatNode, ITreeNode, IUserConfig } from '../../interfaces';
-import { uiActions } from '../../state/ui/ui.store';
-import { AppUserService } from '../../state/user/user.service';
+import { AppGithubUserService } from '../../state/github-user/github-user.service';
 
 /**
  * Tree transformer.
@@ -72,7 +72,7 @@ export class AppApplicationsComponent {
   /**
    *
    */
-  constructor(private readonly store: Store, private readonly user: AppUserService) {}
+  constructor(private readonly store: Store, private readonly user: AppGithubUserService) {}
 
   /**
    * Resolves if tree node has a child.
@@ -110,6 +110,6 @@ export class AppApplicationsComponent {
    * Closes sidebar.
    */
   public sidebarCloseHandler(): void {
-    void this.store.dispatch(new uiActions.patchState({ sidenavOpened: false }));
+    void this.store.dispatch(new sidebarUiActions.setState({ sidebarOpened: false }));
   }
 }

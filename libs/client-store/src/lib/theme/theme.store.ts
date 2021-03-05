@@ -4,7 +4,7 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { setThemeState } from './theme.actions';
 import { IThemeStateModel, THEME_STATE_TOKEN, TThemePayload } from './theme.interface';
 
-const themeThemeActions = {
+const themeActions = {
   setThemeState,
 };
 
@@ -32,4 +32,4 @@ class AppThemeState {
   }
 }
 
-export { AppThemeState, themeThemeActions };
+export { AppThemeState, themeActions };

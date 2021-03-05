@@ -1,9 +1,9 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { AppGithubUserService } from '@mono/client-store';
 import { WINDOW } from '@mono/client-util';
 import { Subscription } from 'rxjs';
 
-import { AppUserService } from '../../state/user/user.service';
 import { AppContactComponent } from '../contact/contact.component';
 
 /**
@@ -46,7 +46,7 @@ export class AppIndexComponent {
    */
   constructor(
     private readonly dialog: MatDialog,
-    private readonly user: AppUserService,
+    private readonly user: AppGithubUserService,
     @Inject(WINDOW) private readonly win: Window,
   ) {
     void this.user.getUserData().subscribe();

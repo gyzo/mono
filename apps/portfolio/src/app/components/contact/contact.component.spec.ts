@@ -13,11 +13,11 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AppClientMaterialModule } from '@mono/client-material';
+import { AppHttpHandlersService } from '@mono/client-store';
 import { AppDialogRefMock, AppDummyComponent } from '@mono/client-unit-testing';
+import { WINDOW, windowFactory } from '@mono/client-util';
 
-import { AppMaterialModule } from '../../modules/material/material.module';
-import { AppHttpHandlersService } from '../../services/http-handlers/http-handlers.service';
-import { WINDOW } from '../../services/providers.config';
 import { AppSendEmailService } from '../../services/send-email/send-email.service';
 import { AppContactComponent } from './contact.component';
 
@@ -32,12 +32,12 @@ describe('AppContactComponent', () => {
       FormsModule,
       ReactiveFormsModule,
       HttpClientTestingModule,
-      AppMaterialModule,
+      AppClientMaterialModule,
       FlexLayoutModule,
       RouterTestingModule.withRoutes([{ path: '', component: AppDummyComponent }]),
     ],
     providers: [
-      { provide: WINDOW, useValue: window },
+      { provide: WINDOW, useValue: windowFactory },
       { provide: MAT_DIALOG_DATA, useValue: MOCKED_MODAL_DATA },
       {
         provide: MatDialogRef,

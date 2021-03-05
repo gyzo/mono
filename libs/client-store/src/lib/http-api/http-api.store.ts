@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { actionPayloadConstructor } from '@mono/client-util';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 
+import { ping } from './http-api.actions';
 import {
   HTTP_API_STATE_TOKEN,
   httpApiInitialState,
@@ -11,9 +11,6 @@ import {
   THttpApiPayload,
 } from './http-api.interface';
 import { AppHttpApiService } from './http-api.service';
-
-const createAction = actionPayloadConstructor(HTTP_API_STATE_TOKEN.getName());
-const ping = createAction<THttpApiPayload>('ping');
 
 export const httpApiActions = {
   ping,

@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { IGuthubUser } from 'src/app/interfaces';
+
+import { IGuthubUser } from '../../interfaces/github-api.interface';
 
 /**
  * Application status badges component.

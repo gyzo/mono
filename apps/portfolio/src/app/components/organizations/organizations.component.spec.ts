@@ -4,9 +4,9 @@ import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@an
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
+import { AppClientMaterialModule } from '@mono/client-material';
 import { AppDummyComponent } from '@mono/client-unit-testing';
 
-import { AppMaterialModule } from '../../modules/material/material.module';
 import { AppOrganizationsComponent } from './organizations.component';
 
 describe('AppOrganizationsComponent', () => {
@@ -16,7 +16,7 @@ describe('AppOrganizationsComponent', () => {
       BrowserDynamicTestingModule,
       NoopAnimationsModule,
       HttpClientTestingModule,
-      AppMaterialModule,
+      AppClientMaterialModule,
       FlexLayoutModule,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

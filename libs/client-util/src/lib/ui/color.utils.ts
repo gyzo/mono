@@ -1,5 +1,3 @@
-import { SimpleChange } from '@angular/core';
-
 const maxColorHexLength = 7;
 const maxNumericColorValue = 256;
 const radix = 16;
@@ -20,9 +18,4 @@ export function getRandomColor() {
     colorHEX = `${colorHEX}c`;
   }
   return colorHEX;
-}
-
-export interface ITypedSimpleChange<T> extends SimpleChange {
-  previousValue: T | null;
-  currentValue: T | null;
 }

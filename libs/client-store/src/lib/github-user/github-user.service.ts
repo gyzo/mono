@@ -9,17 +9,17 @@ import {
   IGithubUserPublicEvent,
   IGithubUserRepo,
   IGuthubUser,
-} from '../../interfaces/github-api.interface';
-import { IUserConfig } from '../../interfaces/user-config.interface';
-import { AppGithubService } from '../../services/github/github.service';
-import { AppUserConfigService } from '../../services/user-config/user-config.service';
-import { IUserService } from './user.interface';
-import { AppUserState, USER_STATE_TOKEN, userActions } from './user.store';
+} from './github-api.interface';
+import { AppGithubApiService } from './github-api.service';
+import { IUserConfig } from './github-user.config';
+import { GITHUB_USER_STATE_TOKEN, IUserService } from './github-user.interface';
+import { AppGithubUserState, userActions } from './github-user.store';
+import { AppUserConfigService } from './github-user-config.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class AppUserService implements IUserService {
+export class AppGithubUserService implements IUserService {
   private readonly githubOrgs = new BehaviorSubject<IGithubUserOrganization[]>([]);
 
   public readonly githubOrgs$ = this.githubOrgs.asObservable();
@@ -28,9 +28,9 @@ export class AppUserService implements IUserService {
 
   public readonly publicEvents$ = this.publicEvents.asObservable();
 
-  public readonly userData$ = this.store.select(AppUserState.getState);
+  public readonly userData$ = this.store.select(AppGithubUserState.getState);
 
-  public readonly languageIcons$ = this.store.select(AppUserState.getState).pipe(
+  public readonly languageIcons$ = this.store.select(AppGithubUserState.getState).pipe(
     filter(state => typeof state.userConfig?.languageIcons !== 'undefined'),
     map(state => state.userConfig?.languageIcons),
   );
@@ -41,14 +41,14 @@ export class AppUserService implements IUserService {
   constructor(
     private readonly store: Store,
     private readonly userConfig: AppUserConfigService,
-    private readonly github: AppGithubService,
+    private readonly githubApi: AppGithubApiService,
   ) {}
 
   /**
    * Gets user data and updates state.
    */
   public getUserData() {
-    return this.github.getGithubAccessToken().pipe(
+    return this.githubApi.getGithubAccessToken().pipe(
       concatMap(() => this.getUserConfig()),
       concatMap(userConfig => {
         const username = userConfig.username.github;
@@ -90,7 +90,7 @@ export class AppUserService implements IUserService {
    * @username github user name
    */
   public getGithubProfile(username: string) {
-    return this.github.getProfile(username).pipe(
+    return this.githubApi.getProfile(username).pipe(
       concatMap((data: IGuthubUser) => {
         const github = data;
         return this.store.dispatch(new userActions.setUserState({ github })).pipe(mapTo(data));
@@ -103,7 +103,7 @@ export class AppUserService implements IUserService {
    * @username github user name
    */
   public getGithubRepos(username: string) {
-    return this.github.getRepos(username).pipe(
+    return this.githubApi.getRepos(username).pipe(
       concatMap((data: IGithubUserRepo[]) => {
         const githubRepos = data;
         return this.store
@@ -126,9 +126,9 @@ export class AppUserService implements IUserService {
    * @repoName repository name
    */
   private getGithubRepoLanguages(username: string, repoName: string) {
-    return this.github.getRepoLanguages(username, repoName).pipe(
+    return this.githubApi.getRepoLanguages(username, repoName).pipe(
       concatMap(data =>
-        this.store.selectOnce(USER_STATE_TOKEN).pipe(map(state => ({ state, data }))),
+        this.store.selectOnce(GITHUB_USER_STATE_TOKEN).pipe(map(state => ({ state, data }))),
       ),
       map(({ state, data }) => {
         const githubLanguages: IGithubRepoLanguages = { ...state.githubLanguages };
@@ -181,7 +181,7 @@ export class AppUserService implements IUserService {
    * @username github user name
    */
   public getGithubUserOrganizations(username: string) {
-    return this.github.getUserOrganizations(username).pipe(
+    return this.githubApi.getUserOrganizations(username).pipe(
       concatMap((githubOrgs: IGithubUserOrganization[]) => {
         this.githubOrgs.next(githubOrgs);
         return this.store
@@ -196,7 +196,7 @@ export class AppUserService implements IUserService {
    * @username github user name
    */
   public getGithubUserPublicEvents(username: string) {
-    return this.github.getPublicEvents(username).pipe(
+    return this.githubApi.getPublicEvents(username).pipe(
       concatMap((publicEventsData: IGithubUserPublicEvent<unknown>[]) => {
         const publicEvents = publicEventsData.reverse();
         void timer(0)

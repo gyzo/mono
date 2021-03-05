@@ -1,13 +1,15 @@
 import { ChangeDetectionStrategy, Component, HostBinding, OnInit } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
+import {
+  AppHttpProgressService,
+  AppSidebarState,
+  AppThemeState,
+  sidebarUiActions,
+  themeActions,
+} from '@mono/client-store';
 import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
-
-import { AppHttpHandlersService } from '../../services/http-handlers/http-handlers.service';
-import { AppThemeService } from '../../state/theme/theme.service';
-import { AppThemeState } from '../../state/theme/theme.store';
-import { AppUiState, uiActions } from '../../state/ui/ui.store';
 
 /**
  * Application root component.
@@ -36,36 +38,32 @@ export class AppRootComponent implements OnInit {
   /**
    * Sidenav opened state.
    */
-  @Select(AppUiState.getSidenavOpened)
+  @Select(AppSidebarState.getSidebarOpened)
   public readonly sidenavOpened$!: Observable<boolean>;
 
-  public readonly showSpinner$ = this.handlers.httpProgress$.pipe(
-    filter(progress => typeof progress.loading === 'boolean'),
-    map(progress => progress.loading),
+  public readonly showSpinner$ = this.progress.output.all$.pipe(
+    filter(progress => typeof progress.mainView === 'boolean'),
+    map(progress => progress.mainView),
   );
 
-  /**
-   * Constructor.
-   */
   constructor(
     private readonly store: Store,
     private readonly dateAdapter: DateAdapter<Date>,
-    private readonly handlers: AppHttpHandlersService,
-    private readonly themeService: AppThemeService,
+    private readonly progress: AppHttpProgressService,
   ) {}
 
   /**
    * Closes sidebar.
    */
   public sidebarCloseHandler(): void {
-    void this.store.dispatch(new uiActions.patchState({ sidenavOpened: false }));
+    void this.store.dispatch(new sidebarUiActions.setState({ sidebarOpened: false }));
   }
 
   /**
    * Toggles sidenav state.
    */
   public toggleSidenav(): void {
-    void this.store.dispatch(new uiActions.toggleSidenav());
+    void this.store.dispatch(new sidebarUiActions.toggleVisibility());
   }
 
   /**
@@ -75,11 +73,8 @@ export class AppRootComponent implements OnInit {
     const hours = new Date().getHours();
     const morning = 9;
     const evening = 18;
-    if (hours <= morning || hours >= evening) {
-      void this.themeService.enableDarkTheme().subscribe();
-    } else {
-      void this.themeService.disableDarkTheme().subscribe();
-    }
+    const darkThemeEnabled = hours <= morning || hours >= evening ? true : false;
+    void this.store.dispatch(new themeActions.setThemeState({ darkThemeEnabled })).subscribe();
   }
 
   /**

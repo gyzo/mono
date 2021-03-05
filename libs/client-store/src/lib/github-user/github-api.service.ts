@@ -1,8 +1,12 @@
-import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
+import { WINDOW } from '@mono/client-util';
+import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
-import { catchError, finalize, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 
+import { AppHttpHandlersService } from '../http-api/http-handlers.service';
+import { httpProgressActions } from '../http-progress/http-progress.store';
 import {
   IGithubAccessToken,
   IGithubApiEngpoints,
@@ -12,12 +16,7 @@ import {
   IGithubUserPublicEvent,
   IGithubUserRepo,
   IGuthubUser,
-} from '../../interfaces';
-import {
-  AppHttpHandlersService,
-  HTTP_PROGRESS_MODIFIER,
-} from '../http-handlers/http-handlers.service';
-import { WINDOW } from '../providers.config';
+} from './github-api.interface';
 
 /**
  * Github service.
@@ -25,7 +24,7 @@ import { WINDOW } from '../providers.config';
 @Injectable({
   providedIn: 'root',
 })
-export class AppGithubService {
+export class AppGithubApiService {
   /**
    * Github access token.
    */
@@ -56,6 +55,7 @@ export class AppGithubService {
    */
   constructor(
     private readonly http: HttpClient,
+    private readonly store: Store,
     private readonly handlers: AppHttpHandlersService,
     @Inject(WINDOW) private readonly win: Window,
   ) {}
@@ -65,15 +65,12 @@ export class AppGithubService {
    */
   public getGithubAccessToken(): Observable<IGithubAccessToken> {
     const url = this.endpoints.githubAccessToken();
-    this.handlers.toggleHttpProgress(HTTP_PROGRESS_MODIFIER.START);
-    return this.http.get<IGithubAccessToken>(url).pipe(
-      tap(res => {
-        this.githubAccessToken = res.token;
-      }),
-      catchError((error: HttpErrorResponse) => this.handlers.handleError(error)),
-      finalize(() => {
-        this.handlers.toggleHttpProgress(HTTP_PROGRESS_MODIFIER.STOP);
-      }),
+    return this.handlers.pipeHttpResponse(
+      this.http.get<IGithubAccessToken>(url).pipe(
+        tap(res => {
+          this.githubAccessToken = res.token;
+        }),
+      ),
     );
   }
 
@@ -84,15 +81,10 @@ export class AppGithubService {
   public getProfile(username: string): Observable<IGuthubUser> {
     const url = this.endpoints.user(username);
     const headers = this.getAuthHeaders();
-    this.handlers.toggleHttpProgress(HTTP_PROGRESS_MODIFIER.START);
-    return this.http
-      .get<IGuthubUser>(url, { headers })
-      .pipe(
-        catchError((error: HttpErrorResponse) => this.handlers.handleError(error)),
-        finalize(() => {
-          this.handlers.toggleHttpProgress(HTTP_PROGRESS_MODIFIER.STOP);
-        }),
-      );
+    void this.store.dispatch(new httpProgressActions.startProgress());
+    return this.handlers.pipeHttpResponse(
+      this.http.get<IGuthubUser>(url, { headers }),
+    );
   }
 
   /**
@@ -102,15 +94,9 @@ export class AppGithubService {
   public getRepos(username: string): Observable<IGithubUserRepo[]> {
     const url = this.endpoints.repos(username);
     const headers = this.getAuthHeaders();
-    this.handlers.toggleHttpProgress(HTTP_PROGRESS_MODIFIER.START);
-    return this.http
-      .get<IGithubUserRepo[]>(url, { headers })
-      .pipe(
-        catchError((error: HttpErrorResponse) => this.handlers.handleError(error)),
-        finalize(() => {
-          this.handlers.toggleHttpProgress(HTTP_PROGRESS_MODIFIER.STOP);
-        }),
-      );
+    return this.handlers.pipeHttpResponse(
+      this.http.get<IGithubUserRepo[]>(url, { headers }),
+    );
   }
 
   /**
@@ -121,15 +107,9 @@ export class AppGithubService {
   public getRepoLanguages(username: string, repo: string): Observable<IGithubRepoLanguages> {
     const url = this.endpoints.languages(username, repo);
     const headers = this.getAuthHeaders();
-    this.handlers.toggleHttpProgress(HTTP_PROGRESS_MODIFIER.START);
-    return this.http
-      .get<IGithubRepoLanguages>(url, { headers })
-      .pipe(
-        catchError((error: HttpErrorResponse) => this.handlers.handleError(error)),
-        finalize(() => {
-          this.handlers.toggleHttpProgress(HTTP_PROGRESS_MODIFIER.STOP);
-        }),
-      );
+    return this.handlers.pipeHttpResponse(
+      this.http.get<IGithubRepoLanguages>(url, { headers }),
+    );
   }
 
   /**
@@ -139,15 +119,9 @@ export class AppGithubService {
   public getUserOrganizations(username: string): Observable<IGithubUserOrganization[]> {
     const url = this.endpoints.organizations(username);
     const headers = this.getAuthHeaders();
-    this.handlers.toggleHttpProgress(HTTP_PROGRESS_MODIFIER.START);
-    return this.http
-      .get<IGithubUserOrganization[]>(url, { headers })
-      .pipe(
-        catchError((error: HttpErrorResponse) => this.handlers.handleError(error)),
-        finalize(() => {
-          this.handlers.toggleHttpProgress(HTTP_PROGRESS_MODIFIER.STOP);
-        }),
-      );
+    return this.handlers.pipeHttpResponse(
+      this.http.get<IGithubUserOrganization[]>(url, { headers }),
+    );
   }
 
   /**
@@ -157,15 +131,9 @@ export class AppGithubService {
   public getOrganization(organization: string): Observable<IGithubOrganization> {
     const url = this.endpoints.organization(organization);
     const headers = this.getAuthHeaders();
-    this.handlers.toggleHttpProgress(HTTP_PROGRESS_MODIFIER.START);
-    return this.http
-      .get<IGithubOrganization>(url, { headers })
-      .pipe(
-        catchError((error: HttpErrorResponse) => this.handlers.handleError(error)),
-        finalize(() => {
-          this.handlers.toggleHttpProgress(HTTP_PROGRESS_MODIFIER.STOP);
-        }),
-      );
+    return this.handlers.pipeHttpResponse(
+      this.http.get<IGithubOrganization>(url, { headers }),
+    );
   }
 
   /**
@@ -175,15 +143,9 @@ export class AppGithubService {
   public getPublicEvents(username: string): Observable<IGithubUserPublicEvent<unknown>[]> {
     const url = this.endpoints.publicEvents(username);
     const headers = this.getAuthHeaders();
-    this.handlers.toggleHttpProgress(HTTP_PROGRESS_MODIFIER.START);
-    return this.http
-      .get<IGithubUserPublicEvent<unknown>[]>(url, { headers })
-      .pipe(
-        catchError((error: HttpErrorResponse) => this.handlers.handleError(error)),
-        finalize(() => {
-          this.handlers.toggleHttpProgress(HTTP_PROGRESS_MODIFIER.STOP);
-        }),
-      );
+    return this.handlers.pipeHttpResponse(
+      this.http.get<IGithubUserPublicEvent<unknown>[]>(url, { headers }),
+    );
   }
 
   /**

@@ -11,17 +11,17 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AppClientMaterialModule } from '@mono/client-material';
+import { AppSidebarState } from '@mono/client-store';
 import { AppDummyComponent } from '@mono/client-unit-testing';
 import { NgxsModule, Store } from '@ngxs/store';
 
-import { AppMaterialModule } from '../../modules/material/material.module';
 import { AppGithubService } from '../../services/github/github.service';
 import { AppHttpHandlersService } from '../../services/http-handlers/http-handlers.service';
 import { WINDOW } from '../../services/providers.config';
 import { AppUserConfigService } from '../../services/user-config/user-config.service';
-import { AppUiState } from '../../state/ui/ui.store';
-import { AppUserService } from '../../state/user/user.service';
-import { AppUserState } from '../../state/user/user.store';
+import { AppGithubUserService } from '../../state/github-user/github-user.service';
+import { AppGithubUserState } from '../../state/github-user/github-user.store';
 import { AppApplicationsComponent } from './applications.component';
 
 describe('AppApplicationsComponent', () => {
@@ -31,9 +31,9 @@ describe('AppApplicationsComponent', () => {
       BrowserDynamicTestingModule,
       NoopAnimationsModule,
       HttpClientTestingModule,
-      AppMaterialModule,
+      AppClientMaterialModule,
       FlexLayoutModule,
-      NgxsModule.forRoot([AppUserState, AppUiState]),
+      NgxsModule.forRoot([AppGithubUserState, AppSidebarState]),
       RouterTestingModule.withRoutes([{ path: '', component: AppDummyComponent }]),
     ],
     providers: [
@@ -62,9 +62,9 @@ describe('AppApplicationsComponent', () => {
         deps: [HttpClient, AppHttpHandlersService, WINDOW],
       },
       {
-        provide: AppUserService,
+        provide: AppGithubUserService,
         useFactory: (store: Store, userConfig: AppUserConfigService, github: AppGithubService) =>
-          new AppUserService(store, userConfig, github),
+          new AppGithubUserService(store, userConfig, github),
         deps: [Store, AppUserConfigService, AppGithubService],
       },
     ],

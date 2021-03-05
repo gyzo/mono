@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-
-import { IUserConfigProfile } from '../../interfaces/user-config.interface';
+import { IUserConfigProfile } from '@mono/client-store';
 
 /**
  * Application profiles component.

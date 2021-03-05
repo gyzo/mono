@@ -1,3 +1,5 @@
+import { IActionPayload } from '@mono/client-util';
+import { StateToken } from '@ngxs/store';
 import { Observable } from 'rxjs';
 
 import {
@@ -7,11 +9,10 @@ import {
   IGithubUserPublicEvent,
   IGithubUserRepo,
   IGuthubUser,
-} from '../../interfaces/github-api.interface';
-import { IUserConfig, IUserConfigProfile } from '../../interfaces/user-config.interface';
-import { IActionPayload } from '../../utils/ngxs.util';
+} from './github-api.interface';
+import { IUserConfig, IUserConfigProfile } from './github-user.config';
 
-export interface IUserState {
+export interface IGithubUserState {
   profiles: IUserConfigProfile[];
   userConfig?: IUserConfig;
   github?: IGuthubUser;
@@ -33,10 +34,12 @@ export interface IUserState {
   publicEvents: IGithubUserPublicEvent<unknown>[];
 }
 
-export type TUserPayload = IActionPayload<Partial<IUserState>>;
+export type TUserPayload = IActionPayload<Partial<IGithubUserState>>;
 
 export interface IUserService {
   getUserData(): void;
   readonly githubOrgs$: Observable<IGithubUserOrganization[]>;
   readonly publicEvents$: Observable<IGithubUserPublicEvent<unknown>[]>;
 }
+
+export const GITHUB_USER_STATE_TOKEN = new StateToken<IGithubUserState>('githubUser');

@@ -5,16 +5,18 @@ import {
   ElementRef,
   Input,
   OnChanges,
+  SimpleChange,
   SimpleChanges,
   ViewChild,
 } from '@angular/core';
+import { IGithubUserPublicEvent } from '@mono/client-store';
+import { getRandomColor } from '@mono/client-util';
 import { arc, pie, PieArcDatum } from 'd3-shape';
 
-import { ARC_CHART_CONFIG, IChartDataNode, IGithubUserPublicEvent } from '../../interfaces';
-import { getRandomColor, ITypedSimpleChange } from '../../utils/ui.utils';
+import { ARC_CHART_CONFIG, IChartDataNode } from '../../interfaces';
 
 interface IInputChanges extends SimpleChanges {
-  publicEvents: ITypedSimpleChange<IGithubUserPublicEvent<unknown>[]>;
+  publicEvents: SimpleChange;
 }
 
 /**

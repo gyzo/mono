@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext, StateToken } from '@ngxs/store';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 
-import { setUserState } from './user.actions';
-import { IUserState, TUserPayload } from './user.interface';
+import { setUserState } from './github-user.actions';
+import { GITHUB_USER_STATE_TOKEN, IGithubUserState, TUserPayload } from './github-user.interface';
 
 export const userActions = {
   setUserState,
 };
 
-export const USER_STATE_TOKEN = new StateToken<IUserState>('user');
-
-@State<IUserState>({
-  name: USER_STATE_TOKEN,
+@State<IGithubUserState>({
+  name: GITHUB_USER_STATE_TOKEN,
   defaults: {
     profiles: [],
     userConfig: void 0,
@@ -35,13 +33,13 @@ export const USER_STATE_TOKEN = new StateToken<IUserState>('user');
 @Injectable({
   providedIn: 'root',
 })
-export class AppUserState {
+export class AppGithubUserState {
   /**
    * State selector.
    * @param state
    */
-  @Selector([USER_STATE_TOKEN])
-  public static getState(state: IUserState) {
+  @Selector([GITHUB_USER_STATE_TOKEN])
+  public static getState(state: IGithubUserState) {
     return state;
   }
 
@@ -51,7 +49,7 @@ export class AppUserState {
    * @param param1
    */
   @Action(setUserState)
-  public setUserState(ctx: StateContext<IUserState>, { payload }: TUserPayload) {
+  public setUserState(ctx: StateContext<IGithubUserState>, { payload }: TUserPayload) {
     return ctx.patchState(payload);
   }
 }

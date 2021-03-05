@@ -1,17 +1,13 @@
 import { Injectable } from '@angular/core';
-import { actionPayloadConstructor } from '@mono/client-util';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
+import { startProgress, stopProgress } from './http-progress.actions';
 import {
   HTTP_PROGRESS_STATE_TOKEN,
   httpProgressInitialState,
   IAppHttpProgressState,
   THttpProgressPayload,
 } from './http-progress.interface';
-
-const createAction = actionPayloadConstructor(HTTP_PROGRESS_STATE_TOKEN.getName());
-const startProgress = createAction<THttpProgressPayload>('start');
-const stopProgress = createAction<THttpProgressPayload>('stop');
 
 export const httpProgressActions = {
   startProgress,

@@ -11,17 +11,19 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AppClientMaterialModule } from '@mono/client-material';
+import {
+  AppGithubApiService,
+  AppGithubUserService,
+  AppGithubUserState,
+  AppHttpHandlersService,
+  AppSidebarState,
+  AppUserConfigService,
+} from '@mono/client-store';
 import { AppDummyComponent } from '@mono/client-unit-testing';
+import { WINDOW, windowFactory } from '@mono/client-util';
 import { NgxsModule, Store } from '@ngxs/store';
 
-import { AppMaterialModule } from '../../modules/material/material.module';
-import { AppGithubService } from '../../services/github/github.service';
-import { AppHttpHandlersService } from '../../services/http-handlers/http-handlers.service';
-import { WINDOW } from '../../services/providers.config';
-import { AppUserConfigService } from '../../services/user-config/user-config.service';
-import { AppUiState } from '../../state/ui/ui.store';
-import { AppUserService } from '../../state/user/user.service';
-import { AppUserState } from '../../state/user/user.store';
 import { AppLanguagesComponent } from './languages.component';
 
 describe('AppLanguagesComponent', () => {
@@ -31,13 +33,13 @@ describe('AppLanguagesComponent', () => {
       BrowserDynamicTestingModule,
       NoopAnimationsModule,
       HttpClientTestingModule,
-      AppMaterialModule,
+      AppClientMaterialModule,
       FlexLayoutModule,
-      NgxsModule.forRoot([AppUserState, AppUiState]),
+      NgxsModule.forRoot([AppGithubUserState, AppSidebarState]),
       RouterTestingModule.withRoutes([{ path: '', component: AppDummyComponent }]),
     ],
     providers: [
-      { provide: WINDOW, useValue: window },
+      { provide: WINDOW, useValue: windowFactory },
       {
         provide: MatSnackBar,
         useValue: {
@@ -56,16 +58,20 @@ describe('AppLanguagesComponent', () => {
         deps: [HttpClient, AppHttpHandlersService, WINDOW],
       },
       {
-        provide: AppGithubService,
-        useFactory: (http: HttpClient, handlers: AppHttpHandlersService, window: Window) =>
-          new AppGithubService(http, handlers, window),
-        deps: [HttpClient, AppHttpHandlersService, WINDOW],
+        provide: AppGithubApiService,
+        useFactory: (
+          http: HttpClient,
+          store: Store,
+          handlers: AppHttpHandlersService,
+          window: Window,
+        ) => new AppGithubApiService(http, store, handlers, window),
+        deps: [HttpClient, Store, AppHttpHandlersService, WINDOW],
       },
       {
-        provide: AppUserService,
-        useFactory: (store: Store, userConfig: AppUserConfigService, github: AppGithubService) =>
-          new AppUserService(store, userConfig, github),
-        deps: [Store, AppUserConfigService, AppGithubService],
+        provide: AppGithubUserService,
+        useFactory: (store: Store, userConfig: AppUserConfigService, github: AppGithubApiService) =>
+          new AppGithubUserService(store, userConfig, github),
+        deps: [Store, AppUserConfigService, AppGithubApiService],
       },
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

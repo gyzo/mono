@@ -1,16 +1,13 @@
 import { Injectable } from '@angular/core';
-import { actionPayloadConstructor } from '@mono/client-util';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
+import { setState } from './websocket.actions';
 import {
   IAppWebsocketStateModel,
   TWebsocketPayload,
   WEBSOCKET_STATE_TOKEN,
   websocketInitialState,
 } from './websocket.interface';
-
-const createAction = actionPayloadConstructor(WEBSOCKET_STATE_TOKEN.getName());
-const setState = createAction<TWebsocketPayload>('set state');
 
 export const websocketActions = {
   setState,

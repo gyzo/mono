@@ -5,14 +5,13 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AppClientMaterialModule } from '@mono/client-material';
+import { AppGithubUserState, AppHttpProgressService, AppSidebarState } from '@mono/client-store';
 import { AppDummyComponent } from '@mono/client-unit-testing';
+import { WINDOW, windowFactory } from '@mono/client-util';
 import { NgxsModule } from '@ngxs/store';
+import { of } from 'rxjs';
 
-import { AppMaterialModule } from '../../modules/material/material.module';
-import { AppHttpHandlersService } from '../../services/http-handlers/http-handlers.service';
-import { WINDOW } from '../../services/providers.config';
-import { AppUiState } from '../../state/ui/ui.store';
-import { AppUserState } from '../../state/user/user.store';
 import { AppRootComponent } from './root.component';
 
 describe('AppRootComponent', () => {
@@ -21,13 +20,13 @@ describe('AppRootComponent', () => {
     imports: [
       BrowserDynamicTestingModule,
       NoopAnimationsModule,
-      AppMaterialModule.forRoot(),
+      AppClientMaterialModule.forRoot(),
       FlexLayoutModule,
-      NgxsModule.forRoot([AppUserState, AppUiState]),
+      NgxsModule.forRoot([AppGithubUserState, AppSidebarState]),
       RouterTestingModule.withRoutes([{ path: '', component: AppDummyComponent }]),
     ],
     providers: [
-      { provide: WINDOW, useValue: window },
+      { provide: WINDOW, useValue: windowFactory },
       {
         provide: MatSnackBar,
         useValue: {
@@ -35,9 +34,12 @@ describe('AppRootComponent', () => {
         },
       },
       {
-        provide: AppHttpHandlersService,
-        useFactory: (snackBar: MatSnackBar) => new AppHttpHandlersService(snackBar),
-        deps: [MatSnackBar],
+        provide: AppHttpProgressService,
+        useValue: {
+          output: {
+            all$: of(false),
+          },
+        },
       },
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

@@ -1,13 +1,12 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-
 import {
+  AppGithubUserService,
   IGithubRepoLanguages,
   IGithubRepoLanguagesRate,
-} from '../../interfaces/github-api.interface';
-import { AppUserService } from '../../state/user/user.service';
+} from '@mono/client-store';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 /**
  * Application languages component.
@@ -35,7 +34,10 @@ export class AppLanguagesComponent {
   /**
    * Constructor.
    */
-  constructor(private readonly domSanitizer: DomSanitizer, private readonly user: AppUserService) {}
+  constructor(
+    private readonly domSanitizer: DomSanitizer,
+    private readonly user: AppGithubUserService,
+  ) {}
 
   /**
    * Image show event handler.

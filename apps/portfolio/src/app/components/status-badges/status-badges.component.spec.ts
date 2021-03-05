@@ -4,19 +4,19 @@ import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@an
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { DummyComponent } from 'src/app/mocks/components/dummy.component';
+import { AppClientMaterialModule } from '@mono/client-material';
+import { AppDummyComponent } from '@mono/client-unit-testing';
 
-import { AppMaterialModule } from '../../modules/material/material.module';
 import { AppStatusBadgesComponent } from './status-badges.component';
 
 describe('AppStatusBadgesComponent', () => {
   const testBedConfig: TestModuleMetadata = {
-    declarations: [AppStatusBadgesComponent, DummyComponent],
+    declarations: [AppStatusBadgesComponent, AppDummyComponent],
     imports: [
       BrowserDynamicTestingModule,
       NoopAnimationsModule,
       HttpClientTestingModule,
-      AppMaterialModule,
+      AppClientMaterialModule,
       FlexLayoutModule,
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
