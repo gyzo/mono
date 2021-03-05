@@ -53,67 +53,61 @@ git cz
 
 Is generated based on GitHub repo.
 
-- [GitBook documentation](https://rfprod.gitbook.io/nx-ng-starter/)
+- [GitBook documentation](https://rfprod.gitbook.io/mono/)
 
 ## Firebase deployment
 
 Applications as well as generated documentation, testing reports, and a custom changelog are deployed to Firebase.
 
-### Webapp
+### Webapps
 
 - [Portfolio](https://rfprod.tk)
 
-### Elements webapp
-
-- [Nx Ng Starter Elements](https://nx-ng-starter-elements.web.app)
-
 ### Documentation
 
-- [Nx Ng Starter Documentation](https://nx-ng-starter-documentation.web.app)
-- [Nx Ng Starter Compodoc](https://nx-ng-starter-documentation.web.app/assets/compodoc/index.html)
+- [Mono Documentation](https://mono-documentation.web.app)
+- [Mono Compodoc](https://mono-documentation.web.app/assets/compodoc/index.html)
 
 #### Unit coverage
 
-- [API](https://nx-ng-starter-documentation.web.app/assets/coverage/apps/api/index.html)
-- [API Interface](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/api-interface/index.html)
-- [Client](https://nx-ng-starter-documentation.web.app/assets/coverage/apps/client/index.html)
-- [Client Components](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-components/index.html)
-- [Client Core](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-core/index.html)
-- [Client Gql](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-gql/index.html)
-- [Client Material](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-material/index.html)
-- [Client Services](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-services/index.html)
-- [Client Store](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-store/index.html)
-- [Client Translate](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-translate/index.html)
-- [Client Util](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/client-util/index.html)
-- [Documentation](https://nx-ng-starter-documentation.web.app/assets/coverage/apps/documentation/index.html)
-- [Mocks Core](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/mocks-core/index.html)
-- [Proto](https://nx-ng-starter-documentation.web.app/assets/coverage/libs/proto/index.html)
+- [API](https://mono-documentation.web.app/assets/coverage/apps/api/index.html)
+- [API Interface](https://mono-documentation.web.app/assets/coverage/libs/api-interface/index.html)
+- [Client](https://mono-documentation.web.app/assets/coverage/apps/client/index.html)
+- [Client Components](https://mono-documentation.web.app/assets/coverage/libs/client-components/index.html)
+- [Client Core](https://mono-documentation.web.app/assets/coverage/libs/client-core/index.html)
+- [Client Material](https://mono-documentation.web.app/assets/coverage/libs/client-material/index.html)
+- [Client Services](https://mono-documentation.web.app/assets/coverage/libs/client-services/index.html)
+- [Client Store](https://mono-documentation.web.app/assets/coverage/libs/client-store/index.html)
+- [Client Translate](https://mono-documentation.web.app/assets/coverage/libs/client-translate/index.html)
+- [Client Util](https://mono-documentation.web.app/assets/coverage/libs/client-util/index.html)
+- [Client Unit Testing](https://mono-documentation.web.app/assets/coverage/libs/client-unit-testing/index.html)
+- [Documentation](https://mono-documentation.web.app/assets/coverage/apps/documentation/index.html)
+- [Proto](https://mono-documentation.web.app/assets/coverage/libs/proto/index.html)
 
 #### E2E report
 
-- [Client E2E](https://nx-ng-starter-documentation.web.app/assets/cypress/client-e2e/mochawesome/mochawesome.html)
-- [Client Components E2E](https://nx-ng-starter-documentation.web.app/assets/cypress/client-components-e2e/mochawesome/mochawesome.html)
-- [Documentation E2E](https://nx-ng-starter-documentation.web.app/assets/cypress/documentation-e2e/mochawesome/mochawesome.html)
+- [Client E2E](https://mono-documentation.web.app/assets/cypress/client-e2e/mochawesome/mochawesome.html)
+- [Client Components E2E](https://mono-documentation.web.app/assets/cypress/client-components-e2e/mochawesome/mochawesome.html)
+- [Documentation E2E](https://mono-documentation.web.app/assets/cypress/documentation-e2e/mochawesome/mochawesome.html)
 
 #### Changelog
 
-- [API](https://nx-ng-starter-documentation.web.app/assets/changelog/apps/api-CHANGELOG.html)
-- [API Interface](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/api-interface-CHANGELOG.html)
-- [Client](https://nx-ng-starter-documentation.web.app/assets/changelog/apps/client-CHANGELOG.html)
-- [Client E2E](https://nx-ng-starter-documentation.web.app/assets/changelog/apps/client-e2e-CHANGELOG.html)
-- [Client Components](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-components-CHANGELOG.html)
-- [Client Components E2E](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-components-e2e-CHANGELOG.html)
-- [Client Core](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-core-CHANGELOG.html)
-- [Client Gql](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-gql-CHANGELOG.html)
-- [Client Material](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-material-CHANGELOG.html)
-- [Client Services](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-services-CHANGELOG.html)
-- [Client Store](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-store-CHANGELOG.html)
-- [Client Translate](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-translate-CHANGELOG.html)
-- [Client Util](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/client-util-CHANGELOG.html)
-- [Documentation](https://nx-ng-starter-documentation.web.app/assets/changelog/apps/documentation-CHANGELOG.html)
-- [Documentation E2E](https://nx-ng-starter-documentation.web.app/assets/changelog/apps/documentation-e2e-CHANGELOG.html)
-- [Mocks Core](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/mocks-core-CHANGELOG.html)
-- [Proto](https://nx-ng-starter-documentation.web.app/assets/changelog/libs/proto-CHANGELOG.html)
+- [API](https://mono-documentation.web.app/assets/changelog/apps/api-CHANGELOG.html)
+- [API Interface](https://mono-documentation.web.app/assets/changelog/libs/api-interface-CHANGELOG.html)
+- [Client](https://mono-documentation.web.app/assets/changelog/apps/client-CHANGELOG.html)
+- [Client E2E](https://mono-documentation.web.app/assets/changelog/apps/client-e2e-CHANGELOG.html)
+- [Client Components](https://mono-documentation.web.app/assets/changelog/libs/client-components-CHANGELOG.html)
+- [Client Components E2E](https://mono-documentation.web.app/assets/changelog/libs/client-components-e2e-CHANGELOG.html)
+- [Client Core](https://mono-documentation.web.app/assets/changelog/libs/client-core-CHANGELOG.html)
+- [Client Material](https://mono-documentation.web.app/assets/changelog/libs/client-material-CHANGELOG.html)
+- [Client Services](https://mono-documentation.web.app/assets/changelog/libs/client-services-CHANGELOG.html)
+- [Client Store](https://mono-documentation.web.app/assets/changelog/libs/client-store-CHANGELOG.html)
+- [Client Translate](https://mono-documentation.web.app/assets/changelog/libs/client-translate-CHANGELOG.html)
+- [Client Unit Testing](https://mono-documentation.web.app/assets/changelog/libs/client-unit-testing-CHANGELOG.html)
+- [Client Util](https://mono-documentation.web.app/assets/changelog/libs/client-util-CHANGELOG.html)
+- [Documentation](https://mono-documentation.web.app/assets/changelog/apps/documentation-CHANGELOG.html)
+- [Documentation E2E](https://mono-documentation.web.app/assets/changelog/apps/documentation-e2e-CHANGELOG.html)
+- [Proto](https://mono-documentation.web.app/assets/changelog/libs/proto-CHANGELOG.html)
 
 ## General Tooling
 
@@ -171,7 +165,7 @@ ng g @nrwl/angular:lib my-lib
 
 Libraries are sharable across libraries and applications.
 
-It can be imported from `@nx-ng-starter/mylib`.
+It can be imported from `@mono/mylib`.
 
 ### Running a development server
 
