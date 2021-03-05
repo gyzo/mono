@@ -5,26 +5,26 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AppDummyComponent } from '@mono/client-unit-testing';
 import { NgxsModule } from '@ngxs/store';
 
-import { DummyComponent } from '../../mocks/components/dummy.component';
 import { AppMaterialModule } from '../../modules/material/material.module';
-import { HttpHandlersService } from '../../services/http-handlers/http-handlers.service';
+import { AppHttpHandlersService } from '../../services/http-handlers/http-handlers.service';
 import { WINDOW } from '../../services/providers.config';
-import { UiState } from '../../state/ui/ui.store';
+import { AppUiState } from '../../state/ui/ui.store';
 import { AppUserState } from '../../state/user/user.store';
 import { AppRootComponent } from './root.component';
 
 describe('AppRootComponent', () => {
   const testBedConfig: TestModuleMetadata = {
-    declarations: [AppRootComponent, DummyComponent],
+    declarations: [AppRootComponent, AppDummyComponent],
     imports: [
       BrowserDynamicTestingModule,
       NoopAnimationsModule,
       AppMaterialModule.forRoot(),
       FlexLayoutModule,
-      NgxsModule.forRoot([AppUserState, UiState]),
-      RouterTestingModule.withRoutes([{ path: '', component: DummyComponent }]),
+      NgxsModule.forRoot([AppUserState, AppUiState]),
+      RouterTestingModule.withRoutes([{ path: '', component: AppDummyComponent }]),
     ],
     providers: [
       { provide: WINDOW, useValue: window },
@@ -35,8 +35,8 @@ describe('AppRootComponent', () => {
         },
       },
       {
-        provide: HttpHandlersService,
-        useFactory: (snackBar: MatSnackBar) => new HttpHandlersService(snackBar),
+        provide: AppHttpHandlersService,
+        useFactory: (snackBar: MatSnackBar) => new AppHttpHandlersService(snackBar),
         deps: [MatSnackBar],
       },
     ],

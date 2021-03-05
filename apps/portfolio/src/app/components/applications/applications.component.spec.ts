@@ -11,30 +11,30 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AppDummyComponent } from '@mono/client-unit-testing';
 import { NgxsModule, Store } from '@ngxs/store';
 
-import { DummyComponent } from '../../mocks/components/dummy.component';
 import { AppMaterialModule } from '../../modules/material/material.module';
-import { GithubService } from '../../services/github/github.service';
-import { HttpHandlersService } from '../../services/http-handlers/http-handlers.service';
+import { AppGithubService } from '../../services/github/github.service';
+import { AppHttpHandlersService } from '../../services/http-handlers/http-handlers.service';
 import { WINDOW } from '../../services/providers.config';
-import { UserConfigService } from '../../services/user-config/user-config.service';
-import { UiState } from '../../state/ui/ui.store';
+import { AppUserConfigService } from '../../services/user-config/user-config.service';
+import { AppUiState } from '../../state/ui/ui.store';
 import { AppUserService } from '../../state/user/user.service';
 import { AppUserState } from '../../state/user/user.store';
 import { AppApplicationsComponent } from './applications.component';
 
 describe('AppApplicationsComponent', () => {
   const testBedConfig: TestModuleMetadata = {
-    declarations: [AppApplicationsComponent, DummyComponent],
+    declarations: [AppApplicationsComponent, AppDummyComponent],
     imports: [
       BrowserDynamicTestingModule,
       NoopAnimationsModule,
       HttpClientTestingModule,
       AppMaterialModule,
       FlexLayoutModule,
-      NgxsModule.forRoot([AppUserState, UiState]),
-      RouterTestingModule.withRoutes([{ path: '', component: DummyComponent }]),
+      NgxsModule.forRoot([AppUserState, AppUiState]),
+      RouterTestingModule.withRoutes([{ path: '', component: AppDummyComponent }]),
     ],
     providers: [
       { provide: WINDOW, useValue: window },
@@ -45,27 +45,27 @@ describe('AppApplicationsComponent', () => {
         },
       },
       {
-        provide: HttpHandlersService,
-        useFactory: (snackBar: MatSnackBar) => new HttpHandlersService(snackBar),
+        provide: AppHttpHandlersService,
+        useFactory: (snackBar: MatSnackBar) => new AppHttpHandlersService(snackBar),
         deps: [MatSnackBar],
       },
       {
-        provide: UserConfigService,
-        useFactory: (http: HttpClient, handlers: HttpHandlersService, window: Window) =>
-          new UserConfigService(http, handlers, window),
-        deps: [HttpClient, HttpHandlersService, WINDOW],
+        provide: AppUserConfigService,
+        useFactory: (http: HttpClient, handlers: AppHttpHandlersService, window: Window) =>
+          new AppUserConfigService(http, handlers, window),
+        deps: [HttpClient, AppHttpHandlersService, WINDOW],
       },
       {
-        provide: GithubService,
-        useFactory: (http: HttpClient, handlers: HttpHandlersService, window: Window) =>
-          new GithubService(http, handlers, window),
-        deps: [HttpClient, HttpHandlersService, WINDOW],
+        provide: AppGithubService,
+        useFactory: (http: HttpClient, handlers: AppHttpHandlersService, window: Window) =>
+          new AppGithubService(http, handlers, window),
+        deps: [HttpClient, AppHttpHandlersService, WINDOW],
       },
       {
         provide: AppUserService,
-        useFactory: (store: Store, userConfig: UserConfigService, github: GithubService) =>
+        useFactory: (store: Store, userConfig: AppUserConfigService, github: AppGithubService) =>
           new AppUserService(store, userConfig, github),
-        deps: [Store, UserConfigService, GithubService],
+        deps: [Store, AppUserConfigService, AppGithubService],
       },
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],

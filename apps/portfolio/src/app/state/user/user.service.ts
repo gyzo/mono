@@ -11,8 +11,8 @@ import {
   IGuthubUser,
 } from '../../interfaces/github-api.interface';
 import { IUserConfig } from '../../interfaces/user-config.interface';
-import { GithubService } from '../../services/github/github.service';
-import { UserConfigService } from '../../services/user-config/user-config.service';
+import { AppGithubService } from '../../services/github/github.service';
+import { AppUserConfigService } from '../../services/user-config/user-config.service';
 import { IUserService } from './user.interface';
 import { AppUserState, USER_STATE_TOKEN, userActions } from './user.store';
 
@@ -40,8 +40,8 @@ export class AppUserService implements IUserService {
    */
   constructor(
     private readonly store: Store,
-    private readonly userConfig: UserConfigService,
-    private readonly github: GithubService,
+    private readonly userConfig: AppUserConfigService,
+    private readonly github: AppGithubService,
   ) {}
 
   /**

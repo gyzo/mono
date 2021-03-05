@@ -4,7 +4,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { tap } from 'rxjs/operators';
 
 import { IContactForm } from '../../interfaces/contact-form.interface';
-import { SendEmailService } from '../../services/send-email/send-email.service';
+import { AppSendEmailService } from '../../services/send-email/send-email.service';
 
 /**
  * Application contact component.
@@ -44,7 +44,7 @@ export class AppContactComponent {
     @Inject(MAT_DIALOG_DATA) public data: { domain: string }, // TODO
     private readonly dialogRef: MatDialogRef<AppContactComponent>,
     private readonly fb: FormBuilder,
-    private readonly sendEmailService: SendEmailService,
+    private readonly sendEmailService: AppSendEmailService,
   ) {}
 
   /**

@@ -4,10 +4,10 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { filter, map, tap } from 'rxjs/operators';
 
-import { HttpHandlersService } from '../../services/http-handlers/http-handlers.service';
+import { AppHttpHandlersService } from '../../services/http-handlers/http-handlers.service';
 import { AppThemeService } from '../../state/theme/theme.service';
 import { AppThemeState } from '../../state/theme/theme.store';
-import { uiActions, UiState } from '../../state/ui/ui.store';
+import { AppUiState, uiActions } from '../../state/ui/ui.store';
 
 /**
  * Application root component.
@@ -36,7 +36,7 @@ export class AppRootComponent implements OnInit {
   /**
    * Sidenav opened state.
    */
-  @Select(UiState.getSidenavOpened)
+  @Select(AppUiState.getSidenavOpened)
   public readonly sidenavOpened$!: Observable<boolean>;
 
   public readonly showSpinner$ = this.handlers.httpProgress$.pipe(
@@ -50,7 +50,7 @@ export class AppRootComponent implements OnInit {
   constructor(
     private readonly store: Store,
     private readonly dateAdapter: DateAdapter<Date>,
-    private readonly handlers: HttpHandlersService,
+    private readonly handlers: AppHttpHandlersService,
     private readonly themeService: AppThemeService,
   ) {}
 

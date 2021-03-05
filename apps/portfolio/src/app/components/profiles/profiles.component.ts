@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { IUserConfigProfile } from 'src/app/interfaces';
+
+import { IUserConfigProfile } from '../../interfaces/user-config.interface';
 
 /**
  * Application profiles component.

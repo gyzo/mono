@@ -4,14 +4,14 @@ import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@an
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
-import { DummyComponent } from 'src/app/mocks/components/dummy.component';
+import { AppDummyComponent } from '@mono/client-unit-testing';
 
 import { AppMaterialModule } from '../../modules/material/material.module';
 import { AppOrganizationsComponent } from './organizations.component';
 
 describe('AppOrganizationsComponent', () => {
   const testBedConfig: TestModuleMetadata = {
-    declarations: [AppOrganizationsComponent, DummyComponent],
+    declarations: [AppOrganizationsComponent, AppDummyComponent],
     imports: [
       BrowserDynamicTestingModule,
       NoopAnimationsModule,
