@@ -9,9 +9,6 @@ import {
 } from '@mono/client-unit-testing';
 import { HTTP_STATUS } from '@mono/client-util';
 import { Store } from '@ngxs/store';
-import { Apollo } from 'apollo-angular';
-import { ExecutionResult, GraphQLError } from 'graphql';
-import { cold, getTestScheduler } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
 import { concatMap, map, tap } from 'rxjs/operators';
 
@@ -30,7 +27,6 @@ describe('AppHttpHandlersService', () => {
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
   let service: AppHttpHandlersService;
-  let apollo: Apollo;
   let httpTestingController: HttpTestingController;
   let localStorage: AppLocalStorageMock;
   let toaster: AppToasterService;
@@ -55,7 +51,6 @@ describe('AppHttpHandlersService', () => {
           service = TestBed.inject(AppHttpHandlersService);
           toaster = TestBed.inject(AppToasterService);
           httpTestingController = TestBed.inject(HttpTestingController);
-          apollo = TestBed.inject(Apollo);
           store = TestBed.inject(Store);
           spy = {
             store: {
@@ -78,7 +73,6 @@ describe('AppHttpHandlersService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
-    expect(apollo).toBeDefined();
     expect(toaster).toBeDefined();
   });
 
@@ -88,86 +82,13 @@ describe('AppHttpHandlersService', () => {
     expect(service.graphQlEndpoint).toEqual(expect.any(Function));
     expect(service.getGraphQLHttpHeaders).toEqual(expect.any(Function));
     expect(service.getEndpoint).toEqual(expect.any(Function));
-    expect(service.extractGraphQLData).toEqual(expect.any(Function));
     expect(service.checkErrorStatusAndRedirect).toEqual(expect.any(Function));
     expect(service.handleError).toEqual(expect.any(Function));
     expect(service.handleGraphQLError).toEqual(expect.any(Function));
     expect(service.pipeHttpResponse).toEqual(expect.any(Function));
-    expect(service.pipeGraphQLRequest).toEqual(expect.any(Function));
     expect(service.tapProgress).toEqual(expect.any(Function));
     expect(service.tapError).toEqual(expect.any(Function));
-    expect(service.createApolloLinkFor).toEqual(expect.any(Function));
   });
-
-  describe('extractGraphQLData', () => {
-    it(
-      'should return an Array',
-      waitForAsync(() => {
-        const executionResult: ExecutionResult = {
-          data: [{ x: 'x' }, { y: 'y' }],
-        };
-        void service.extractGraphQLData(executionResult).pipe(
-          tap(result => {
-            expect(result).toEqual(expect.any(Array));
-          }),
-        );
-
-        void service.extractGraphQLData(executionResult).pipe(
-          tap(result => {
-            expect(result).toEqual(executionResult.data);
-          }),
-        );
-      }),
-    );
-
-    it(
-      'should return execution result if response does not contain nested data object',
-      waitForAsync(() => {
-        const executionResult: ExecutionResult = {};
-        void service.extractGraphQLData(executionResult).pipe(
-          tap(result => {
-            expect(result).toEqual(expect.any(Object));
-          }),
-        );
-
-        void service.extractGraphQLData(executionResult).pipe(
-          tap(result => {
-            expect(result).toEqual(executionResult);
-          }),
-        );
-      }),
-    );
-  });
-
-  it('extractGraphQLData should throw errors if get', () => {
-    const error: GraphQLError = new GraphQLError('message');
-    void service.extractGraphQLData({ errors: [error] }).pipe(
-      tap(
-        () => {
-          // empty
-        },
-        errors => {
-          expect(errors[0]).toBe(error);
-        },
-      ),
-    );
-  });
-
-  it(
-    'pipeGraphQLRequest should check error if 401 status',
-    waitForAsync(() => {
-      const q$ = cold('---#|', null, { networkError: { status: HTTP_STATUS.BAD_REQUEST } });
-      void service.pipeGraphQLRequest(q$).subscribe(
-        () => null,
-        () => {
-          expect(spy.service.checkErrorStatusAndRedirect).toHaveBeenCalledWith(
-            HTTP_STATUS.UNAUTHORIZED,
-          );
-        },
-      );
-      getTestScheduler().flush();
-    }),
-  );
 
   it('checkErrorStatusAndRedirect should reset user if error status is 401', () => {
     service.checkErrorStatusAndRedirect(HTTP_STATUS.BAD_REQUEST);

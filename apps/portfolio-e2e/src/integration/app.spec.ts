@@ -1,5 +1,3 @@
-import { getGreeting } from '../support/app.po';
-
 describe('portfolio', () => {
   beforeEach(() => cy.visit('/'));
 
