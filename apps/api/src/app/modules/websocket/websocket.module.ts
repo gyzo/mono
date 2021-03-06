@@ -1,8 +1,16 @@
-import { Module } from '@nestjs/common';
+import { DynamicModule, Module, Provider } from '@nestjs/common';
 
 import { ApiEventsGateway } from './gateway/events.gateway';
 
-@Module({
-  providers: [ApiEventsGateway],
-})
-export class ApiWebsocketModule {}
+const moduleProviders: Provider[] = [ApiEventsGateway];
+
+@Module({})
+export class ApiWebsocketModule {
+  public static forRoot(): DynamicModule {
+    return {
+      module: ApiWebsocketModule,
+      providers: [...moduleProviders],
+      exports: [...moduleProviders],
+    };
+  }
+}

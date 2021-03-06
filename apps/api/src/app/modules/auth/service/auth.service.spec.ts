@@ -1,7 +1,6 @@
 import { JwtModule } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
 
-import { ApiAuthUtilsService } from '../../auth-utils/service/auth-utils.service';
 import { ApiAuthService } from './auth.service';
 
 describe('ApiAuthService', () => {
@@ -14,14 +13,14 @@ describe('ApiAuthService', () => {
           secret: 'jwtsecret',
         }),
       ],
-      providers: [ApiAuthService, ApiAuthUtilsService],
+      providers: [ApiAuthService],
     }).compile();
 
     service = app.get<ApiAuthService>(ApiAuthService);
   });
 
-  describe('getData', () => {
-    it('should return "Welcome to api!"', () => {
+  describe('ping', () => {
+    it('Auth service is online. Public methods: login, logout, signup."', () => {
       expect(service.ping()).toEqual({
         message: 'Auth service is online. Public methods: login, logout, signup.',
       });

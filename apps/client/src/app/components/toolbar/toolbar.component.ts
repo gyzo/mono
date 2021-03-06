@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AppSidebarService, chatbotActions } from '@mono/client-store';
-import { Store } from '@ngxs/store';
+import { AppSidebarService } from '@mono/client-store';
 
 @Component({
   selector: 'app-toolbar',
@@ -11,9 +10,5 @@ import { Store } from '@ngxs/store';
 export class AppToolbarComponent {
   public readonly sidebarOpened$ = this.sidebarService.sidebarOpened$;
 
-  constructor(private readonly store: Store, public readonly sidebarService: AppSidebarService) {}
-
-  public toggleChatbot(): void {
-    void this.store.dispatch(new chatbotActions.toggle());
-  }
+  constructor(public readonly sidebarService: AppSidebarService) {}
 }

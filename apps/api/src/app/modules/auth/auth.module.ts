@@ -1,16 +1,26 @@
-import { Module, Provider } from '@nestjs/common';
+import { DynamicModule, Module, Provider } from '@nestjs/common';
+import { JwtModule } from '@nestjs/jwt';
 
-import { ApiAuthUtilsModule } from '../auth-utils/auth-utils.module';
-import { ApiAuthUtilsService } from '../auth-utils/service/auth-utils.service';
 import { ApiAuthController } from './controller/auth.controller';
 import { ApiAuthService } from './service/auth.service';
 
-export const authModuleProviders: Provider[] = [ApiAuthService, ApiAuthUtilsService];
+const moduleProviders: Provider[] = [ApiAuthService];
 
 @Module({
-  imports: [ApiAuthUtilsModule],
-  exports: [ApiAuthUtilsModule],
+  imports: [
+    JwtModule.register({
+      secret: 'jwtsecret', // TODO: should be set from .env
+    }),
+  ],
+  exports: [JwtModule],
   controllers: [ApiAuthController],
-  providers: [...authModuleProviders],
 })
-export class ApiAuthModule {}
+export class ApiAuthModule {
+  public static forRoot(): DynamicModule {
+    return {
+      module: ApiAuthModule,
+      providers: [...moduleProviders],
+      exports: [...moduleProviders],
+    };
+  }
+}

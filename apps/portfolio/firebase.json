@@ -1,0 +1,74 @@
+{
+  "hosting": {
+    "headers": [
+      {
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "https://rfprod-2cda1.firebaseapp.com https://rfprod-2cda1.web.app https://rfprod.tk"
+          },
+          {
+            "key": "Access-Control-Allow-Methods",
+            "value": "GET,PUT,POST,DELETE,OPTIONS,HEAD"
+          }
+        ],
+        "source": "**"
+      },
+      {
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=7200"
+          }
+        ],
+        "source": "**/*.@(jpg|jpeg|gif|png|svg)"
+      },
+      {
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "public, no-cache, no-store, must-ravalidate, max-age=0"
+          },
+          {
+            "key": "Expires",
+            "value": "-1"
+          },
+          {
+            "key": "Pragme",
+            "value": "no-cache"
+          }
+        ],
+        "source": "/api/**"
+      }
+    ],
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**", "**/src/**"],
+    "public": "dist",
+    "rewrites": [
+      {
+        "function": "githubAccessToken",
+        "source": "/api/githubAccessToken"
+      },
+      {
+        "function": "sendEmail",
+        "source": "/api/sendEmail"
+      },
+      {
+        "function": "githubUser",
+        "source": "/api/githubUser"
+      },
+      {
+        "function": "githubUserRepos",
+        "source": "/api/githubUserRepos"
+      },
+      {
+        "function": "githubUserReposLanguages",
+        "source": "/api/githubUserReposLanguages"
+      },
+      {
+        "destination": "/index.html",
+        "source": "**/!(*.*|githubAccessToken|sendEmail|githubUser|githubUserRepos|githubUserReposLanguages)"
+      }
+    ],
+    "site": "rfprod-2cda1"
+  }
+}

@@ -130,6 +130,20 @@ const clientConstraints = [
     ],
   },
   {
+    sourceTag: 'scope:portfolio',
+    onlyDependOnLibsWithTags: [
+      'scope:client-unit-testing',
+      'scope:proto',
+      'scope:client-store',
+      'scope:client-services',
+      'scope:client-components',
+      'scope:client-core',
+      'scope:client-material',
+      'scope:client-translate',
+      'scope:client-util',
+    ],
+  },
+  {
     sourceTag: 'scope:client-e2e',
     onlyDependOnLibsWithTags: ['scope:client-util'],
   },

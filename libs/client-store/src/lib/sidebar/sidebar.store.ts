@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { actionPayloadConstructor } from '@mono/client-util';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
+import { setState, toggleVisibility } from './sidebar.actions';
 import {
   ISiedbarUiState,
   SIDEBAR_STATE_TOKEN,
@@ -9,11 +9,9 @@ import {
   TSidebarPayload,
 } from './sidebar.interface';
 
-const createAction = actionPayloadConstructor(SIDEBAR_STATE_TOKEN.getName());
-const setState = createAction<TSidebarPayload>('set state');
-
 export const sidebarUiActions = {
   setState,
+  toggleVisibility,
 };
 
 @State<ISiedbarUiState>({
@@ -37,5 +35,11 @@ export class AppSidebarState {
   @Action(setState)
   public setState(ctx: StateContext<ISiedbarUiState>, { payload }: TSidebarPayload) {
     return ctx.patchState(payload);
+  }
+
+  @Action(toggleVisibility)
+  public toggleVisibility(ctx: StateContext<ISiedbarUiState>) {
+    const sidebarOpened = !ctx.getState().sidebarOpened;
+    return ctx.patchState({ sidebarOpened });
   }
 }

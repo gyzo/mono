@@ -19,9 +19,6 @@ source tools/shell/print-utils.sh ''
 reportUsageError() {
   printInfoTitle "<< USAGE >>"
   printWarningMessage "firebase deploy token must be provided as a first argument"
-  printInfoMessage "Client app"
-  printUsageTip "bash tools/shell/firebase-deploy.sh FIREBASE_DEPLOY_TOKEN app:client" "CI environment"
-  printUsageTip "bash tools/shell/firebase-deploy.sh localhost app:client" "Local environment, firebase authentication required"
   printInfoMessage "Portfolio app"
   printUsageTip "bash tools/shell/firebase-deploy.sh FIREBASE_DEPLOY_TOKEN app:portfolio" "CI environment"
   printUsageTip "bash tools/shell/firebase-deploy.sh localhost app:portfolio" "Local environment, firebase authentication required"
@@ -41,7 +38,6 @@ reportUsageError() {
 ##
 declare -A PROJECT_DIRECTORIES=(
   ["api"]=./apps/api/
-  ["client"]=./apps/client/
   ["documentation"]=./apps/documentation/
   ["portfolio"]=./apps/portfolio/
 )
@@ -70,21 +66,6 @@ config() {
   ##
   cp "$1".firebaserc ./.firebaserc
   cp "$1"firebase.json ./firebase.json
-}
-
-##
-# Deploys client application.
-##
-deployClientApp() {
-  config "${PROJECT_DIRECTORIES["client"]}"
-
-  if [ "$1" = "localhost" ]; then
-    firebase deploy --only hosting || exit 1
-  else
-    firebase deploy --only hosting --token "$1" || exit 1
-  fi
-
-  cleanup
 }
 
 ##
@@ -137,7 +118,6 @@ deployApiApp() {
 ##
 deployAll() {
   deployApiApp "$1"
-  deployClientApp "$1"
   deployPortfolioApp "$1"
   deployDocumentationApp "$1"
 }
@@ -148,9 +128,7 @@ deployAll() {
 if [ $# -lt 1 ]; then
   reportUsageError
 elif [ $# -ge 2 ]; then
-  if [ "$2" = "client" ]; then
-    deployClientApp "$1"
-  elif [ "$2" = "portfolio" ]; then
+  if [ "$2" = "portfolio" ]; then
     deployPortfolioApp "$1"
   elif [ "$2" = "documentation" ]; then
     deployDocumentationApp "$1"

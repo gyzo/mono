@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { AppChatbotModule } from './chatbot/chatbot.module';
+import { AppGithubUserModule } from './github-user/github-user.module';
 import { AppHttpApiModule } from './http-api/http-api.module';
 import { AppHttpProgressModule } from './http-progress/http-progress.module';
 import { AppSidebarModule } from './sidebar/sidebar.module';
@@ -13,18 +13,18 @@ import { AppWebsocketModule } from './websocket/websocket.module';
     AppHttpApiModule,
     AppHttpProgressModule.forRoot(),
     AppUserModule,
+    AppGithubUserModule,
     AppSidebarModule,
     AppWebsocketModule,
-    AppChatbotModule,
     AppThemeModule,
   ],
   exports: [
     AppHttpApiModule,
     AppHttpProgressModule,
     AppUserModule,
+    AppGithubUserModule,
     AppSidebarModule,
     AppWebsocketModule,
-    AppChatbotModule,
     AppThemeModule,
   ],
 })

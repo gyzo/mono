@@ -1,4 +1,4 @@
-import { HttpErrorResponse, HttpHeaders, HttpRequest } from '@angular/common/http';
+import { HttpErrorResponse, HttpRequest } from '@angular/common/http';
 import { HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { AppClientTranslateModule } from '@mono/client-translate';
@@ -7,13 +7,7 @@ import {
   getTestBedConfig,
   newTestBedMetadata,
 } from '@mono/client-unit-testing';
-import { HTTP_STATUS } from '@mono/client-util';
-import { Store } from '@ngxs/store';
-import { Apollo } from 'apollo-angular';
-import { ExecutionResult, GraphQLError } from 'graphql';
-import { cold, getTestScheduler } from 'jasmine-marbles';
 import { Observable, of } from 'rxjs';
-import { concatMap, map, tap } from 'rxjs/operators';
 
 import { AppHttpProgressModule } from '../http-progress/http-progress.module';
 import {
@@ -30,19 +24,9 @@ describe('AppHttpHandlersService', () => {
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
   let service: AppHttpHandlersService;
-  let apollo: Apollo;
   let httpTestingController: HttpTestingController;
   let localStorage: AppLocalStorageMock;
   let toaster: AppToasterService;
-  let store: Store;
-  let spy: {
-    store: {
-      dispatch: jest.SpyInstance;
-    };
-    service: {
-      checkErrorStatusAndRedirect: jest.SpyInstance;
-    };
-  };
 
   beforeEach(
     waitForAsync(() => {
@@ -55,16 +39,6 @@ describe('AppHttpHandlersService', () => {
           service = TestBed.inject(AppHttpHandlersService);
           toaster = TestBed.inject(AppToasterService);
           httpTestingController = TestBed.inject(HttpTestingController);
-          apollo = TestBed.inject(Apollo);
-          store = TestBed.inject(Store);
-          spy = {
-            store: {
-              dispatch: jest.spyOn(store, 'dispatch'),
-            },
-            service: {
-              checkErrorStatusAndRedirect: jest.spyOn(service, 'checkErrorStatusAndRedirect'),
-            },
-          };
         });
     }),
   );
@@ -78,102 +52,18 @@ describe('AppHttpHandlersService', () => {
 
   it('should be defined', () => {
     expect(service).toBeDefined();
-    expect(apollo).toBeDefined();
     expect(toaster).toBeDefined();
   });
 
   it('should have variables and methods defined', () => {
     expect(service.defaultHttpTimeout).toEqual(expect.any(Number));
     expect(service.isLocalhost).toEqual(expect.any(Function));
-    expect(service.graphQlEndpoint).toEqual(expect.any(Function));
-    expect(service.getGraphQLHttpHeaders).toEqual(expect.any(Function));
     expect(service.getEndpoint).toEqual(expect.any(Function));
-    expect(service.extractGraphQLData).toEqual(expect.any(Function));
-    expect(service.checkErrorStatusAndRedirect).toEqual(expect.any(Function));
     expect(service.handleError).toEqual(expect.any(Function));
     expect(service.handleGraphQLError).toEqual(expect.any(Function));
     expect(service.pipeHttpResponse).toEqual(expect.any(Function));
-    expect(service.pipeGraphQLRequest).toEqual(expect.any(Function));
     expect(service.tapProgress).toEqual(expect.any(Function));
     expect(service.tapError).toEqual(expect.any(Function));
-    expect(service.createApolloLinkFor).toEqual(expect.any(Function));
-  });
-
-  describe('extractGraphQLData', () => {
-    it(
-      'should return an Array',
-      waitForAsync(() => {
-        const executionResult: ExecutionResult = {
-          data: [{ x: 'x' }, { y: 'y' }],
-        };
-        void service.extractGraphQLData(executionResult).pipe(
-          tap(result => {
-            expect(result).toEqual(expect.any(Array));
-          }),
-        );
-
-        void service.extractGraphQLData(executionResult).pipe(
-          tap(result => {
-            expect(result).toEqual(executionResult.data);
-          }),
-        );
-      }),
-    );
-
-    it(
-      'should return execution result if response does not contain nested data object',
-      waitForAsync(() => {
-        const executionResult: ExecutionResult = {};
-        void service.extractGraphQLData(executionResult).pipe(
-          tap(result => {
-            expect(result).toEqual(expect.any(Object));
-          }),
-        );
-
-        void service.extractGraphQLData(executionResult).pipe(
-          tap(result => {
-            expect(result).toEqual(executionResult);
-          }),
-        );
-      }),
-    );
-  });
-
-  it('extractGraphQLData should throw errors if get', () => {
-    const error: GraphQLError = new GraphQLError('message');
-    void service.extractGraphQLData({ errors: [error] }).pipe(
-      tap(
-        () => {
-          // empty
-        },
-        errors => {
-          expect(errors[0]).toBe(error);
-        },
-      ),
-    );
-  });
-
-  it(
-    'pipeGraphQLRequest should check error if 401 status',
-    waitForAsync(() => {
-      const q$ = cold('---#|', null, { networkError: { status: HTTP_STATUS.BAD_REQUEST } });
-      void service.pipeGraphQLRequest(q$).subscribe(
-        () => null,
-        () => {
-          expect(spy.service.checkErrorStatusAndRedirect).toHaveBeenCalledWith(
-            HTTP_STATUS.UNAUTHORIZED,
-          );
-        },
-      );
-      getTestScheduler().flush();
-    }),
-  );
-
-  it('checkErrorStatusAndRedirect should reset user if error status is 401', () => {
-    service.checkErrorStatusAndRedirect(HTTP_STATUS.BAD_REQUEST);
-    expect(spy.store.dispatch).not.toHaveBeenCalled();
-    service.checkErrorStatusAndRedirect(HTTP_STATUS.UNAUTHORIZED);
-    expect(spy.store.dispatch).toHaveBeenCalled();
   });
 
   describe('handleError', () => {
@@ -224,28 +114,6 @@ describe('AppHttpHandlersService', () => {
       expect(service.isLocalhost()).toBeTruthy();
     });
   });
-
-  it(
-    'graphQLHttpHeaders should return new http headers with authorization header set',
-    waitForAsync(() => {
-      void service.userToken$
-        .pipe(
-          concatMap(userToken => {
-            const newHeadersObj: {
-              [name: string]: string | string[];
-            } = {
-              Authorization: `Token ${userToken}`,
-            };
-            const newHeaders: HttpHeaders = new HttpHeaders(newHeadersObj);
-            return service.getGraphQLHttpHeaders().pipe(map(headers => ({ headers, newHeaders })));
-          }),
-          tap(({ headers, newHeaders }) => {
-            expect(headers.get('Authorization')).toEqual(newHeaders.get('Authorization'));
-          }),
-        )
-        .subscribe();
-    }),
-  );
 
   it('pipeHttpResponse should work correctly', () => {
     const observable = of({ data: {} });

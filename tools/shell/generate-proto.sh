@@ -53,7 +53,8 @@ reportSuccess() {
 ##
 run_protoc() {
   local PROTO_FILES="$PROTO_SOURCE_PATH/root.proto
-    $PROTO_SOURCE_PATH/common.proto"
+    $PROTO_SOURCE_PATH/common.proto
+    $PROTO_SOURCE_PATH/mailer.proto"
 
   printInfoTitle "<< RUNNING PROTOC >>"
   printNameAndValue "proto files" "$PROTO_FILES"
@@ -69,8 +70,8 @@ run_protoc() {
 # Runs protobufjs.
 ##
 run_protobufjs() {
-  local PATH_TO_PROTO_JS="$OUT_DIR_TS/nx-ng-starter_proto.js"
-  local PATH_TO_PROTO_TS="$OUT_DIR_TS/nx-ng-starter_proto.d.ts"
+  local PATH_TO_PROTO_JS="$OUT_DIR_TS/mono_proto.js"
+  local PATH_TO_PROTO_TS="$OUT_DIR_TS/mono_proto.d.ts"
 
   printInfoTitle "<< RUNNING PROTOBUFJS >>"
   printNameAndValue "path to proto" "$PROTO_SOURCE_PATH"

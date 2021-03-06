@@ -1,9 +1,5 @@
-import {
-  Message,
-  UserLoginCredentials,
-  UserLogoutCredentials,
-  UserProfile,
-} from '@mono/api-interface';
+import { UserLoginCredentials, UserLogoutCredentials, UserProfile } from '@mono/api-interface';
+import { mono } from '@mono/proto';
 import { Body, Controller, Get, Post } from '@nestjs/common';
 
 import { ApiAuthService } from '../service/auth.service';
@@ -12,8 +8,8 @@ import { ApiAuthService } from '../service/auth.service';
 export class ApiAuthController {
   constructor(private readonly authService: ApiAuthService) {}
 
-  @Get('ping')
-  public ping(): Message {
+  @Get('auth')
+  public ping(): mono.Result {
     return this.authService.ping();
   }
 
@@ -23,7 +19,7 @@ export class ApiAuthController {
   }
 
   @Post('logout')
-  public logout(@Body() credentials: UserLogoutCredentials): Message {
+  public logout(@Body() credentials: UserLogoutCredentials): mono.Result {
     return this.authService.logout(credentials);
   }
 

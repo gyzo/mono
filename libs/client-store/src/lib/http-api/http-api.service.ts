@@ -16,8 +16,14 @@ export class AppHttpApiService {
     private readonly httpHandlers: AppHttpHandlersService,
   ) {}
 
-  public ping() {
-    const endpoint = this.httpHandlers.getEndpoint('ping');
+  public pingAuth() {
+    const endpoint = this.httpHandlers.getEndpoint('auth');
+    const observable = this.httpClient.get<IPingResponse>(endpoint);
+    return this.httpHandlers.pipeHttpResponse<IPingResponse>(observable);
+  }
+
+  public pingMailer() {
+    const endpoint = this.httpHandlers.getEndpoint('mailer');
     const observable = this.httpClient.get<IPingResponse>(endpoint);
     return this.httpHandlers.pipeHttpResponse<IPingResponse>(observable);
   }

@@ -3,7 +3,6 @@ import { HttpTestingController, TestRequest } from '@angular/common/http/testing
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { AppClientTranslateModule } from '@mono/client-translate';
 import { getTestBedConfig, newTestBedMetadata } from '@mono/client-unit-testing';
-import { Apollo } from 'apollo-angular';
 import { of } from 'rxjs';
 
 import {
@@ -26,7 +25,6 @@ describe('AppHttpApiService', () => {
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
   let service: AppHttpApiService;
-  let apollo: Apollo;
   let httpHandlers: AppHttpHandlersService;
   let toaster: AppToasterService;
   let user: AppUserService;
@@ -47,7 +45,6 @@ describe('AppHttpApiService', () => {
           service = TestBed.inject(AppHttpApiService);
           toaster = TestBed.inject(AppToasterService);
           httpHandlers = TestBed.inject(AppHttpHandlersService);
-          apollo = TestBed.inject(Apollo);
           user = TestBed.inject(AppUserService);
           spy = {
             httpHandlers: {
@@ -73,7 +70,6 @@ describe('AppHttpApiService', () => {
 
   it('should exist', () => {
     expect(service).toBeTruthy();
-    expect(apollo).toBeDefined();
     expect(toaster).toBeDefined();
     expect(user).toBeDefined();
   });

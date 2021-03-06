@@ -18,7 +18,7 @@ import { environment } from './environments/environment';
  */
 const server: e.Express = e();
 /**
- * Defult port value.
+ * Default port value.
  */
 const defaultPort = 8080;
 
@@ -49,14 +49,19 @@ async function bootstrap(expressInstance: e.Express): Promise<unknown> {
   const port = typeof process.env.port !== 'undefined' ? process.env.port : defaultPort;
   await app.listen(port, () => {
     console.warn(`Listening at:
-    - http://localhost:${port}/${globalPrefix}/ping
+    - http://localhost:${port}/${globalPrefix}/auth
     - http://localhost:${port}/${globalPrefix}/signup
     - http://localhost:${port}/${globalPrefix}/login
     - http://localhost:${port}/${globalPrefix}/logout
-    - http://localhost:${port}/${globalPrefix}/graphql
     - http://localhost:${port}/${globalPrefix}/grpc
     - http://localhost:${port}/${globalPrefix}/grpc/:id
-    - ws://localhost:${defaultWsPort}/api/events`);
+    - http://localhost:${port}/${globalPrefix}/mailer
+    - http://localhost:${port}/${globalPrefix}/mail
+    - http://localhost:${port}/${globalPrefix}/githubAccessToken
+    - http://localhost:${port}/${globalPrefix}/githubUser
+    - http://localhost:${port}/${globalPrefix}/githubUserRepos
+    - http://localhost:${port}/${globalPrefix}/githubUserReposLanguages
+    - ws://localhost:${defaultWsPort}/${globalPrefix}/events`);
   });
 
   return app.init();
@@ -74,11 +79,24 @@ const firebaseConfig = process.env.FIREBASE_CONFIG;
  */
 if (Boolean(firebaseConfig)) {
   admin.initializeApp();
-  (exports as Record<string, unknown>).ping = functions.https.onRequest(server);
+  /**
+   * @note TODO: handle websocket events
+   * (exports as Record<string, unknown>).events = functions.https.onRequest(server);
+   */
+  /**
+   * @note try one main entry point
+   */
+  // (exports as Record<string, unknown>).api = functions.https.onRequest(server);
+  //
+  (exports as Record<string, unknown>).auth = functions.https.onRequest(server);
+  (exports as Record<string, unknown>).signup = functions.https.onRequest(server);
   (exports as Record<string, unknown>).login = functions.https.onRequest(server);
   (exports as Record<string, unknown>).logout = functions.https.onRequest(server);
-  (exports as Record<string, unknown>).signup = functions.https.onRequest(server);
-  (exports as Record<string, unknown>).graphql = functions.https.onRequest(server);
-  // TODO: handle websocket events (exports as Record<string, unknown>).events = functions.https.onRequest(server);
-  // TODO: (exports as Record<string, unknown>).grpc = functions.https.onRequest(server);
+  (exports as Record<string, unknown>).mailer = functions.https.onRequest(server);
+  (exports as Record<string, unknown>).mail = functions.https.onRequest(server);
+  //
+  (exports as Record<string, unknown>).githubAccessToken = functions.https.onRequest(server);
+  (exports as Record<string, unknown>).githubUser = functions.https.onRequest(server);
+  (exports as Record<string, unknown>).githubUserRepos = functions.https.onRequest(server);
+  (exports as Record<string, unknown>).githubUserReposLanguages = functions.https.onRequest(server);
 }

@@ -1,1 +1,1 @@
-export * from './nx-ng-starter_proto';
+export * from './mono_proto';

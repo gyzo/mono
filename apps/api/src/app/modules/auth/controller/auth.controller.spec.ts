@@ -1,7 +1,6 @@
 import { JwtModule } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 
-import { ApiAuthUtilsService } from '../../auth-utils/service/auth-utils.service';
 import { ApiAuthService } from '../service/auth.service';
 import { ApiAuthController } from './auth.controller';
 
@@ -16,7 +15,7 @@ describe('ApiAuthController', () => {
         }),
       ],
       controllers: [ApiAuthController],
-      providers: [ApiAuthService, ApiAuthUtilsService],
+      providers: [ApiAuthService],
     }).compile();
   });
 

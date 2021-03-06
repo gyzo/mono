@@ -157,11 +157,8 @@
               "hammerjs",
               "google-protobuf/google/protobuf/any_pb.js",
               "protobufjs/minimal",
-              "zen-observable",
-              "apollo-upload-client",
               "extract-files/public/isExtractableFile",
               "extract-files/public/extractFiles",
-              "graphql-tag",
               "subscriptions-transport-ws"
             ],
             "aot": true,
@@ -810,6 +807,173 @@
       "projectType": "application",
       "root": "apps/documentation-e2e",
       "sourceRoot": "apps/documentation-e2e/src"
+    },
+    "portfolio": {
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "configurations": {
+            "analyze-bundle": {
+              "aot": true,
+              "buildOptimizer": true,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/portfolio/src/environments/environment.ts",
+                  "with": "apps/portfolio/src/environments/environment.prod.ts"
+                }
+              ],
+              "namedChunks": true,
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": true,
+              "vendorChunk": true
+            },
+            "production": {
+              "aot": true,
+              "buildOptimizer": true,
+              "extractLicenses": true,
+              "fileReplacements": [
+                {
+                  "replace": "apps/portfolio/src/environments/environment.ts",
+                  "with": "apps/portfolio/src/environments/environment.prod.ts"
+                }
+              ],
+              "namedChunks": true,
+              "ngswConfigPath": "apps/portfolio/ngsw-config.json",
+              "optimization": true,
+              "outputHashing": "all",
+              "serviceWorker": true,
+              "sourceMap": false,
+              "vendorChunk": true
+            }
+          },
+          "options": {
+            "allowedCommonJsDependencies": [
+              "hammerjs",
+              "google-protobuf/google/protobuf/any_pb.js",
+              "protobufjs/minimal",
+              "extract-files/public/isExtractableFile",
+              "extract-files/public/extractFiles",
+              "subscriptions-transport-ws"
+            ],
+            "aot": true,
+            "assets": [
+              "apps/portfolio/src/favicon.ico",
+              "apps/portfolio/src/assets",
+              "apps/portfolio/src/manifest.webmanifest",
+              {
+                "glob": "**/*",
+                "input": "./libs/client-core/src/lib/assets",
+                "output": "./assets"
+              }
+            ],
+            "baseHref": "/",
+            "budgets": [
+              {
+                "maximumError": "15mb",
+                "maximumWarning": "12mb",
+                "type": "initial"
+              },
+              {
+                "maximumError": "10kb",
+                "maximumWarning": "6kb",
+                "type": "anyComponentStyle"
+              }
+            ],
+            "index": "apps/portfolio/src/index.html",
+            "main": "apps/portfolio/src/main.ts",
+            "outputPath": "dist/apps/portfolio",
+            "polyfills": "apps/portfolio/src/polyfills.ts",
+            "scripts": [],
+            "styles": [
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+              "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
+              "apps/portfolio/src/styles.scss",
+              "libs/client-core/src/lib/styles/styles.scss"
+            ],
+            "tsConfig": "apps/portfolio/tsconfig.app.json"
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "portfolio:build"
+          }
+        },
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "apps/portfolio/.eslintrc.json",
+            "lintFilePatterns": ["apps/portfolio/**/*.ts"]
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "portfolio:build:production"
+            }
+          },
+          "options": {
+            "browserTarget": "portfolio:build"
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "assets": [
+              "apps/portfolio/src/favicon.ico",
+              "apps/portfolio/src/assets",
+              {
+                "glob": "**/*",
+                "input": "./libs/client-core/src/lib/assets",
+                "output": "./assets"
+              }
+            ],
+            "jestConfig": "apps/portfolio/jest.config.js",
+            "passWithNoTests": true,
+            "scripts": [],
+            "styles": [
+              "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
+              "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
+              "apps/portfolio/src/styles.scss",
+              "libs/client-core/src/lib/styles/styles.scss"
+            ]
+          },
+          "outputs": ["coverage/apps/portfolio"]
+        }
+      },
+      "prefix": "mono",
+      "projectType": "application",
+      "root": "apps/portfolio",
+      "sourceRoot": "apps/portfolio/src"
+    },
+    "portfolio-e2e": {
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "configurations": {
+            "production": {
+              "devServerTarget": "portfolio:serve:production"
+            }
+          },
+          "options": {
+            "cypressConfig": "apps/portfolio-e2e/cypress.json",
+            "devServerTarget": "portfolio:serve",
+            "tsConfig": "apps/portfolio-e2e/tsconfig.e2e.json"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/portfolio-e2e/**/*.{js,ts}"]
+          }
+        }
+      },
+      "projectType": "application",
+      "root": "apps/portfolio-e2e",
+      "sourceRoot": "apps/portfolio-e2e/src"
     },
     "proto": {
       "architect": {

@@ -1,17 +1,31 @@
 import { API_ENV } from '@mono/api-interface';
-import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
+import { HttpModule, MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
 import { environment } from '../environments/environment';
 import { ApiLoggerMiddleware } from './middleware/logger/logger.middleware';
 import { ApiAuthModule } from './modules/auth/auth.module';
-import { ApiGrpcApiModule } from './modules/grpc/grpc.module';
+import { ApiGithubModule } from './modules/github/github.module';
+import { ApiGrpcModule } from './modules/grpc/grpc.module';
+import { ApiMailerModule } from './modules/mailer/mailer.module';
 import { ApiWebsocketModule } from './modules/websocket/websocket.module';
 
 /**
  * Root API application module.
  */
 @Module({
-  imports: [ApiAuthModule, ApiWebsocketModule, ApiGrpcApiModule],
+  imports: [
+    HttpModule.registerAsync({
+      useFactory: () => ({
+        timeout: 10000,
+        maxRedirects: 5,
+      }),
+    }),
+    ApiAuthModule.forRoot(),
+    ApiMailerModule.forRoot(),
+    ApiWebsocketModule.forRoot(),
+    ApiGithubModule.forRoot(),
+    ApiGrpcModule,
+  ],
   providers: [
     {
       provide: API_ENV,

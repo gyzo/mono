@@ -2,7 +2,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AppClientStoreModule } from '@mono/client-store';
 import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV } from '@mono/client-util';
 
 import { appClientCoreModuleProviders } from './providers/client-core-module.providers';
@@ -11,20 +10,8 @@ import { appClientCoreModuleProviders } from './providers/client-core-module.pro
  * Client core module.
  */
 @NgModule({
-  imports: [
-    FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AppClientStoreModule,
-  ],
-  exports: [
-    FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
-    HttpClientModule,
-    AppClientStoreModule,
-  ],
+  imports: [FlexLayoutModule, FormsModule, ReactiveFormsModule, HttpClientModule],
+  exports: [FlexLayoutModule, FormsModule, ReactiveFormsModule, HttpClientModule],
 })
 export class AppClientCoreModule {
   /**

@@ -7,20 +7,23 @@ export interface IPingResponse {
 }
 
 export interface IAppHttpApiState {
-  ping: string;
+  pingAuth: string;
+  pingMailer: string;
 }
 
 export interface IAppHttpApiStatePayload {
-  ping?: string;
+  pingAuth?: string;
+  pingMailer?: string;
 }
 
 export const httpApiInitialState = {
-  ping: '',
+  pingAuth: '',
+  pingMailer: '',
 };
 
 export const HTTP_API_STATE_TOKEN = new StateToken<IAppHttpApiState>('httpApi');
 
-export type THttpApiPayload = IActionPayload<IAppHttpApiStatePayload>;
+export type THttpApiPayload = IActionPayload<void>;
 
 export interface IHttpApiHandlersActions {
   cached(): Observable<string>;

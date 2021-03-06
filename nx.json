@@ -70,6 +70,13 @@
       "implicitDependencies": ["documentation"],
       "tags": ["scope:documentation-e2e", "type:e2e"]
     },
+    "portfolio": {
+      "tags": ["scope:portfolio", "type:application"]
+    },
+    "portfolio-e2e": {
+      "implicitDependencies": ["portfolio"],
+      "tags": ["scope:portfolio-e2e", "type:e2e"]
+    },
     "proto": {
       "tags": ["scope:proto", "type:data-access"]
     },

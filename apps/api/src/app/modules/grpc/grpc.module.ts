@@ -1,17 +1,17 @@
 import { Module } from '@nestjs/common';
 import { ClientsModule } from '@nestjs/microservices';
 import { ApiGrpcController } from './controller/grpc.controller';
-import { apiGrpcClientOptions, NXNGSTARTER_PACKAGE } from './grpc-client.options';
+import { apiGrpcClientOptions, MONO_GRPC_PACKAGE } from './grpc-client.options';
 
 @Module({
   imports: [
     ClientsModule.register([
       {
-        name: NXNGSTARTER_PACKAGE,
+        name: MONO_GRPC_PACKAGE,
         ...apiGrpcClientOptions,
       },
     ]),
   ],
   controllers: [ApiGrpcController],
 })
-export class ApiGrpcApiModule {}
+export class ApiGrpcModule {}
