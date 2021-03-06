@@ -27,20 +27,20 @@ export class ApiGithubService {
     return process.env.GITHUB_ACCESS_TOKEN ?? 'n/a';
   }
 
-  public githubUser(userName: string) {
-    const url = this.endpoints.user(userName);
+  public githubUser(userName?: string) {
+    const url = this.endpoints.user(userName ?? '');
     // TODO: send request
     return of(url);
   }
 
-  public githubUserRepos(userName: string) {
-    const url = this.endpoints.repos(userName);
+  public githubUserRepos(userName?: string) {
+    const url = this.endpoints.repos(userName ?? '');
     // TODO: send request
     return of(url);
   }
 
-  public githubUserReposLanguages(userName: string, repoName: string) {
-    const url = this.endpoints.languages(userName, repoName);
+  public githubUserReposLanguages(userName?: string, repoName?: string) {
+    const url = this.endpoints.languages(userName ?? '', repoName ?? '');
     // TODO: send request
     return of(url);
   }

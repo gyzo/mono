@@ -3,6 +3,8 @@ import { Controller, Get, Query } from '@nestjs/common';
 
 import { ApiGithubService } from '../service/github.service';
 
+type TQueryPatams<T> = T & Record<string, string>;
+
 @Controller()
 export class ApiGithubController {
   constructor(private readonly service: ApiGithubService) {}
@@ -18,17 +20,17 @@ export class ApiGithubController {
   }
 
   @Get('githubUser')
-  public githubUser(@Query() username: string) {
-    return this.service.githubUser(username);
+  public githubUser(@Query() query: TQueryPatams<{ username?: string }>) {
+    return this.service.githubUser(query.username);
   }
 
   @Get('githubUserRepos')
-  public githubUserRepos(@Query() username: string) {
-    return this.service.githubUserRepos(username);
+  public githubUserRepos(@Query() query: TQueryPatams<{ username?: string }>) {
+    return this.service.githubUserRepos(query.username);
   }
 
   @Get('githubUserReposLanguages')
-  public githubUserReposLanguages(@Query() username: string, @Query() reponame: string) {
-    return this.service.githubUserReposLanguages(username, reponame);
+  public githubUserReposLanguages(@Query() query: { username?: string; reponame?: string }) {
+    return this.service.githubUserReposLanguages(query.username, query.reponame);
   }
 }
