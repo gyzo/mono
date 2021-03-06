@@ -1,18 +1,18 @@
 import { Controller, Get, Inject, OnModuleInit, Param } from '@nestjs/common';
 import { ClientGrpc, GrpcMethod, GrpcStreamMethod } from '@nestjs/microservices';
-import { nxngstarter } from '@mono/proto';
+import { mono } from '@mono/proto';
 import { from, Observable, of, ReplaySubject, Subject } from 'rxjs';
 import { toArray } from 'rxjs/operators';
-import { NXNGSTARTER_PACKAGE } from '../grpc-client.options';
+import { MONO_GRPC_PACKAGE } from '../grpc-client.options';
 
 export interface IEntityService {
-  findOne(data: nxngstarter.IEntityById): Observable<nxngstarter.IEntity>;
-  findMany(upstream: Observable<nxngstarter.IEntityById>): Observable<nxngstarter.IEntity>;
+  findOne(data: mono.IEntityById): Observable<mono.IEntity>;
+  findMany(upstream: Observable<mono.IEntityById>): Observable<mono.IEntity>;
 }
 
 @Controller('grpc')
 export class ApiGrpcController implements OnModuleInit {
-  private readonly items: nxngstarter.IEntity[] = [
+  private readonly items: mono.IEntity[] = [
     {
       id: 'id1',
       num1: 1,
@@ -33,50 +33,47 @@ export class ApiGrpcController implements OnModuleInit {
     },
   ];
 
-  private sampleService?: IEntityService;
+  private entityService?: IEntityService;
 
-  constructor(@Inject(NXNGSTARTER_PACKAGE) private readonly client: ClientGrpc) {}
+  constructor(@Inject(MONO_GRPC_PACKAGE) private readonly client: ClientGrpc) {}
 
   public onModuleInit() {
-    this.sampleService = this.client.getService<IEntityService>('EntityService');
+    this.entityService = this.client.getService<IEntityService>('EntityService');
   }
 
   @Get()
-  public getMany(): Observable<nxngstarter.IEntity[]> {
-    const ids$ = new ReplaySubject<nxngstarter.IEntityById>();
+  public getMany(): Observable<mono.IEntity[]> {
+    const ids$ = new ReplaySubject<mono.IEntityById>();
     ids$.next({ id: 'id1' });
     ids$.next({ id: 'id2' });
     ids$.complete();
 
-    return typeof this.sampleService !== 'undefined'
-      ? this.sampleService.findMany(ids$.asObservable()).pipe(toArray())
+    return typeof this.entityService !== 'undefined'
+      ? this.entityService.findMany(ids$.asObservable()).pipe(toArray())
       : of([]);
   }
 
   @Get(':id')
-  public getById(@Param('id') id: string): Observable<nxngstarter.IEntity> {
-    return typeof this.sampleService !== 'undefined'
-      ? from(this.sampleService.findOne({ id }))
+  public getById(@Param('id') id: string): Observable<mono.IEntity> {
+    return typeof this.entityService !== 'undefined'
+      ? from(this.entityService.findOne({ id }))
       : of(
-          nxngstarter.Entity.toObject(new nxngstarter.Entity(), {
+          mono.Entity.toObject(new mono.Entity(), {
             defaults: true,
           }),
         );
   }
 
   @GrpcMethod('EntityService', 'FindOne')
-  public findOne(data: nxngstarter.IEntityById, metadata: any): nxngstarter.IEntity | undefined {
+  public findOne(data: mono.IEntityById, metadata: any): mono.IEntity | undefined {
     return this.items.find(({ id }) => id === data.id);
   }
 
   @GrpcStreamMethod('EntityService', 'FindMany')
-  public findMany(
-    data$: Observable<nxngstarter.IEntityById>,
-    metadata: any,
-  ): Observable<nxngstarter.IEntity> {
-    const entity$ = new Subject<nxngstarter.IEntity>();
+  public findMany(data$: Observable<mono.IEntityById>, metadata: any): Observable<mono.IEntity> {
+    const entity$ = new Subject<mono.IEntity>();
 
-    const onNext = (entityById: nxngstarter.IEntityById) => {
+    const onNext = (entityById: mono.IEntityById) => {
       const item = this.items.find(({ id }) => id === entityById.id);
       entity$.next(item);
     };

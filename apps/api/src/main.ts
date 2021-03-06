@@ -53,7 +53,6 @@ async function bootstrap(expressInstance: e.Express): Promise<unknown> {
     - http://localhost:${port}/${globalPrefix}/signup
     - http://localhost:${port}/${globalPrefix}/login
     - http://localhost:${port}/${globalPrefix}/logout
-    - http://localhost:${port}/${globalPrefix}/graphql
     - http://localhost:${port}/${globalPrefix}/grpc
     - http://localhost:${port}/${globalPrefix}/grpc/:id
     - ws://localhost:${defaultWsPort}/api/events`);
@@ -78,7 +77,6 @@ if (Boolean(firebaseConfig)) {
   (exports as Record<string, unknown>).login = functions.https.onRequest(server);
   (exports as Record<string, unknown>).logout = functions.https.onRequest(server);
   (exports as Record<string, unknown>).signup = functions.https.onRequest(server);
-  (exports as Record<string, unknown>).graphql = functions.https.onRequest(server);
   // TODO: handle websocket events (exports as Record<string, unknown>).events = functions.https.onRequest(server);
   // TODO: (exports as Record<string, unknown>).grpc = functions.https.onRequest(server);
 }
