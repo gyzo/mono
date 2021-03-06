@@ -1,92 +1,36 @@
-import { HttpClient, HttpRequest } from '@angular/common/http';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-  TestRequest,
-} from '@angular/common/http/testing';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { HttpRequest } from '@angular/common/http';
+import { HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientMaterialModule } from '@mono/client-material';
-import {
-  AppGithubApiService,
-  AppGithubUserService,
-  AppGithubUserState,
-  AppHttpHandlersService,
-  AppSidebarState,
-  AppUserConfigService,
-} from '@mono/client-store';
-import { AppDummyComponent } from '@mono/client-unit-testing';
-import {
-  IWebClientAppEnvironment,
-  WEB_CLIENT_APP_ENV,
-  WINDOW,
-  windowFactory,
-} from '@mono/client-util';
-import { TranslateService } from '@ngx-translate/core';
-import { NgxsModule, Store } from '@ngxs/store';
+import { AppGithubUserService, AppGithubUserState } from '@mono/client-store';
+import { AppDummyComponent, getTestBedConfig, newTestBedMetadata } from '@mono/client-unit-testing';
+import { NgxsModule } from '@ngxs/store';
+import { of } from 'rxjs';
 
 import { AppIndexComponent } from './index.component';
 
 describe('AppIndexComponent', () => {
-  const testBedConfig: TestModuleMetadata = {
-    declarations: [AppIndexComponent, AppDummyComponent],
+  const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
+    declarations: [AppIndexComponent],
     imports: [
-      BrowserDynamicTestingModule,
-      NoopAnimationsModule,
-      HttpClientTestingModule,
       AppClientMaterialModule,
-      FlexLayoutModule,
-      NgxsModule.forRoot([AppGithubUserState, AppSidebarState]),
+      NgxsModule.forFeature([AppGithubUserState]),
       RouterTestingModule.withRoutes([{ path: '', component: AppDummyComponent }]),
     ],
     providers: [
-      { provide: WINDOW, useValue: windowFactory },
-      {
-        provide: MatSnackBar,
-        useValue: {
-          open: (): null => null,
-        },
-      },
-      {
-        provide: AppHttpHandlersService,
-        useFactory: (
-          store: Store,
-          translate: TranslateService,
-          win: Window,
-          appEnv: IWebClientAppEnvironment,
-        ) => new AppHttpHandlersService(store, translate, win, appEnv),
-        deps: [Store, TranslateService, WINDOW, WEB_CLIENT_APP_ENV],
-      },
-      {
-        provide: AppUserConfigService,
-        useFactory: (http: HttpClient, handlers: AppHttpHandlersService, window: Window) =>
-          new AppUserConfigService(http, handlers, window),
-        deps: [HttpClient, AppHttpHandlersService, WINDOW],
-      },
-      {
-        provide: AppGithubApiService,
-        useFactory: (
-          http: HttpClient,
-          store: Store,
-          handlers: AppHttpHandlersService,
-          window: Window,
-        ) => new AppGithubApiService(http, store, handlers, window),
-        deps: [HttpClient, Store, AppHttpHandlersService, WINDOW],
-      },
       {
         provide: AppGithubUserService,
-        useFactory: (store: Store, userConfig: AppUserConfigService, github: AppGithubApiService) =>
-          new AppGithubUserService(store, userConfig, github),
-        deps: [Store, AppUserConfigService, AppGithubApiService],
+        useValue: {
+          userData$: of({}),
+          githubOrgs$: of([]),
+          publicEvents$: of([]),
+          getUserData: () => of({}),
+        },
       },
     ],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  };
+  });
+  const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
   let fixture: ComponentFixture<AppIndexComponent>;
   let component: AppIndexComponent;

@@ -32,7 +32,7 @@ describe('AppActivityComponent', () => {
       RouterTestingModule.withRoutes([{ path: '', component: AppDummyComponent }]),
     ],
     providers: [
-      { provide: WINDOW, useValue: windowFactory },
+      { provide: WINDOW, useFactory: windowFactory },
       {
         provide: MatSnackBar,
         useValue: {

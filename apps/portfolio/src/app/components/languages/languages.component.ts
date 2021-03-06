@@ -31,9 +31,6 @@ export class AppLanguagesComponent {
     [key: string]: boolean;
   } = {};
 
-  /**
-   * Constructor.
-   */
   constructor(
     private readonly domSanitizer: DomSanitizer,
     private readonly user: AppGithubUserService,

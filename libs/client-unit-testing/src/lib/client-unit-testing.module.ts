@@ -14,7 +14,9 @@ import {
   WINDOW,
   windowFactory,
 } from '@mono/client-util';
+import { TranslateModule } from '@ngx-translate/core';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
 import { NgxsModule } from '@ngxs/store';
 
 import { AppDummyComponent } from './components/dummy/dummy.component.mock';
@@ -69,6 +71,8 @@ export const mocksCoreModuleProviders: Provider[] = [
     RouterTestingModule,
     NgxsModule.forRoot([], { developmentMode: true }),
     NgxsFormPluginModule.forRoot(),
+    NgxsRouterPluginModule.forRoot(),
+    TranslateModule.forRoot(),
   ],
   declarations: [AppDummyComponent],
   exports: [
@@ -81,6 +85,7 @@ export const mocksCoreModuleProviders: Provider[] = [
     AppClientMaterialModule,
     HttpClientTestingModule,
     RouterTestingModule,
+    TranslateModule,
     AppDummyComponent,
   ],
 })

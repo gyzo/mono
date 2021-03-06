@@ -30,7 +30,7 @@ describe('AppProfilesComponent', () => {
       NgxsModule.forRoot([AppGithubUserState, AppSidebarState]),
       RouterTestingModule.withRoutes([{ path: '', component: AppDummyComponent }]),
     ],
-    providers: [{ provide: WINDOW, useValue: windowFactory }],
+    providers: [{ provide: WINDOW, useFactory: windowFactory }],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
   };
 

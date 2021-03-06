@@ -41,9 +41,6 @@ export class AppIndexComponent {
    */
   private dialogSub?: Subscription;
 
-  /**
-   * Constructor.
-   */
   constructor(
     private readonly dialog: MatDialog,
     private readonly user: AppGithubUserService,

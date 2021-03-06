@@ -15,15 +15,15 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientMaterialModule } from '@mono/client-material';
 import { AppHttpHandlersService } from '@mono/client-store';
-import { AppDialogRefMock, AppDummyComponent } from '@mono/client-unit-testing';
+import { AppDialogRefMock, AppDummyComponent, testingEnvironment } from '@mono/client-unit-testing';
 import {
   IWebClientAppEnvironment,
   WEB_CLIENT_APP_ENV,
   WINDOW,
   windowFactory,
 } from '@mono/client-util';
-import { TranslateService } from '@ngx-translate/core';
-import { Store } from '@ngxs/store';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { NgxsModule, Store } from '@ngxs/store';
 
 import { AppSendEmailService } from '../../services/send-email/send-email.service';
 import { AppContactComponent } from './contact.component';
@@ -40,11 +40,15 @@ describe('AppContactComponent', () => {
       ReactiveFormsModule,
       HttpClientTestingModule,
       AppClientMaterialModule,
+      NgxsModule.forRoot([]),
       FlexLayoutModule,
       RouterTestingModule.withRoutes([{ path: '', component: AppDummyComponent }]),
+      TranslateModule.forRoot(),
     ],
     providers: [
-      { provide: WINDOW, useValue: windowFactory },
+      Store,
+      { provide: WINDOW, useFactory: windowFactory },
+      { provide: WEB_CLIENT_APP_ENV, useValue: testingEnvironment },
       { provide: MAT_DIALOG_DATA, useValue: MOCKED_MODAL_DATA },
       {
         provide: MatDialogRef,

@@ -35,9 +35,6 @@ export class AppGithubUserService implements IUserService {
     map(state => state.userConfig?.languageIcons),
   );
 
-  /**
-   * Constructor.
-   */
   constructor(
     private readonly store: Store,
     private readonly userConfig: AppUserConfigService,

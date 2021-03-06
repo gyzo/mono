@@ -68,9 +68,6 @@ export class AppApplicationsComponent {
    */
   public treeDataSource = new MatTreeFlatDataSource(this.treeControl, this.treeFlattener);
 
-  /**
-   *
-   */
   constructor(private readonly store: Store, private readonly user: AppGithubUserService) {}
 
   /**

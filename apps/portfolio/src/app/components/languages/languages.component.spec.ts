@@ -20,14 +20,14 @@ import {
   AppSidebarState,
   AppUserConfigService,
 } from '@mono/client-store';
-import { AppDummyComponent } from '@mono/client-unit-testing';
+import { AppDummyComponent, testingEnvironment } from '@mono/client-unit-testing';
 import {
   IWebClientAppEnvironment,
   WEB_CLIENT_APP_ENV,
   WINDOW,
   windowFactory,
 } from '@mono/client-util';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NgxsModule, Store } from '@ngxs/store';
 
 import { AppLanguagesComponent } from './languages.component';
@@ -43,9 +43,11 @@ describe('AppLanguagesComponent', () => {
       FlexLayoutModule,
       NgxsModule.forRoot([AppGithubUserState, AppSidebarState]),
       RouterTestingModule.withRoutes([{ path: '', component: AppDummyComponent }]),
+      TranslateModule.forRoot(),
     ],
     providers: [
-      { provide: WINDOW, useValue: windowFactory },
+      { provide: WINDOW, useFactory: windowFactory },
+      { provide: WEB_CLIENT_APP_ENV, useValue: testingEnvironment },
       {
         provide: MatSnackBar,
         useValue: {
