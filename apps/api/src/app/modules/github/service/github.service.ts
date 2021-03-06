@@ -2,6 +2,8 @@ import { mono } from '@mono/proto';
 import { HttpService, Injectable } from '@nestjs/common';
 import { map } from 'rxjs/operators';
 
+import { getAuthHeader } from '../../auth/service/auth.utils';
+
 @Injectable()
 export class ApiGithubService {
   private readonly apiUrl = 'https://api.github.com';
@@ -9,11 +11,10 @@ export class ApiGithubService {
   private readonly accessToken = process.env.GITHUB_ACCESS_TOKEN ?? '';
 
   private readonly endpoints = {
-    user: (userName: string) => `${this.apiUrl}/users/${userName}?access_token=${this.accessToken}`,
-    repos: (userName: string) =>
-      `${this.apiUrl}/users/${userName}/repos?access_token=${this.accessToken}`,
+    user: (userName: string) => `${this.apiUrl}/users/${userName}`,
+    repos: (userName: string) => `${this.apiUrl}/users/${userName}/repos`,
     languages: (userName: string, repoName: string) =>
-      `${this.apiUrl}/repos/${userName}/${repoName}/languages?access_token=${this.accessToken}`,
+      `${this.apiUrl}/repos/${userName}/${repoName}/languages`,
   };
 
   constructor(private readonly http: HttpService) {}
@@ -31,25 +32,28 @@ export class ApiGithubService {
 
   public githubUser(userName?: string) {
     const url = this.endpoints.user(userName ?? '');
+    const headers = getAuthHeader(this.accessToken);
     /**
      * @note TODO: add type
      */
-    return this.http.get(url).pipe(map(res => res.data));
+    return this.http.get(url, { headers }).pipe(map(res => res.data));
   }
 
   public githubUserRepos(userName?: string) {
     const url = this.endpoints.repos(userName ?? '');
+    const headers = getAuthHeader(this.accessToken);
     /**
      * @note TODO: add type
      */
-    return this.http.get(url).pipe(map(res => res.data));
+    return this.http.get(url, { headers }).pipe(map(res => res.data));
   }
 
   public githubUserReposLanguages(userName?: string, repoName?: string) {
     const url = this.endpoints.languages(userName ?? '', repoName ?? '');
+    const headers = getAuthHeader(this.accessToken);
     /**
      * @note TODO: add type
      */
-    return this.http.get(url).pipe(map(res => res.data));
+    return this.http.get(url, { headers }).pipe(map(res => res.data));
   }
 }

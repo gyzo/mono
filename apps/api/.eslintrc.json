@@ -28,6 +28,12 @@
         "trailingUnderscore": "forbid"
       },
       {
+        "selector": "objectLiteralProperty",
+        "format": ["camelCase", "PascalCase"],
+        "leadingUnderscore": "forbid",
+        "trailingUnderscore": "forbid"
+      },
+      {
         "selector": "function",
         "format": ["camelCase"],
         "leadingUnderscore": "forbid",
