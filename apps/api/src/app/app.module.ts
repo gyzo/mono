@@ -12,7 +12,12 @@ import { ApiWebsocketModule } from './modules/websocket/websocket.module';
  * Root API application module.
  */
 @Module({
-  imports: [ApiAuthModule.forRoot(), ApiMailerModule.forRoot(), ApiWebsocketModule, ApiGrpcModule],
+  imports: [
+    ApiAuthModule.forRoot(),
+    ApiMailerModule.forRoot(),
+    ApiWebsocketModule.forRoot(),
+    ApiGrpcModule,
+  ],
   providers: [
     {
       provide: API_ENV,
