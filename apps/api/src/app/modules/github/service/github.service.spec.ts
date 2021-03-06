@@ -1,4 +1,4 @@
-import { JwtModule } from '@nestjs/jwt';
+import { HttpModule } from '@nestjs/common';
 import { Test } from '@nestjs/testing';
 
 import { ApiGithubService } from './github.service';
@@ -8,11 +8,7 @@ describe('ApiGithubService', () => {
 
   beforeAll(async () => {
     const app = await Test.createTestingModule({
-      imports: [
-        JwtModule.register({
-          secret: 'jwtsecret',
-        }),
-      ],
+      imports: [HttpModule.register({})],
       providers: [ApiGithubService],
     }).compile();
 
@@ -20,10 +16,10 @@ describe('ApiGithubService', () => {
   });
 
   describe('ping', () => {
-    it('should return "Github service is online. Public methods: githubAccessToken, githubUser, githubUserRepos, githubUserReposLanguages"', () => {
+    it('should return "Github service is online. Public methods: githubAccessToken, githubUser, githubUserRepos, githubUserReposLanguages."', () => {
       expect(service.ping()).toEqual({
         message:
-          'Github service is online. Public methods: githubAccessToken, githubUser, githubUserRepos, githubUserReposLanguages',
+          'Github service is online. Public methods: githubAccessToken, githubUser, githubUserRepos, githubUserReposLanguages.',
       });
     });
   });
