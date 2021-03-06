@@ -23,3 +23,7 @@ message SubEntity {
 message EntityById {
   string id = 1;
 }
+
+message Result {
+  string message = 1;
+}

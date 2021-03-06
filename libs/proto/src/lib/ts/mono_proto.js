@@ -209,6 +209,169 @@ export const mono = $root.mono = (() => {
         return EntityById;
     })();
 
+    mono.Result = (function() {
+
+        function Result(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        Result.prototype.message = "";
+
+        Result.fromObject = function fromObject(d) {
+            if (d instanceof $root.mono.Result)
+                return d;
+            var m = new $root.mono.Result();
+            if (d.message != null) {
+                m.message = String(d.message);
+            }
+            return m;
+        };
+
+        Result.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.message = "";
+            }
+            if (m.message != null && m.hasOwnProperty("message")) {
+                d.message = m.message;
+            }
+            return d;
+        };
+
+        Result.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return Result;
+    })();
+
+    mono.Email = (function() {
+
+        function Email(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        Email.prototype.id = "";
+        Email.prototype.name = "";
+        Email.prototype.email = "";
+        Email.prototype.header = "";
+        Email.prototype.message = "";
+        Email.prototype.domain = "";
+
+        Email.fromObject = function fromObject(d) {
+            if (d instanceof $root.mono.Email)
+                return d;
+            var m = new $root.mono.Email();
+            if (d.id != null) {
+                m.id = String(d.id);
+            }
+            if (d.name != null) {
+                m.name = String(d.name);
+            }
+            if (d.email != null) {
+                m.email = String(d.email);
+            }
+            if (d.header != null) {
+                m.header = String(d.header);
+            }
+            if (d.message != null) {
+                m.message = String(d.message);
+            }
+            if (d.domain != null) {
+                m.domain = String(d.domain);
+            }
+            return m;
+        };
+
+        Email.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.id = "";
+                d.name = "";
+                d.email = "";
+                d.header = "";
+                d.message = "";
+                d.domain = "";
+            }
+            if (m.id != null && m.hasOwnProperty("id")) {
+                d.id = m.id;
+            }
+            if (m.name != null && m.hasOwnProperty("name")) {
+                d.name = m.name;
+            }
+            if (m.email != null && m.hasOwnProperty("email")) {
+                d.email = m.email;
+            }
+            if (m.header != null && m.hasOwnProperty("header")) {
+                d.header = m.header;
+            }
+            if (m.message != null && m.hasOwnProperty("message")) {
+                d.message = m.message;
+            }
+            if (m.domain != null && m.hasOwnProperty("domain")) {
+                d.domain = m.domain;
+            }
+            return d;
+        };
+
+        Email.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return Email;
+    })();
+
+    mono.EmailById = (function() {
+
+        function EmailById(p) {
+            if (p)
+                for (var ks = Object.keys(p), i = 0; i < ks.length; ++i)
+                    if (p[ks[i]] != null)
+                        this[ks[i]] = p[ks[i]];
+        }
+
+        EmailById.prototype.id = "";
+
+        EmailById.fromObject = function fromObject(d) {
+            if (d instanceof $root.mono.EmailById)
+                return d;
+            var m = new $root.mono.EmailById();
+            if (d.id != null) {
+                m.id = String(d.id);
+            }
+            return m;
+        };
+
+        EmailById.toObject = function toObject(m, o) {
+            if (!o)
+                o = {};
+            var d = {};
+            if (o.defaults) {
+                d.id = "";
+            }
+            if (m.id != null && m.hasOwnProperty("id")) {
+                d.id = m.id;
+            }
+            return d;
+        };
+
+        EmailById.prototype.toJSON = function toJSON() {
+            return this.constructor.toObject(this, $protobuf.util.toJSONOptions);
+        };
+
+        return EmailById;
+    })();
+
     mono.EntityService = (function() {
 
         function EntityService(rpcImpl, requestDelimited, responseDelimited) {
@@ -228,6 +391,27 @@ export const mono = $root.mono = (() => {
         }, "name", { value: "FindMany" });
 
         return EntityService;
+    })();
+
+    mono.MailerService = (function() {
+
+        function MailerService(rpcImpl, requestDelimited, responseDelimited) {
+            $protobuf.rpc.Service.call(this, rpcImpl, requestDelimited, responseDelimited);
+        }
+
+        (MailerService.prototype = Object.create($protobuf.rpc.Service.prototype)).constructor = MailerService;
+
+
+        Object.defineProperty(MailerService.prototype.findOne = function findOne(request, callback) {
+            return this.rpcCall(findOne, $root.mono.EmailById, $root.mono.Email, request, callback);
+        }, "name", { value: "FindOne" });
+
+
+        Object.defineProperty(MailerService.prototype.findMany = function findMany(request, callback) {
+            return this.rpcCall(findMany, $root.mono.EmailById, $root.mono.Email, request, callback);
+        }, "name", { value: "FindMany" });
+
+        return MailerService;
     })();
 
     return mono;

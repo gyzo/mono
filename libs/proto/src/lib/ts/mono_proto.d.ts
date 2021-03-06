@@ -161,6 +161,159 @@ export namespace mono {
         public toJSON(): { [k: string]: any };
     }
 
+    /** Properties of a Result. */
+    interface IResult {
+
+        /** Result message */
+        message?: (string|null);
+    }
+
+    /** Represents a Result. */
+    class Result implements IResult {
+
+        /**
+         * Constructs a new Result.
+         * @param [p] Properties to set
+         */
+        constructor(p?: mono.IResult);
+
+        /** Result message. */
+        public message: string;
+
+        /**
+         * Creates a Result message from a plain object. Also converts values to their respective internal types.
+         * @param d Plain object
+         * @returns Result
+         */
+        public static fromObject(d: { [k: string]: any }): mono.Result;
+
+        /**
+         * Creates a plain object from a Result message. Also converts values to other types if specified.
+         * @param m Result
+         * @param [o] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(m: mono.Result, o?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Result to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of an Email. */
+    interface IEmail {
+
+        /** Email id */
+        id?: (string|null);
+
+        /** Email name */
+        name?: (string|null);
+
+        /** Email email */
+        email?: (string|null);
+
+        /** Email header */
+        header?: (string|null);
+
+        /** Email message */
+        message?: (string|null);
+
+        /** Email domain */
+        domain?: (string|null);
+    }
+
+    /** Represents an Email. */
+    class Email implements IEmail {
+
+        /**
+         * Constructs a new Email.
+         * @param [p] Properties to set
+         */
+        constructor(p?: mono.IEmail);
+
+        /** Email id. */
+        public id: string;
+
+        /** Email name. */
+        public name: string;
+
+        /** Email email. */
+        public email: string;
+
+        /** Email header. */
+        public header: string;
+
+        /** Email message. */
+        public message: string;
+
+        /** Email domain. */
+        public domain: string;
+
+        /**
+         * Creates an Email message from a plain object. Also converts values to their respective internal types.
+         * @param d Plain object
+         * @returns Email
+         */
+        public static fromObject(d: { [k: string]: any }): mono.Email;
+
+        /**
+         * Creates a plain object from an Email message. Also converts values to other types if specified.
+         * @param m Email
+         * @param [o] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(m: mono.Email, o?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this Email to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
+    /** Properties of an EmailById. */
+    interface IEmailById {
+
+        /** EmailById id */
+        id?: (string|null);
+    }
+
+    /** Represents an EmailById. */
+    class EmailById implements IEmailById {
+
+        /**
+         * Constructs a new EmailById.
+         * @param [p] Properties to set
+         */
+        constructor(p?: mono.IEmailById);
+
+        /** EmailById id. */
+        public id: string;
+
+        /**
+         * Creates an EmailById message from a plain object. Also converts values to their respective internal types.
+         * @param d Plain object
+         * @returns EmailById
+         */
+        public static fromObject(d: { [k: string]: any }): mono.EmailById;
+
+        /**
+         * Creates a plain object from an EmailById message. Also converts values to other types if specified.
+         * @param m EmailById
+         * @param [o] Conversion options
+         * @returns Plain object
+         */
+        public static toObject(m: mono.EmailById, o?: $protobuf.IConversionOptions): { [k: string]: any };
+
+        /**
+         * Converts this EmailById to JSON.
+         * @returns JSON object
+         */
+        public toJSON(): { [k: string]: any };
+    }
+
     /** Represents an EntityService */
     class EntityService extends $protobuf.rpc.Service {
 
@@ -216,6 +369,63 @@ export namespace mono {
          * @param [response] Entity
          */
         type FindManyCallback = (error: (Error|null), response?: mono.Entity) => void;
+    }
+
+    /** Represents a MailerService */
+    class MailerService extends $protobuf.rpc.Service {
+
+        /**
+         * Constructs a new MailerService service.
+         * @param rpcImpl RPC implementation
+         * @param [requestDelimited=false] Whether requests are length-delimited
+         * @param [responseDelimited=false] Whether responses are length-delimited
+         */
+        constructor(rpcImpl: $protobuf.RPCImpl, requestDelimited?: boolean, responseDelimited?: boolean);
+
+        /**
+         * Calls FindOne.
+         * @param request EmailById message or plain object
+         * @param callback Node-style callback called with the error, if any, and Email
+         */
+        public findOne(request: mono.IEmailById, callback: mono.MailerService.FindOneCallback): void;
+
+        /**
+         * Calls FindOne.
+         * @param request EmailById message or plain object
+         * @returns Promise
+         */
+        public findOne(request: mono.IEmailById): Promise<mono.Email>;
+
+        /**
+         * Calls FindMany.
+         * @param request EmailById message or plain object
+         * @param callback Node-style callback called with the error, if any, and Email
+         */
+        public findMany(request: mono.IEmailById, callback: mono.MailerService.FindManyCallback): void;
+
+        /**
+         * Calls FindMany.
+         * @param request EmailById message or plain object
+         * @returns Promise
+         */
+        public findMany(request: mono.IEmailById): Promise<mono.Email>;
+    }
+
+    namespace MailerService {
+
+        /**
+         * Callback as used by {@link mono.MailerService#findOne}.
+         * @param error Error, if any
+         * @param [response] Email
+         */
+        type FindOneCallback = (error: (Error|null), response?: mono.Email) => void;
+
+        /**
+         * Callback as used by {@link mono.MailerService#findMany}.
+         * @param error Error, if any
+         * @param [response] Email
+         */
+        type FindManyCallback = (error: (Error|null), response?: mono.Email) => void;
     }
 }
 

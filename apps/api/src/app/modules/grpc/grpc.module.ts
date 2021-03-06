@@ -14,4 +14,4 @@ import { apiGrpcClientOptions, MONO_GRPC_PACKAGE } from './grpc-client.options';
   ],
   controllers: [ApiGrpcController],
 })
-export class ApiGrpcApiModule {}
+export class ApiGrpcModule {}

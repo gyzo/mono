@@ -17,3 +17,5 @@ var global = Function('return this')();
 
 var common_pb = require('./common_pb.js');
 goog.object.extend(proto, common_pb);
+var mailer_pb = require('./mailer_pb.js');
+goog.object.extend(proto, mailer_pb);

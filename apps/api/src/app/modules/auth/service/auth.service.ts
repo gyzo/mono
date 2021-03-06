@@ -1,21 +1,26 @@
 import {
-  Message,
   UserContacts,
   UserLoginCredentials,
   UserLogoutCredentials,
   UserName,
   UserProfile,
 } from '@mono/api-interface';
+import { mono } from '@mono/proto';
 import { Injectable } from '@nestjs/common';
+import { JwtService } from '@nestjs/jwt';
 
-import { ApiAuthUtilsService } from '../../auth-utils/service/auth-utils.service';
+interface IAuthPayload {
+  email: string;
+  name: string;
+  expires: Date;
+}
 
 @Injectable()
 export class ApiAuthService {
-  constructor(private readonly authUtils: ApiAuthUtilsService) {}
+  constructor(private readonly jwt: JwtService) {}
 
-  public ping(): Message {
-    return new Message({
+  public ping(): mono.Result {
+    return mono.Result.fromObject({
       message: 'Auth service is online. Public methods: login, logout, signup.',
     });
   }
@@ -24,8 +29,8 @@ export class ApiAuthService {
     return this.authenticateAndReturnProfile(credentials);
   }
 
-  public logout(credentials: UserLogoutCredentials): Message {
-    return new Message({ message: `success for token ${credentials.token}` });
+  public logout(credentials: UserLogoutCredentials): mono.Result {
+    return mono.Result.fromObject({ message: `success for token ${credentials.token}` });
   }
 
   public signup(credentials: UserLoginCredentials): UserProfile {
@@ -42,11 +47,31 @@ export class ApiAuthService {
       email: credentials.email,
       phone: '',
     };
-    const token = this.authUtils.generateJWToken({
+    const token = this.generateJWToken({
       email: contacts.email,
       name: `${name.first} ${name.last}`,
     });
     const profile: UserProfile = new UserProfile({ id, name, contacts, token });
     return profile;
+  }
+
+  /**
+   * Generates JWT token
+   */
+  public generateJWToken(payload: Omit<IAuthPayload, 'expires'>) {
+    const expires = new Date();
+    const daysInWeek = 7;
+    expires.setDate(expires.getDate() + daysInWeek);
+    const token = this.jwt.sign(payload);
+    return token;
+  }
+
+  /**
+   * Decrypts JWT token.
+   * @param token user token
+   */
+  public decryptJWToken(token: string) {
+    const result = this.jwt.decode(token) as IAuthPayload;
+    return result;
   }
 }

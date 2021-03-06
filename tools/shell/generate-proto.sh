@@ -53,7 +53,8 @@ reportSuccess() {
 ##
 run_protoc() {
   local PROTO_FILES="$PROTO_SOURCE_PATH/root.proto
-    $PROTO_SOURCE_PATH/common.proto"
+    $PROTO_SOURCE_PATH/common.proto
+    $PROTO_SOURCE_PATH/mailer.proto"
 
   printInfoTitle "<< RUNNING PROTOC >>"
   printNameAndValue "proto files" "$PROTO_FILES"

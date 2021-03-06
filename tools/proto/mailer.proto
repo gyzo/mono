@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package mono;
+
+message Email {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  string header = 4;
+  string message = 5;
+  string domain = 6;
+}
+
+message EmailById {
+  string id = 1;
+}

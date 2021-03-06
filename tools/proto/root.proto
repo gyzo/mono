@@ -5,8 +5,14 @@ syntax = "proto3";
 package mono;
 
 import "common.proto";
+import "mailer.proto";
 
 service EntityService {
   rpc FindOne(EntityById) returns (Entity) {};
   rpc FindMany(stream EntityById) returns (stream Entity) {};
+}
+
+service MailerService {
+  rpc FindOne(EmailById) returns (Email) {};
+  rpc FindMany(stream EmailById) returns (stream Email) {};
 }

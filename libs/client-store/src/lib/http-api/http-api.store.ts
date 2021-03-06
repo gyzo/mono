@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 
-import { ping } from './http-api.actions';
+import { pingAuth, pingMailer } from './http-api.actions';
 import {
   HTTP_API_STATE_TOKEN,
   httpApiInitialState,
@@ -13,7 +13,8 @@ import {
 import { AppHttpApiService } from './http-api.service';
 
 export const httpApiActions = {
-  ping,
+  pingAuth,
+  pingMailer,
 };
 
 @State<IAppHttpApiState>({
@@ -32,16 +33,28 @@ export class AppHttpApiState {
   }
 
   @Selector()
-  public static ping(state: IAppHttpApiState) {
-    return state.ping;
+  public static pingAuth(state: IAppHttpApiState) {
+    return state.pingAuth;
   }
 
-  @Action(ping)
-  public ping(ctx: StateContext<IAppHttpApiState>, { payload }: THttpApiPayload) {
-    return this.api.ping().pipe(
+  @Action(pingAuth)
+  public pingAuth(ctx: StateContext<IAppHttpApiState>, { payload }: THttpApiPayload) {
+    return this.api.pingAuth().pipe(
       tap(result => {
         const pingPayload: IAppHttpApiStatePayload = {
-          ping: result.message,
+          pingAuth: result.message,
+        };
+        ctx.patchState(pingPayload);
+      }),
+    );
+  }
+
+  @Action(pingMailer)
+  public pingMailer(ctx: StateContext<IAppHttpApiState>, { payload }: THttpApiPayload) {
+    return this.api.pingMailer().pipe(
+      tap(result => {
+        const pingPayload: IAppHttpApiStatePayload = {
+          pingMailer: result.message,
         };
         ctx.patchState(pingPayload);
       }),

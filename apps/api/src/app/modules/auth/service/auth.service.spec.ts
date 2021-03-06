@@ -1,7 +1,6 @@
 import { JwtModule } from '@nestjs/jwt';
 import { Test } from '@nestjs/testing';
 
-import { ApiAuthUtilsService } from '../../auth-utils/service/auth-utils.service';
 import { ApiAuthService } from './auth.service';
 
 describe('ApiAuthService', () => {
@@ -14,7 +13,7 @@ describe('ApiAuthService', () => {
           secret: 'jwtsecret',
         }),
       ],
-      providers: [ApiAuthService, ApiAuthUtilsService],
+      providers: [ApiAuthService],
     }).compile();
 
     service = app.get<ApiAuthService>(ApiAuthService);

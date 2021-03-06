@@ -84,3 +84,21 @@ export namespace EntityById {
   }
 }
 
+export class Result extends jspb.Message {
+  getMessage(): string;
+  setMessage(value: string): Result;
+
+  serializeBinary(): Uint8Array;
+  toObject(includeInstance?: boolean): Result.AsObject;
+  static toObject(includeInstance: boolean, msg: Result): Result.AsObject;
+  static serializeBinaryToWriter(message: Result, writer: jspb.BinaryWriter): void;
+  static deserializeBinary(bytes: Uint8Array): Result;
+  static deserializeBinaryFromReader(message: Result, reader: jspb.BinaryReader): Result;
+}
+
+export namespace Result {
+  export type AsObject = {
+    message: string,
+  }
+}
+
