@@ -1,6 +1,6 @@
 import { mono } from '@mono/proto';
-import { Injectable } from '@nestjs/common';
-import { of } from 'rxjs';
+import { HttpService, Injectable } from '@nestjs/common';
+import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ApiGithubService {
@@ -16,6 +16,8 @@ export class ApiGithubService {
       `${this.apiUrl}/repos/${userName}/${repoName}/languages?access_token=${this.accessToken}`,
   };
 
+  constructor(private readonly http: HttpService) {}
+
   public ping(): mono.Result {
     return mono.Result.fromObject({
       message:
@@ -29,19 +31,25 @@ export class ApiGithubService {
 
   public githubUser(userName?: string) {
     const url = this.endpoints.user(userName ?? '');
-    // TODO: send request
-    return of(url);
+    /**
+     * @note TODO: add type
+     */
+    return this.http.get(url).pipe(map(res => res.data));
   }
 
   public githubUserRepos(userName?: string) {
     const url = this.endpoints.repos(userName ?? '');
-    // TODO: send request
-    return of(url);
+    /**
+     * @note TODO: add type
+     */
+    return this.http.get(url).pipe(map(res => res.data));
   }
 
   public githubUserReposLanguages(userName?: string, repoName?: string) {
     const url = this.endpoints.languages(userName ?? '', repoName ?? '');
-    // TODO: send request
-    return of(url);
+    /**
+     * @note TODO: add type
+     */
+    return this.http.get(url).pipe(map(res => res.data));
   }
 }

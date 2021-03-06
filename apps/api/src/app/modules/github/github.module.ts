@@ -1,4 +1,4 @@
-import { DynamicModule, Module, Provider } from '@nestjs/common';
+import { DynamicModule, HttpModule, Module, Provider } from '@nestjs/common';
 
 import { ApiGithubController } from './controller/github.controller';
 import { ApiGithubService } from './service/github.service';
@@ -6,6 +6,7 @@ import { ApiGithubService } from './service/github.service';
 const moduleProviders: Provider[] = [ApiGithubService];
 
 @Module({
+  imports: [HttpModule],
   controllers: [ApiGithubController],
 })
 export class ApiGithubModule {
