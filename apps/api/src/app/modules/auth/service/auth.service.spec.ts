@@ -19,8 +19,8 @@ describe('ApiAuthService', () => {
     service = app.get<ApiAuthService>(ApiAuthService);
   });
 
-  describe('getData', () => {
-    it('should return "Welcome to api!"', () => {
+  describe('ping', () => {
+    it('Auth service is online. Public methods: login, logout, signup."', () => {
       expect(service.ping()).toEqual({
         message: 'Auth service is online. Public methods: login, logout, signup.',
       });

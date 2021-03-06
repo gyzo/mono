@@ -38,7 +38,7 @@
             "value": "no-cache"
           }
         ],
-        "source": "/api/(githubAccessToken|sendEmail|githubUser|githubUserRepos|githubUserReposLanguages)"
+        "source": "/api/**"
       }
     ],
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**", "**/src/**"],
