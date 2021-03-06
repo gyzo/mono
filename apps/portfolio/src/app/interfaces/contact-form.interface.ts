@@ -1,8 +1,5 @@
 import { AbstractControl, FormGroup } from '@angular/forms';
 
-/**
- * Contact form interface.
- */
 export interface IContactForm extends FormGroup {
   controls: {
     name: AbstractControl;
@@ -11,4 +8,12 @@ export interface IContactForm extends FormGroup {
     message: AbstractControl;
     domain: AbstractControl;
   };
+}
+
+export interface IContectFormValue {
+  name: string;
+  email: string;
+  header: string;
+  message: string;
+  domain: string;
 }

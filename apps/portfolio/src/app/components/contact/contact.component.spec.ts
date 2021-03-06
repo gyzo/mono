@@ -16,7 +16,14 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientMaterialModule } from '@mono/client-material';
 import { AppHttpHandlersService } from '@mono/client-store';
 import { AppDialogRefMock, AppDummyComponent } from '@mono/client-unit-testing';
-import { WINDOW, windowFactory } from '@mono/client-util';
+import {
+  IWebClientAppEnvironment,
+  WEB_CLIENT_APP_ENV,
+  WINDOW,
+  windowFactory,
+} from '@mono/client-util';
+import { TranslateService } from '@ngx-translate/core';
+import { Store } from '@ngxs/store';
 
 import { AppSendEmailService } from '../../services/send-email/send-email.service';
 import { AppContactComponent } from './contact.component';
@@ -52,8 +59,13 @@ describe('AppContactComponent', () => {
       },
       {
         provide: AppHttpHandlersService,
-        useFactory: (snackBar: MatSnackBar) => new AppHttpHandlersService(snackBar),
-        deps: [MatSnackBar],
+        useFactory: (
+          store: Store,
+          translate: TranslateService,
+          win: Window,
+          appEnv: IWebClientAppEnvironment,
+        ) => new AppHttpHandlersService(store, translate, win, appEnv),
+        deps: [Store, TranslateService, WINDOW, WEB_CLIENT_APP_ENV],
       },
       {
         provide: AppSendEmailService,

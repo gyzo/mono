@@ -21,7 +21,13 @@ import {
   AppUserConfigService,
 } from '@mono/client-store';
 import { AppDummyComponent } from '@mono/client-unit-testing';
-import { WINDOW, windowFactory } from '@mono/client-util';
+import {
+  IWebClientAppEnvironment,
+  WEB_CLIENT_APP_ENV,
+  WINDOW,
+  windowFactory,
+} from '@mono/client-util';
+import { TranslateService } from '@ngx-translate/core';
 import { NgxsModule, Store } from '@ngxs/store';
 
 import { AppLanguagesComponent } from './languages.component';
@@ -48,8 +54,13 @@ describe('AppLanguagesComponent', () => {
       },
       {
         provide: AppHttpHandlersService,
-        useFactory: (snackBar: MatSnackBar) => new AppHttpHandlersService(snackBar),
-        deps: [MatSnackBar],
+        useFactory: (
+          store: Store,
+          translate: TranslateService,
+          win: Window,
+          appEnv: IWebClientAppEnvironment,
+        ) => new AppHttpHandlersService(store, translate, win, appEnv),
+        deps: [Store, TranslateService, WINDOW, WEB_CLIENT_APP_ENV],
       },
       {
         provide: AppUserConfigService,

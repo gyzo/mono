@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-
-import { IGuthubUser } from '../../interfaces/github-api.interface';
+import { IGuthubUser } from '@mono/client-store';
 
 /**
  * Application status badges component.

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
-import { startProgress, stopProgress } from './http-progress.actions';
+import { displayToast, startProgress, stopProgress } from './http-progress.actions';
 import {
   HTTP_PROGRESS_STATE_TOKEN,
   httpProgressInitialState,
@@ -12,6 +12,7 @@ import {
 export const httpProgressActions = {
   startProgress,
   stopProgress,
+  displayToast,
 };
 
 @State<IAppHttpProgressState>({
@@ -42,6 +43,11 @@ export class AppHttpProgressState {
 
   @Action(stopProgress)
   public stopProgress(ctx: StateContext<IAppHttpProgressState>, { payload }: THttpProgressPayload) {
+    return ctx.patchState(payload);
+  }
+
+  @Action(displayToast)
+  public displayToast(ctx: StateContext<IAppHttpProgressState>, { payload }: THttpProgressPayload) {
     return ctx.patchState(payload);
   }
 }

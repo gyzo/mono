@@ -1,12 +1,11 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { sidebarUiActions } from '@mono/client-store';
+import { AppGithubUserService, IUserConfig, sidebarUiActions } from '@mono/client-store';
 import { Store } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 
-import { IFlatNode, ITreeNode, IUserConfig } from '../../interfaces';
-import { AppGithubUserService } from '../../state/github-user/github-user.service';
+import { IFlatNode, ITreeNode } from '../../interfaces';
 
 /**
  * Tree transformer.

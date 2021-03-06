@@ -37,9 +37,6 @@ export class AppContactComponent {
     domain: [this.data.domain, Validators.compose([Validators.required])],
   }) as IContactForm;
 
-  /**
-   * Constructor.
-   */
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { domain: string }, // TODO
     private readonly dialogRef: MatDialogRef<AppContactComponent>,

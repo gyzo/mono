@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-
-import { IGithubUserOrganization } from '../../interfaces/github-api.interface';
+import { IGithubUserOrganization } from '@mono/client-store';
 
 /**
  * Application organizations component.

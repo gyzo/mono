@@ -12,16 +12,19 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientMaterialModule } from '@mono/client-material';
-import { AppSidebarState } from '@mono/client-store';
+import {
+  AppGithubApiService,
+  AppGithubUserService,
+  AppGithubUserState,
+  AppHttpHandlersService,
+  AppSidebarState,
+  AppUserConfigService,
+} from '@mono/client-store';
 import { AppDummyComponent } from '@mono/client-unit-testing';
+import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV, WINDOW } from '@mono/client-util';
+import { TranslateService } from '@ngx-translate/core';
 import { NgxsModule, Store } from '@ngxs/store';
 
-import { AppGithubService } from '../../services/github/github.service';
-import { AppHttpHandlersService } from '../../services/http-handlers/http-handlers.service';
-import { WINDOW } from '../../services/providers.config';
-import { AppUserConfigService } from '../../services/user-config/user-config.service';
-import { AppGithubUserService } from '../../state/github-user/github-user.service';
-import { AppGithubUserState } from '../../state/github-user/github-user.store';
 import { AppApplicationsComponent } from './applications.component';
 
 describe('AppApplicationsComponent', () => {
@@ -46,8 +49,13 @@ describe('AppApplicationsComponent', () => {
       },
       {
         provide: AppHttpHandlersService,
-        useFactory: (snackBar: MatSnackBar) => new AppHttpHandlersService(snackBar),
-        deps: [MatSnackBar],
+        useFactory: (
+          store: Store,
+          translate: TranslateService,
+          win: Window,
+          appEnv: IWebClientAppEnvironment,
+        ) => new AppHttpHandlersService(store, translate, win, appEnv),
+        deps: [Store, TranslateService, WINDOW, WEB_CLIENT_APP_ENV],
       },
       {
         provide: AppUserConfigService,
@@ -56,16 +64,20 @@ describe('AppApplicationsComponent', () => {
         deps: [HttpClient, AppHttpHandlersService, WINDOW],
       },
       {
-        provide: AppGithubService,
-        useFactory: (http: HttpClient, handlers: AppHttpHandlersService, window: Window) =>
-          new AppGithubService(http, handlers, window),
-        deps: [HttpClient, AppHttpHandlersService, WINDOW],
+        provide: AppGithubApiService,
+        useFactory: (
+          http: HttpClient,
+          store: Store,
+          handlers: AppHttpHandlersService,
+          window: Window,
+        ) => new AppGithubApiService(http, store, handlers, window),
+        deps: [HttpClient, Store, AppHttpHandlersService, WINDOW],
       },
       {
         provide: AppGithubUserService,
-        useFactory: (store: Store, userConfig: AppUserConfigService, github: AppGithubService) =>
+        useFactory: (store: Store, userConfig: AppUserConfigService, github: AppGithubApiService) =>
           new AppGithubUserService(store, userConfig, github),
-        deps: [Store, AppUserConfigService, AppGithubService],
+        deps: [Store, AppUserConfigService, AppGithubApiService],
       },
     ],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
