@@ -916,7 +916,8 @@
             }
           },
           "options": {
-            "browserTarget": "portfolio:build"
+            "browserTarget": "portfolio:build",
+            "proxyConfig": "apps/portfolio/proxy.conf.json"
           }
         },
         "test": {
