@@ -76,22 +76,33 @@ jobs:
           ng run tools:coverage-stats
           cat ./tools/ts/UNIT_COVERAGE.md
 
+      - name: Set environment variables (portfolio app)
+        run: bash tools/shell/set-portfolio-env.sh $GITHUB_ACCESS_TOKEN $MAILER_HOST $MAILER_PORT $MAILER_EMAIL $MAILER_CLIENT_ID $MAILER_CLIENT_SECRET $MAILER_REFRESH_TOKEN $MAILER_ACCESS_TOKEN $MAILER_RECIPIENT_EMAIL
+        env:
+          GITHUB_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+          MAILER_HOST: ${{ secrets.MAILER_HOST }}
+          MAILER_PORT: ${{ secrets.MAILER_PORT }}
+          MAILER_EMAIL: ${{ secrets.MAILER_EMAIL }}
+          MAILER_CLIENT_ID: ${{ secrets.MAILER_CLIENT_ID }}
+          MAILER_CLIENT_SECRET: ${{ secrets.MAILER_CLIENT_SECRET }}
+          MAILER_REFRESH_TOKEN: ${{ secrets.MAILER_REFRESH_TOKEN }}
+          MAILER_ACCESS_TOKEN: ${{ secrets.MAILER_ACCESS_TOKEN }}
+          MAILER_RECIPIENT_EMAIL: ${{ secrets.MAILER_RECIPIENT_EMAIL }}
+
       - name: Build all (production)
         run: npx nx run-many --target=build --all --configuration production
 
-      # TODO: configure portfolio app deployment
-      #- name: Deploy portfolio app
-      #  run: bash tools/shell/firebase-deploy.sh "$FIREBASE_DEPLOY_TOKEN" portfolio || exit 1
-      #  env:
-      #    FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
+      - name: Deploy portfolio app
+        run: bash tools/shell/firebase-deploy.sh "$FIREBASE_DEPLOY_TOKEN" portfolio || exit 1
+        env:
+          FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
 
       - name: Build documentation
         run: |
           npx cypress install
           yarn build:documentation:prod
 
-      # TODO: configure documentation deployment
-      #- name: Deploy documentation app
-      #  run: bash tools/shell/firebase-deploy.sh "$FIREBASE_DEPLOY_TOKEN" documentation || exit 1
-      #  env:
-      #    FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
+      - name: Deploy documentation app
+        run: bash tools/shell/firebase-deploy.sh "$FIREBASE_DEPLOY_TOKEN" documentation || exit 1
+        env:
+          FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
