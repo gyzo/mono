@@ -26,8 +26,9 @@ export class ApiGithubService {
     });
   }
 
-  public githubAccessToken(): string {
-    return process.env.GITHUB_ACCESS_TOKEN ?? 'n/a';
+  public githubAccessToken(): { token: string } {
+    const token = process.env.GITHUB_ACCESS_TOKEN ?? 'n/a';
+    return { token };
   }
 
   public githubUser(userName?: string) {

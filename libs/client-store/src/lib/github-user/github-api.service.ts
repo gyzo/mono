@@ -50,9 +50,6 @@ export class AppGithubApiService {
       `${this.githubApiBaseUrl}/users/${username}/events/public`,
   };
 
-  /**
-   * Constructor.
-   */
   constructor(
     private readonly http: HttpClient,
     private readonly store: Store,
@@ -81,7 +78,7 @@ export class AppGithubApiService {
   public getProfile(username: string): Observable<IGuthubUser> {
     const url = this.endpoints.user(username);
     const headers = this.getAuthHeaders();
-    void this.store.dispatch(new httpProgressActions.startProgress());
+    void this.store.dispatch(new httpProgressActions.startProgress({ mainView: true }));
     return this.handlers.pipeHttpResponse(
       this.http.get<IGuthubUser>(url, { headers }),
     );

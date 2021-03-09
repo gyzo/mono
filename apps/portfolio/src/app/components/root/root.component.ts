@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, HostBinding, OnInit } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
 import {
-  AppHttpProgressService,
+  AppHttpProgressState,
   AppSidebarState,
   AppThemeState,
   sidebarUiActions,
@@ -41,16 +41,12 @@ export class AppRootComponent implements OnInit {
   @Select(AppSidebarState.getSidebarOpened)
   public readonly sidenavOpened$!: Observable<boolean>;
 
-  public readonly showSpinner$ = this.progress.output.all$.pipe(
+  public readonly showSpinner$ = this.store.select(AppHttpProgressState.allProgress).pipe(
     filter(progress => typeof progress.mainView === 'boolean'),
     map(progress => progress.mainView),
   );
 
-  constructor(
-    private readonly store: Store,
-    private readonly dateAdapter: DateAdapter<Date>,
-    private readonly progress: AppHttpProgressService,
-  ) {}
+  constructor(private readonly store: Store, private readonly dateAdapter: DateAdapter<Date>) {}
 
   /**
    * Closes sidebar.

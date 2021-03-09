@@ -7,7 +7,9 @@ import {
   httpProgressInitialState,
   IAppHttpProgressState,
   THttpProgressPayload,
+  TShowToastPayload,
 } from './http-progress.interface';
+import { AppToasterService } from './services/toaster/toaster.service';
 
 export const httpProgressActions = {
   startProgress,
@@ -23,6 +25,8 @@ export const httpProgressActions = {
 })
 @Injectable()
 export class AppHttpProgressState {
+  constructor(private readonly toaster: AppToasterService) {}
+
   @Selector()
   public static allProgress(state: IAppHttpProgressState) {
     return state;
@@ -38,16 +42,34 @@ export class AppHttpProgressState {
     ctx: StateContext<IAppHttpProgressState>,
     { payload }: THttpProgressPayload,
   ) {
-    return ctx.patchState(payload);
+    const newState = { ...ctx.getState() };
+    const keys = Object.keys(payload);
+    for (const key of keys) {
+      if (key in newState) {
+        const k = key as keyof IAppHttpProgressState;
+        newState[k].counter = newState[k].counter + 1;
+        newState[k].loading = newState[k].counter > 0;
+      }
+    }
+    return ctx.patchState(newState);
   }
 
   @Action(stopProgress)
   public stopProgress(ctx: StateContext<IAppHttpProgressState>, { payload }: THttpProgressPayload) {
-    return ctx.patchState(payload);
+    const newState = { ...ctx.getState() };
+    const keys = Object.keys(payload);
+    for (const key of keys) {
+      if (key in newState) {
+        const k = key as keyof IAppHttpProgressState;
+        newState[k].counter = newState[k].counter - 1;
+        newState[k].loading = newState[k].counter > 0;
+      }
+    }
+    return ctx.patchState(newState);
   }
 
   @Action(displayToast)
-  public displayToast(ctx: StateContext<IAppHttpProgressState>, { payload }: THttpProgressPayload) {
-    return ctx.patchState(payload);
+  public displayToast(ctx: StateContext<IAppHttpProgressState>, { payload }: TShowToastPayload) {
+    this.toaster.showToaster(payload.message, payload.type, payload.duration);
   }
 }
