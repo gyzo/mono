@@ -15,7 +15,7 @@ export class ApiGithubController {
   }
 
   @Get('githubAccessToken')
-  public githubAccessToken(): string {
+  public githubAccessToken() {
     return this.service.githubAccessToken();
   }
 
