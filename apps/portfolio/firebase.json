@@ -42,7 +42,7 @@
       }
     ],
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**", "**/src/**"],
-    "public": "dist",
+    "public": "dist/apps/portfolio",
     "rewrites": [
       {
         "function": "githubAccessToken",
