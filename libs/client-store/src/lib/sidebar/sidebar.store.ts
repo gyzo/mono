@@ -1,17 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
-import { setState, toggleVisibility } from './sidebar.actions';
-import {
-  ISiedbarUiState,
-  SIDEBAR_STATE_TOKEN,
-  sidebarUiInitialState,
-  TSidebarPayload,
-} from './sidebar.interface';
+import { closeSidebar, openSidebar } from './sidebar.actions';
+import { ISiedbarUiState, SIDEBAR_STATE_TOKEN, sidebarUiInitialState } from './sidebar.interface';
+import { AppSidebarService } from './sidebar.service';
 
 export const sidebarUiActions = {
-  setState,
-  toggleVisibility,
+  openSidebar,
+  closeSidebar,
 };
 
 @State<ISiedbarUiState>({
@@ -22,24 +18,24 @@ export const sidebarUiActions = {
 })
 @Injectable()
 export class AppSidebarState {
+  constructor(private readonly service: AppSidebarService) {}
+
   @Selector()
-  public static getSidebar(state: ISiedbarUiState) {
+  public static getState(state: ISiedbarUiState) {
     return state;
   }
 
-  @Selector()
-  public static getSidebarOpened(state: ISiedbarUiState) {
-    return state.sidebarOpened;
+  @Action(openSidebar)
+  public openSidebar(ctx: StateContext<ISiedbarUiState>) {
+    const sidebarOpened = true;
+    this.service.openSidebar();
+    return ctx.patchState({ sidebarOpened });
   }
 
-  @Action(setState)
-  public setState(ctx: StateContext<ISiedbarUiState>, { payload }: TSidebarPayload) {
-    return ctx.patchState(payload);
-  }
-
-  @Action(toggleVisibility)
-  public toggleVisibility(ctx: StateContext<ISiedbarUiState>) {
-    const sidebarOpened = !ctx.getState().sidebarOpened;
+  @Action(closeSidebar)
+  public closeSidebar(ctx: StateContext<ISiedbarUiState>) {
+    const sidebarOpened = false;
+    this.service.closeSidebar();
     return ctx.patchState({ sidebarOpened });
   }
 }

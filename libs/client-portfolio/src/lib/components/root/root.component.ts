@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, HostBinding, OnInit } from '@angula
 import { DateAdapter } from '@angular/material/core';
 import { AppSidebarState, AppThemeState, sidebarUiActions, themeActions } from '@mono/client-store';
 import { Store } from '@ngxs/store';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 /**
  * Application root component.
@@ -31,7 +31,9 @@ export class AppPortfolioRootComponent implements OnInit {
   /**
    * Sidenav opened state.
    */
-  public readonly sidebarOpened$ = this.store.select(AppSidebarState.getSidebarOpened);
+  public readonly sidebarOpened$ = this.store
+    .select(AppSidebarState.getState)
+    .pipe(map(state => state.sidebarOpened));
 
   constructor(private readonly store: Store, private readonly dateAdapter: DateAdapter<Date>) {}
 
@@ -39,7 +41,7 @@ export class AppPortfolioRootComponent implements OnInit {
    * Closes sidebar.
    */
   public sidebarCloseHandler(): void {
-    void this.store.dispatch(new sidebarUiActions.setState({ sidebarOpened: false }));
+    void this.store.dispatch(new sidebarUiActions.closeSidebar());
   }
 
   /**

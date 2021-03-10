@@ -11,8 +11,9 @@ const ROUTES: Route[] = [
   },
   {
     path: '',
-    redirectTo: '',
-    pathMatch: 'full',
+    outlet: 'sidebar',
+    loadChildren: () =>
+      import('@mono/client-portfolio').then(mod => mod.AppClientPortfolioSidebarModule),
   },
   {
     path: '**',

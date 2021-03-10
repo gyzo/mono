@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AppSidebarService } from '@mono/client-store';
+import { AppSidebarState, sidebarUiActions } from '@mono/client-store';
+import { Store } from '@ngxs/store';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-toolbar',
@@ -8,7 +10,17 @@ import { AppSidebarService } from '@mono/client-store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppToolbarComponent {
-  public readonly sidebarOpened$ = this.sidebarService.sidebarOpened$;
+  public readonly sidebarOpened$ = this.store
+    .select(AppSidebarState.getState)
+    .pipe(map(state => state.sidebarOpened));
 
-  constructor(public readonly sidebarService: AppSidebarService) {}
+  constructor(public readonly store: Store) {}
+
+  public sidebarCloseHandler(): void {
+    void this.store.dispatch(new sidebarUiActions.closeSidebar());
+  }
+
+  public sidebarOpenHandler(): void {
+    void this.store.dispatch(new sidebarUiActions.openSidebar());
+  }
 }

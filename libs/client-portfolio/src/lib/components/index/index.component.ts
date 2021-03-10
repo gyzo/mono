@@ -55,7 +55,7 @@ export class AppPortfolioIndexComponent {
    * Toggles sidebar state.
    */
   public toggleSidenav(): void {
-    void this.store.dispatch(new sidebarUiActions.toggleVisibility());
+    void this.store.dispatch(new sidebarUiActions.openSidebar());
   }
 
   /**

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AppSidebarService } from '@mono/client-store';
+import { sidebarUiActions } from '@mono/client-store';
 import { Navigate } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
 
@@ -10,14 +10,14 @@ import { Store } from '@ngxs/store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppSidebarRootComponent {
-  constructor(private readonly store: Store, private readonly sidebarService: AppSidebarService) {}
+  constructor(private readonly store: Store) {}
 
   /**
    * Sidebar close handler.
    * Propagates sidebar close event from UI to state store.
    */
   public sidebarCloseHandler(): void {
-    this.sidebarService.close();
+    void this.store.dispatch(new sidebarUiActions.closeSidebar());
     void this.store.dispatch(new Navigate([{ outlets: { primary: 'info' } }]));
   }
 }

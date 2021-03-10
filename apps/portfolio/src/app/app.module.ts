@@ -12,7 +12,8 @@ import { NgxsModule } from '@ngxs/store';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
-import { AppRootComponent } from './components/root.component';
+import { AppContentComponent } from './components/content/content.component';
+import { AppRootComponent } from './components/root/root.component';
 
 /**
  * Root application module.
@@ -32,7 +33,7 @@ import { AppRootComponent } from './components/root.component';
     AppRoutingModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [AppRootComponent],
+  declarations: [AppRootComponent, AppContentComponent],
   bootstrap: [AppRootComponent],
 })
 export class AppPortfolioClientModule {}

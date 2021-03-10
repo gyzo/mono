@@ -12,11 +12,6 @@ const ROUTES: Route[] = [
     component: AppPortfolioIndexComponent,
   },
   {
-    path: '',
-    redirectTo: '',
-    pathMatch: 'full',
-  },
-  {
     path: '**',
     redirectTo: '',
   },

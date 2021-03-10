@@ -106,6 +106,6 @@ export class AppPortfolioApplicationsComponent {
    * Closes sidebar.
    */
   public sidebarCloseHandler(): void {
-    void this.store.dispatch(new sidebarUiActions.setState({ sidebarOpened: false }));
+    void this.store.dispatch(new sidebarUiActions.closeSidebar());
   }
 }
