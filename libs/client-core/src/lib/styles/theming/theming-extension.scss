@@ -41,7 +41,6 @@ $extended-bg-palette: (
     '.success': $success,
     '.error': $error,
     'mat-grid-tile': $primary-mild,
-    'app-root': $primary-mild,
     '.label': $lightgrey,
     '::webkit-scrollbar': $white,
   ),
@@ -53,7 +52,6 @@ $extended-bg-palette: (
     '.success': $dark-success,
     '.error': $dark-error,
     'mat-grid-tile': $dark-primary-mild,
-    'app-root': $dark-primary-mild,
     '.label': $darkgrey,
     '::webkit-scrollbar': $white,
   ),
@@ -67,7 +65,6 @@ $extended-text-palette: (
     '.success': $success,
     '.error': $error,
     'mat-slide-toggle:hover': $warn,
-    'app-root': $black,
     'form.legend': $darkgrey,
   ),
   dark: (
@@ -78,7 +75,6 @@ $extended-text-palette: (
     '.success': $dark-success,
     '.error': $dark-error,
     'mat-slide-toggle:hover': $warn,
-    'app-root': $white,
     'form.legend': $lightgrey,
   ),
 );
@@ -147,11 +143,6 @@ $extended-box-shadow-palette: (
 @mixin custom-selectors-coloring() {
   mat-grid-tile {
     @include extended-background-color(mat-grid-tile);
-  }
-
-  app-root {
-    @include extended-color(app-root);
-    @include extended-background-color(app-root);
   }
 
   form {

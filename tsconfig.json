@@ -33,6 +33,7 @@
       "@mono/client-core": ["libs/client-core/src/index.ts"],
       "@mono/client-gql": ["libs/client-gql/src/index.ts"],
       "@mono/client-material": ["libs/client-material/src/index.ts"],
+      "@mono/client-portfolio": ["libs/client-portfolio/src/index.ts"],
       "@mono/client-services": ["libs/client-services/src/index.ts"],
       "@mono/client-sidebar": ["libs/client-sidebar/src/index.ts"],
       "@mono/client-store": ["libs/client-store/src/index.ts"],

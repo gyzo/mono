@@ -429,6 +429,29 @@
       },
       "sourceRoot": "libs/client-material/src"
     },
+    "client-portfolio": {
+      "architect": {
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "libs/client-portfolio/.eslintrc.json",
+            "lintFilePatterns": ["libs/client-portfolio/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/client-portfolio/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/client-portfolio"]
+        }
+      },
+      "prefix": "mono",
+      "projectType": "library",
+      "root": "libs/client-portfolio",
+      "sourceRoot": "libs/client-portfolio/src"
+    },
     "client-services": {
       "architect": {
         "lint": {

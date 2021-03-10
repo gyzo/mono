@@ -1,9 +1,9 @@
 import { actionPayloadConstructor } from '@mono/client-util';
 
-import { SIDEBAR_STATE_TOKEN, TSidebarPayload } from './sidebar.interface';
+import { SIDEBAR_STATE_TOKEN } from './sidebar.interface';
 
 const createAction = actionPayloadConstructor(SIDEBAR_STATE_TOKEN.getName());
 
-export const setState = createAction<TSidebarPayload>('set state');
+export const openSidebar = createAction('open');
 
-export const toggleVisibility = createAction('toggle visibility');
+export const closeSidebar = createAction('close');

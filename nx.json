@@ -45,6 +45,9 @@
     "client-material": {
       "tags": ["scope:client-material", "type:ui"]
     },
+    "client-portfolio": {
+      "tags": ["scope:client-portfolio", "type:feature"]
+    },
     "client-services": {
       "tags": ["scope:client-services", "type:ui"]
     },

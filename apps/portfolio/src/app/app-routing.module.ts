@@ -1,20 +1,19 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 
-import { AppIndexComponent } from './components/index/index.component';
-
 /**
  * Application routes config.
  */
 const ROUTES: Route[] = [
   {
     path: '',
-    component: AppIndexComponent,
+    loadChildren: () => import('@mono/client-portfolio').then(mod => mod.AppClientPortfolioModule),
   },
   {
     path: '',
-    redirectTo: '',
-    pathMatch: 'full',
+    outlet: 'sidebar',
+    loadChildren: () =>
+      import('@mono/client-portfolio').then(mod => mod.AppClientPortfolioSidebarModule),
   },
   {
     path: '**',

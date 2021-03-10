@@ -9,6 +9,7 @@ export const overlayContainerMock: Provider = {
         add: (): null => null,
         remove: (): null => null,
       },
+      appendChild: (): null => null,
     }),
   },
 };

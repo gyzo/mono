@@ -1,6 +1,5 @@
 export * from './github-api.interface';
 export * from './github-api.service';
-export * from './github-user.actions';
 export * from './github-user.config';
 export * from './github-user.interface';
 export * from './github-user.module';

@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -10,8 +11,8 @@ import { appClientCoreModuleProviders } from './providers/client-core-module.pro
  * Client core module.
  */
 @NgModule({
-  imports: [FlexLayoutModule, FormsModule, ReactiveFormsModule, HttpClientModule],
-  exports: [FlexLayoutModule, FormsModule, ReactiveFormsModule, HttpClientModule],
+  imports: [CommonModule, FlexLayoutModule, FormsModule, ReactiveFormsModule, HttpClientModule],
+  exports: [CommonModule, FlexLayoutModule, FormsModule, ReactiveFormsModule, HttpClientModule],
 })
 export class AppClientCoreModule {
   /**
