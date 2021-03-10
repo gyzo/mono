@@ -2,7 +2,7 @@
   "apps": [
     {
       "imgRef": "assets/logos/firebase-logo.svg",
-      "name": "NX Angular starter",
+      "name": "NX Angular NestJS starter",
       "tag": "angular",
       "urls": {
         "android": "",
@@ -12,22 +12,12 @@
     },
     {
       "imgRef": "assets/logos/firebase-logo.svg",
-      "name": "Angular elements NodeJS widget server starter",
+      "name": "NX Angular NestJS webapps monorepo",
       "tag": "angular",
       "urls": {
         "android": "",
-        "repo": "https://github.com/rfprod/ng-elements-starter",
-        "web": "https://ng2elements.web.app/ng-elements-app"
-      }
-    },
-    {
-      "imgRef": "assets/logos/firebase-logo.svg",
-      "name": "DNBHUB multimedia concentrator",
-      "tag": "angular",
-      "urls": {
-        "android": "",
-        "repo": "https://github.com/rfprod/dnbhub",
-        "web": "https://dnbhub.com"
+        "repo": "https://github.com/rfprod/mono",
+        "web": "https://mono-documentation.web.app/"
       }
     },
     {
