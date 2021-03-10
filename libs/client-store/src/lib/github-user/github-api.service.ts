@@ -1,12 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
 import { WINDOW } from '@mono/client-util';
-import { Store } from '@ngxs/store';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import { AppHttpHandlersService } from '../http-api/http-handlers.service';
-import { httpProgressActions } from '../http-progress/http-progress.store';
 import {
   IGithubAccessToken,
   IGithubApiEngpoints,
@@ -52,7 +50,6 @@ export class AppGithubApiService {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly store: Store,
     private readonly handlers: AppHttpHandlersService,
     @Inject(WINDOW) private readonly win: Window,
   ) {}
@@ -78,7 +75,6 @@ export class AppGithubApiService {
   public getProfile(username: string): Observable<IGuthubUser> {
     const url = this.endpoints.user(username);
     const headers = this.getAuthHeaders();
-    void this.store.dispatch(new httpProgressActions.startProgress({ mainView: true }));
     return this.handlers.pipeHttpResponse(
       this.http.get<IGuthubUser>(url, { headers }),
     );

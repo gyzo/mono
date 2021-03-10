@@ -10,8 +10,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { Navigate } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
 import memo from 'memo-decorator';
-import { MonoTypeOperatorFunction, Observable, throwError } from 'rxjs';
-import { catchError, take, tap, timeout } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
+import { catchError, finalize, take, timeout } from 'rxjs/operators';
 
 import { httpProgressActions } from '../http-progress/http-progress.store';
 
@@ -58,11 +58,14 @@ export class AppHttpHandlersService {
    * @param listenX number of responses to catch
    */
   public pipeHttpResponse<T>(observable: Observable<T>, listenX = 1) {
+    void this.store.dispatch(new httpProgressActions.startProgress({ mainView: true }));
     return observable.pipe(
       timeout(this.defaultHttpTimeout),
-      this.tapProgress<T>(true),
       take(listenX),
       catchError(err => this.handleError(err)),
+      finalize(() => {
+        void this.store.dispatch(new httpProgressActions.stopProgress({ mainView: true }));
+      }),
     );
   }
 
@@ -78,53 +81,16 @@ export class AppHttpHandlersService {
 
   /**
    * Handles error.
-   * @param error error object
    */
   public handleError(error: HttpErrorResponse): Observable<never> {
     const errorMessage = this.getErrorMessage(error);
     void this.store.dispatch(
       new httpProgressActions.displayToast({ message: errorMessage, type: 'error' }),
     );
-    return throwError(errorMessage);
-  }
-
-  /**
-   * Handles graphQL error response.
-   * @param error error message
-   */
-  public handleGraphQLError(error: string): Observable<never> {
-    return throwError(error);
-  }
-
-  /**
-   * Taps progress.
-   * @param withProgress indicates whether progress should be shown
-   */
-  public tapProgress<T>(widhProgress: boolean): MonoTypeOperatorFunction<T> {
-    let handler: () => void = () => {
-      // default handler
-    };
-    if (widhProgress) {
-      handler = () => {
-        return void this.store.dispatch(new httpProgressActions.stopProgress({ mainView: true }));
-      };
+    const unauthorized: boolean = error.status === HTTP_STATUS.UNAUTHORIZED;
+    if (unauthorized) {
+      void this.store.dispatch(new Navigate(['/']));
     }
-    return tap(handler, handler, handler);
-  }
-
-  /**
-   * Taps errors.
-   */
-  public tapError<T>(): MonoTypeOperatorFunction<T> {
-    return tap(
-      (): void => void 0,
-      (error: { networkError: HttpErrorResponse }) => {
-        const unauthorized: boolean =
-          Boolean(error.networkError) && error.networkError.status === HTTP_STATUS.BAD_REQUEST;
-        if (unauthorized) {
-          void this.store.dispatch(new Navigate(['/']));
-        }
-      },
-    );
+    return throwError(errorMessage);
   }
 }

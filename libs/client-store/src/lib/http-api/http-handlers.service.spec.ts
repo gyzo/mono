@@ -7,9 +7,13 @@ import {
   getTestBedConfig,
   newTestBedMetadata,
 } from '@mono/client-unit-testing';
+import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV, WINDOW } from '@mono/client-util';
+import { TranslateService } from '@ngx-translate/core';
+import { Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 
 import { AppHttpProgressModule } from '../http-progress/http-progress.module';
+import { httpProgressServiceProvider } from '../http-progress/http-progress.service';
 import {
   AppToasterService,
   toasterServiceProvider,
@@ -18,8 +22,21 @@ import { AppHttpHandlersService } from './http-handlers.service';
 
 describe('AppHttpHandlersService', () => {
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    imports: [AppClientTranslateModule.forRoot(), AppHttpProgressModule.forRoot()],
-    providers: [toasterServiceProvider],
+    imports: [AppClientTranslateModule.forRoot(), AppHttpProgressModule],
+    providers: [
+      toasterServiceProvider,
+      httpProgressServiceProvider,
+      {
+        provide: AppHttpHandlersService,
+        useFactory: (
+          store: Store,
+          translate: TranslateService,
+          win: Window,
+          env: IWebClientAppEnvironment,
+        ) => new AppHttpHandlersService(store, translate, win, env),
+        deps: [Store, TranslateService, WINDOW, WEB_CLIENT_APP_ENV],
+      },
+    ],
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);
 
@@ -60,10 +77,7 @@ describe('AppHttpHandlersService', () => {
     expect(service.isLocalhost).toEqual(expect.any(Function));
     expect(service.getEndpoint).toEqual(expect.any(Function));
     expect(service.handleError).toEqual(expect.any(Function));
-    expect(service.handleGraphQLError).toEqual(expect.any(Function));
     expect(service.pipeHttpResponse).toEqual(expect.any(Function));
-    expect(service.tapProgress).toEqual(expect.any(Function));
-    expect(service.tapError).toEqual(expect.any(Function));
   });
 
   describe('handleError', () => {
@@ -101,12 +115,6 @@ describe('AppHttpHandlersService', () => {
           );
       }),
     );
-  });
-
-  describe('handleGraphQLError', () => {
-    it('should return an Observable', () => {
-      expect(service['handleGraphQLError']('err')).toEqual(expect.any(Observable));
-    });
   });
 
   describe('isLocalhost', () => {

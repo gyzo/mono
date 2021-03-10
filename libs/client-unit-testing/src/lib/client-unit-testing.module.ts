@@ -21,8 +21,7 @@ import { NgxsModule } from '@ngxs/store';
 
 import { AppDummyComponent } from './components/dummy/dummy.component.mock';
 import { dialogRefMockProvider } from './refs/dialog-ref.mock';
-import { overlayContainerMock } from './refs/overlay-container.mock';
-import { overlayRefMockProvider } from './refs/overlay-ref.mock';
+import { overlayRefMockProviders } from './refs/overlay-ref.mock';
 import { matSnackbarRefMockProvider } from './refs/snackbar-ref.mock';
 
 export const testingEnvironment: IWebClientAppEnvironment = {
@@ -37,9 +36,8 @@ export const testingEnvironment: IWebClientAppEnvironment = {
 
 export const mocksCoreModuleProviders: Provider[] = [
   dialogRefMockProvider,
-  overlayRefMockProvider,
-  overlayContainerMock,
   matSnackbarRefMockProvider,
+  ...overlayRefMockProviders,
   {
     provide: APP_BASE_HREF,
     useValue: '/',
