@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
 
+import { AppPortfolioIndexComponent } from './components/index/index.component';
+
 /**
  * Application routes config.
  */
 const ROUTES: Route[] = [
   {
     path: '',
-    loadChildren: () => import('@mono/client-portfolio').then(mod => mod.AppClientPortfolioModule),
+    component: AppPortfolioIndexComponent,
   },
   {
     path: '',
@@ -24,7 +26,7 @@ const ROUTES: Route[] = [
  * Application routing module.
  */
 @NgModule({
-  imports: [RouterModule.forRoot(ROUTES, { relativeLinkResolution: 'legacy' })],
+  imports: [RouterModule.forChild(ROUTES)],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppClientPortfolioRoutingModule {}

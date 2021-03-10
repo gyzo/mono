@@ -1,5 +1,6 @@
 module.exports = {
   projects: [
+    '<rootDir>/libs/proto',
     '<rootDir>/apps/api',
     '<rootDir>/apps/client',
     '<rootDir>/apps/portfolio',
@@ -14,6 +15,6 @@ module.exports = {
     '<rootDir>/libs/client-translate',
     '<rootDir>/libs/client-util',
     '<rootDir>/libs/client-unit-testing',
-    '<rootDir>/libs/proto',
+    '<rootDir>/libs/client-portfolio',
   ],
 };

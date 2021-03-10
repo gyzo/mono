@@ -9,6 +9,7 @@ import {
   THttpProgressPayload,
   TShowToastPayload,
 } from './http-progress.interface';
+import { AppHttpProgressService } from './http-progress.service';
 import { AppToasterService } from './services/toaster/toaster.service';
 
 export const httpProgressActions = {
@@ -25,7 +26,10 @@ export const httpProgressActions = {
 })
 @Injectable()
 export class AppHttpProgressState {
-  constructor(private readonly toaster: AppToasterService) {}
+  constructor(
+    private readonly toaster: AppToasterService,
+    private readonly service: AppHttpProgressService,
+  ) {}
 
   @Selector()
   public static allProgress(state: IAppHttpProgressState) {
@@ -42,7 +46,7 @@ export class AppHttpProgressState {
     ctx: StateContext<IAppHttpProgressState>,
     { payload }: THttpProgressPayload,
   ) {
-    const newState = { ...ctx.getState() };
+    const newState = { mainView: { ...ctx.getState().mainView } };
     const keys = Object.keys(payload);
     for (const key of keys) {
       if (key in newState) {
@@ -51,19 +55,25 @@ export class AppHttpProgressState {
         newState[k].loading = newState[k].counter > 0;
       }
     }
+    if (newState.mainView.loading) {
+      this.service.handlers.mainView.start();
+    }
     return ctx.patchState(newState);
   }
 
   @Action(stopProgress)
   public stopProgress(ctx: StateContext<IAppHttpProgressState>, { payload }: THttpProgressPayload) {
-    const newState = { ...ctx.getState() };
+    const newState = { mainView: { ...ctx.getState().mainView } };
     const keys = Object.keys(payload);
     for (const key of keys) {
       if (key in newState) {
         const k = key as keyof IAppHttpProgressState;
-        newState[k].counter = newState[k].counter - 1;
+        newState[k].counter = newState[k].counter - 1 >= 0 ? newState[k].counter - 1 : 0;
         newState[k].loading = newState[k].counter > 0;
       }
+    }
+    if (!newState.mainView.loading) {
+      this.service.handlers.mainView.stop();
     }
     return ctx.patchState(newState);
   }

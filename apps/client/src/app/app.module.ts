@@ -3,7 +3,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppClientCoreModule } from '@mono/client-core';
 import { AppClientMaterialModule } from '@mono/client-material';
-import { AppClientStoreModule, AppWebsocketModule } from '@mono/client-store';
+import { AppClientStoreModule } from '@mono/client-store';
 import { AppClientTranslateModule } from '@mono/client-translate';
 import { EntityServiceClient } from '@mono/proto';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
@@ -38,10 +38,9 @@ export const grpcProviders: Provider[] = [
     NgxsFormPluginModule.forRoot(),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
     AppClientCoreModule.forRoot(environment),
-    AppClientStoreModule,
     AppClientMaterialModule.forRoot(),
-    AppWebsocketModule.forRoot(environment),
     AppClientTranslateModule.forRoot(),
+    AppClientStoreModule.forRoot(environment),
     AppRoutingModule,
   ],
   providers: [...grpcProviders],
