@@ -2,7 +2,7 @@ import { ApiEnvironment } from '@mono/backend-interfaces';
 import { ClientOptions, Transport } from '@nestjs/microservices';
 import { join } from 'path';
 
-export const MONO_GRPC_PACKAGE = 'MONO_PACKAGE';
+export const MONO_GRPC_PACKAGE = 'MONO_GRPC_PACKAGE';
 
 const localProtoPath = [join(__dirname, '..', '..', '..', 'tools/proto/root.proto')];
 const functionsProtoPath = [join(__dirname, 'proto/root.proto')];

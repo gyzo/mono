@@ -24,7 +24,7 @@ import { environment } from '../environments/environment';
     BackendMailerModule.forRoot(),
     BackendWebsocketModule.forRoot(),
     BackendGithubModule.forRoot(),
-    BackendGrpcModule,
+    BackendGrpcModule.forRoot(environment),
   ],
   providers: [
     {

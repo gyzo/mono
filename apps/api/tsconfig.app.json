@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "allowJs": true,
     "outDir": "../../dist/out-tsc"
   },
   "exclude": ["**/*.spec.ts"],
