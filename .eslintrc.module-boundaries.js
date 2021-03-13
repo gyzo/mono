@@ -126,7 +126,7 @@ const clientConstraints = [
   },
   {
     sourceTag: 'scope:client-services',
-    onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:proto'],
+    onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:client-util', 'scope:proto'],
   },
   {
     sourceTag: 'scope:client-componnents',
@@ -170,6 +170,7 @@ const clientConstraints = [
       'scope:client-core',
       'scope:client-material',
       'scope:client-translate',
+      'scope:client-services',
       'scope:client-util',
     ],
   },
