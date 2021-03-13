@@ -24,4 +24,9 @@ export const environment: IWebClientAppEnvironment = {
     ? 'http://localhost:8080/api'
     : `${window.location.origin}/api`,
   envoyUrl: 'http://localhost:8082',
+  sentry: {
+    env: 'development',
+    dsn: '',
+    tracingOrigins: ['localhost:4200'],
+  },
 };

@@ -182,6 +182,8 @@
     "@nrwl/storybook": "11.5.1",
     "@nrwl/tao": "11.5.1",
     "@nrwl/workspace": "11.5.1",
+    "@sentry/angular": "6.2.2",
+    "@sentry/tracing": "6.2.2",
     "@storybook/addon-knobs": "6.1.21",
     "@storybook/angular": "6.1.21",
     "@types/d3-shape": "2.0.0",

@@ -1,3 +1,4 @@
+import { TSentryEnvironment } from './sentry.interface';
 /**
  * Application name type.
  */
@@ -12,4 +13,9 @@ export interface IWebClientAppEnvironment {
   appName: TAppName;
   api: string;
   envoyUrl: string;
+  sentry: {
+    env: TSentryEnvironment;
+    dsn: string;
+    tracingOrigins: string[];
+  };
 }
