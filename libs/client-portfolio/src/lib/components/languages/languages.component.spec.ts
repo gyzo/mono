@@ -72,12 +72,8 @@ describe('AppPortfolioLanguagesComponent', () => {
       },
       {
         provide: AppGithubApiService,
-        useFactory: (
-          http: HttpClient,
-          store: Store,
-          handlers: AppHttpHandlersService,
-          window: Window,
-        ) => new AppGithubApiService(http, store, handlers, window),
+        useFactory: (http: HttpClient, handlers: AppHttpHandlersService, window: Window) =>
+          new AppGithubApiService(http, handlers, window),
         deps: [HttpClient, Store, AppHttpHandlersService, WINDOW],
       },
       {
