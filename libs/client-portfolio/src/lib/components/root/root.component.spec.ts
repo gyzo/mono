@@ -6,11 +6,10 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientMaterialModule } from '@mono/client-material';
-import { AppGithubUserState, AppHttpProgressService, AppSidebarState } from '@mono/client-store';
+import { AppGithubUserState, AppSidebarState } from '@mono/client-store';
 import { AppDummyComponent } from '@mono/client-unit-testing';
 import { WINDOW, windowFactory } from '@mono/client-util';
 import { NgxsModule } from '@ngxs/store';
-import { of } from 'rxjs';
 
 import { AppPortfolioRootComponent } from './root.component';
 
@@ -31,14 +30,6 @@ describe('AppPortfolioRootComponent', () => {
         provide: MatSnackBar,
         useValue: {
           open: (): null => null,
-        },
-      },
-      {
-        provide: AppHttpProgressService,
-        useValue: {
-          output: {
-            all$: of(false),
-          },
         },
       },
     ],

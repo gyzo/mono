@@ -71,7 +71,13 @@ Applications as well as generated documentation, testing reports, and a custom c
 #### Unit coverage
 
 - [API](https://mono-documentation.web.app/assets/coverage/apps/api/index.html)
-- [API Interface](https://mono-documentation.web.app/assets/coverage/libs/api-interface/index.html)
+- [Backend Auth](https://mono-documentation.web.app/assets/coverage/libs/backend-auth/index.html)
+- [Backend Github](https://mono-documentation.web.app/assets/coverage/libs/backend-github/index.html)
+- [Backend gRPC](https://mono-documentation.web.app/assets/coverage/libs/backend-grpc/index.html)
+- [Backend Interfaces](https://mono-documentation.web.app/assets/coverage/libs/backend-interfaces/index.html)
+- [Backend Logger](https://mono-documentation.web.app/assets/coverage/libs/backend-logger/index.html)
+- [Backend Mailer](https://mono-documentation.web.app/assets/coverage/libs/backend-mailer/index.html)
+- [Backend Websocket](https://mono-documentation.web.app/assets/coverage/libs/backend-websocket/index.html)
 - [Client](https://mono-documentation.web.app/assets/coverage/apps/client/index.html)
 - [Client Components](https://mono-documentation.web.app/assets/coverage/libs/client-components/index.html)
 - [Client Core](https://mono-documentation.web.app/assets/coverage/libs/client-core/index.html)
@@ -93,7 +99,13 @@ Applications as well as generated documentation, testing reports, and a custom c
 #### Changelog
 
 - [API](https://mono-documentation.web.app/assets/changelog/apps/api-CHANGELOG.html)
-- [API Interface](https://mono-documentation.web.app/assets/changelog/libs/api-interface-CHANGELOG.html)
+- [Backend Auth](https://mono-documentation.web.app/assets/changelog/libs/backend-auth-CHANGELOG.html)
+- [Backend Github](https://mono-documentation.web.app/assets/changelog/libs/backend-github-CHANGELOG.html)
+- [Backend gRPC](https://mono-documentation.web.app/assets/changelog/libs/backend-grpc-CHANGELOG.html)
+- [Backend Interfaces](https://mono-documentation.web.app/assets/changelog/libs/backend-interfaces-CHANGELOG.html)
+- [Backend Logger](https://mono-documentation.web.app/assets/changelog/libs/backend-logger-CHANGELOG.html)
+- [Backend Mailer](https://mono-documentation.web.app/assets/changelog/libs/backend-interfaces-CHANGELOG.html)
+- [Backend Websocket](https://mono-documentation.web.app/assets/changelog/libs/backend-interfaces-CHANGELOG.html)
 - [Client](https://mono-documentation.web.app/assets/changelog/apps/client-CHANGELOG.html)
 - [Client E2E](https://mono-documentation.web.app/assets/changelog/apps/client-e2e-CHANGELOG.html)
 - [Client Components](https://mono-documentation.web.app/assets/changelog/libs/client-components-CHANGELOG.html)

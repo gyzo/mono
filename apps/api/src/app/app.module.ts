@@ -1,13 +1,13 @@
-import { API_ENV } from '@mono/api-interface';
+import { BackendAuthModule } from '@mono/backend-auth';
+import { BackendGithubModule } from '@mono/backend-github';
+import { BackendGrpcModule } from '@mono/backend-grpc';
+import { API_ENV } from '@mono/backend-interfaces';
+import { BackendLoggerMiddleware } from '@mono/backend-logger';
+import { BackendMailerModule } from '@mono/backend-mailer';
+import { BackendWebsocketModule } from '@mono/backend-websocket';
 import { HttpModule, MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 
 import { environment } from '../environments/environment';
-import { ApiLoggerMiddleware } from './middleware/logger/logger.middleware';
-import { ApiAuthModule } from './modules/auth/auth.module';
-import { ApiGithubModule } from './modules/github/github.module';
-import { ApiGrpcModule } from './modules/grpc/grpc.module';
-import { ApiMailerModule } from './modules/mailer/mailer.module';
-import { ApiWebsocketModule } from './modules/websocket/websocket.module';
 
 /**
  * Root API application module.
@@ -20,11 +20,11 @@ import { ApiWebsocketModule } from './modules/websocket/websocket.module';
         maxRedirects: 5,
       }),
     }),
-    ApiAuthModule.forRoot(),
-    ApiMailerModule.forRoot(),
-    ApiWebsocketModule.forRoot(),
-    ApiGithubModule.forRoot(),
-    ApiGrpcModule,
+    BackendAuthModule.forRoot(),
+    BackendMailerModule.forRoot(),
+    BackendWebsocketModule.forRoot(),
+    BackendGithubModule.forRoot(),
+    BackendGrpcModule,
   ],
   providers: [
     {
@@ -35,6 +35,6 @@ import { ApiWebsocketModule } from './modules/websocket/websocket.module';
 })
 export class ApiAppModule implements NestModule {
   public configure(consumer: MiddlewareConsumer) {
-    consumer.apply(ApiLoggerMiddleware).forRoutes('*');
+    consumer.apply(BackendLoggerMiddleware).forRoutes('*');
   }
 }

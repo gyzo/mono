@@ -1,4 +1,4 @@
-import { ApiEnvironment } from '@mono/api-interface';
+import { ApiEnvironment } from '@mono/backend-interfaces';
 
 /**
  * Development environment variables.
