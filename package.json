@@ -181,6 +181,7 @@
     "@nrwl/node": "11.5.1",
     "@nrwl/storybook": "11.5.1",
     "@nrwl/tao": "11.5.1",
+    "@nrwl/web": "11.5.1",
     "@nrwl/workspace": "11.5.1",
     "@sentry/angular": "6.2.2",
     "@sentry/tracing": "6.2.2",
