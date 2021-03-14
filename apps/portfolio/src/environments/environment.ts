@@ -31,6 +31,7 @@ export const environment: IWebClientAppEnvironment = {
       'localhost:4200',
       'https://rfprod-2cda1.web.app',
       'https://rfprod-2cda1.firebaseapp.com',
+      'https://rfprod.tk',
     ],
   },
 };
