@@ -5,7 +5,7 @@ export const APP_ROUTES: Route[] = [
   {
     path: '',
     loadChildren: () =>
-      import('@mono/client-components').then(mod => mod.AppClientComponentsModule),
+      import('@mono/client-diagnostics').then(mod => mod.AppClientDiagnosticsModule),
   },
   {
     path: '',

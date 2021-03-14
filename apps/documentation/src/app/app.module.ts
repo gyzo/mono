@@ -34,11 +34,6 @@ const markdownModuleConfig: MarkdownModuleConfig = {
 };
 
 @NgModule({
-  declarations: [
-    AppDocRootComponent,
-    AppDocMarkdownReferenceTreeComponent,
-    AppDocMarkdownReferenceComponent,
-  ],
   imports: [
     BrowserAnimationsModule,
     HttpClientModule,
@@ -56,6 +51,11 @@ const markdownModuleConfig: MarkdownModuleConfig = {
     { provide: WINDOW, useFactory: windowFactory },
     { provide: DOCUMENT, useFactory: documentFactory },
     { provide: DOC_APP_ENV, useValue: environment },
+  ],
+  declarations: [
+    AppDocRootComponent,
+    AppDocMarkdownReferenceTreeComponent,
+    AppDocMarkdownReferenceComponent,
   ],
   bootstrap: [AppDocRootComponent],
 })
