@@ -14,6 +14,7 @@ module.exports = {
     '<rootDir>/libs/backend-websocket',
     '<rootDir>/libs/client-components',
     '<rootDir>/libs/client-core',
+    '<rootDir>/libs/client-diagnostics',
     '<rootDir>/libs/client-material',
     '<rootDir>/libs/client-services',
     '<rootDir>/libs/client-sidebar',

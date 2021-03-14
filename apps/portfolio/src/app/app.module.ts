@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AppClientComponentsModule } from '@mono/client-components';
 import { AppClientCoreModule } from '@mono/client-core';
 import { AppClientMaterialModule } from '@mono/client-material';
 import { AppClientStoreModule } from '@mono/client-store';
@@ -12,8 +13,7 @@ import { NgxsModule } from '@ngxs/store';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
-import { AppContentComponent } from './components/content/content.component';
-import { AppRootComponent } from './components/root/root.component';
+import { AppRootComponent } from './components/root.component';
 
 /**
  * Root application module.
@@ -30,10 +30,11 @@ import { AppRootComponent } from './components/root/root.component';
     AppClientMaterialModule.forRoot(),
     AppClientTranslateModule.forRoot(),
     AppClientStoreModule.forRoot(environment),
+    AppClientComponentsModule,
     AppRoutingModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  declarations: [AppRootComponent, AppContentComponent],
+  declarations: [AppRootComponent],
   bootstrap: [AppRootComponent],
 })
 export class AppPortfolioClientModule {}

@@ -1,6 +1,7 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule, Provider } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { AppClientComponentsModule } from '@mono/client-components';
 import { AppClientCoreModule } from '@mono/client-core';
 import { AppClientMaterialModule } from '@mono/client-material';
 import { AppClientStoreModule } from '@mono/client-store';
@@ -13,10 +14,7 @@ import { NgxsModule } from '@ngxs/store';
 
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
-import { AppContentComponent } from './components/content/content.component';
-import { AppNavbarComponent } from './components/navbar/navbar.component';
 import { AppRootComponent } from './components/root/root.component';
-import { AppToolbarComponent } from './components/toolbar/toolbar.component';
 
 export const grpcProviders: Provider[] = [
   {
@@ -41,10 +39,11 @@ export const grpcProviders: Provider[] = [
     AppClientMaterialModule.forRoot(),
     AppClientTranslateModule.forRoot(),
     AppClientStoreModule.forRoot(environment),
+    AppClientComponentsModule,
     AppRoutingModule,
   ],
   providers: [...grpcProviders],
-  declarations: [AppRootComponent, AppContentComponent, AppNavbarComponent, AppToolbarComponent],
+  declarations: [AppRootComponent],
   bootstrap: [AppRootComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
