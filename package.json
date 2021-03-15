@@ -84,7 +84,7 @@
     "nx:format:write": "nx format:write",
     "nx:help": "nx help",
     "serve": "ng serve documentation",
-    "serve:client": "ng serve client",
+    "serve:client": "ng serve api & ng serve client",
     "serve:portfolio": "ng serve api & ng serve portfolio",
     "start:envoy": "sudo docker-compose -f .devops/docker-compose.envoy.yml up",
     "start:envoy:api": "yarn start:envoy & ng serve api",

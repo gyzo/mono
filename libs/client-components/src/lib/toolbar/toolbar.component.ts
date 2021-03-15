@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { AppSidebarState, sidebarUiActions } from '@mono/client-store';
+import { IToolbarButton } from '@mono/client-util';
 import { Store } from '@ngxs/store';
 import { map } from 'rxjs/operators';
 
@@ -10,6 +11,19 @@ import { map } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppToolbarComponent {
+  @Input() public buttons: IToolbarButton[] = [
+    {
+      routerLink: ['info'],
+      icon: 'touch_app',
+      title: 'API info',
+    },
+    {
+      routerLink: [''],
+      icon: 'home',
+      title: 'Home',
+    },
+  ];
+
   public readonly sidebarOpened$ = this.store
     .select(AppSidebarState.getState)
     .pipe(map(state => state.sidebarOpened));

@@ -1,26 +1,28 @@
 <mat-toolbar color="primary" fxFlex="0 1 auto">
   <button mat-icon-button>
     <mat-icon
-      title="open sidenav"
+      title="Open sidenav"
       *ngIf="(sidebarOpened$ | async) === false"
       (click)="sidebarOpenHandler()"
     >
       flip_to_front
     </mat-icon>
 
-    <mat-icon title="close sidenav" *ngIf="sidebarOpened$ | async" (click)="sidebarCloseHandler()">
+    <mat-icon title="Close sidenav" *ngIf="sidebarOpened$ | async" (click)="sidebarCloseHandler()">
       flip_to_back
     </mat-icon>
   </button>
 
   <span fxFlex="1 1 auto"></span>
 
-  <button mat-button [routerLink]="['info']" [fxHide.xs]="true" [fxHide.sm]="true">
-    <mat-icon>touch_app</mat-icon> API info
-  </button>
-
-  <button mat-button [routerLink]="['']" [fxHide.xs]="true" [fxHide.sm]="true">
-    <mat-icon>home</mat-icon> Home
+  <button
+    mat-button
+    *ngFor="let button of buttons"
+    [routerLink]="button.routerLink"
+    [fxHide.xs]="true"
+    [fxHide.sm]="true"
+  >
+    <mat-icon>{{ button.icon }}</mat-icon> {{ button.title }}
   </button>
 
   <button
@@ -34,7 +36,8 @@
   </button>
 
   <mat-menu #mobileMenuBottom="matMenu" [fxHide.md]="true" [fxHide.lg]="true" [fxHide.xl]="true">
-    <a mat-menu-item [routerLink]="['info']"> <mat-icon>touch_app</mat-icon> API info </a>
-    <a mat-menu-item [routerLink]="['']"> <mat-icon>home</mat-icon> Home </a>
+    <a mat-menu-item *ngFor="let button of buttons" [routerLink]="button.routerLink">
+      <mat-icon>{{ button.icon }}</mat-icon> {{ button.title }}
+    </a>
   </mat-menu>
 </mat-toolbar>
