@@ -1,5 +1,5 @@
 {
-  "extends": "../../tsconfig.json",
+  "extends": "../../tsconfig.base.json",
   "files": [],
   "include": [],
   "references": [
@@ -10,7 +10,7 @@
       "path": "./tsconfig.spec.json"
     },
     {
-      "path": "./tsconfig.editor.json"
+      "path": "./tsconfig.eslint.json"
     }
   ]
 }
