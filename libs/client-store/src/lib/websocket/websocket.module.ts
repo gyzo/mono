@@ -19,14 +19,16 @@ export const wsConfigProvider: (env: IWebClientAppEnvironment) => Provider = (
 @NgModule({
   imports: [NgxsModule.forFeature([AppWebsocketState])],
 })
-export class AppWebsocketModule {
+export class AppWebsocketStoreModule {
   /**
    * @note This method should be called only if websocker service should be imported in some root application module on its own.
    * @note In other cases AppClientStoreModule should be called with forRoot, and it will provide WS_CONFIG.
    */
-  public static forRoot(env: IWebClientAppEnvironment): ModuleWithProviders<AppWebsocketModule> {
+  public static forRoot(
+    env: IWebClientAppEnvironment,
+  ): ModuleWithProviders<AppWebsocketStoreModule> {
     return {
-      ngModule: AppWebsocketModule,
+      ngModule: AppWebsocketStoreModule,
       providers: [wsConfigProvider(env)],
     };
   }

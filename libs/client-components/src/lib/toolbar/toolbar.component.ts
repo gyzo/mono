@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { AppSidebarState, sidebarUiActions } from '@mono/client-store';
+import { AppSidebarState, chatbotActions, sidebarUiActions } from '@mono/client-store';
 import { IToolbarButton } from '@mono/client-util';
 import { Store } from '@ngxs/store';
 import { map } from 'rxjs/operators';
@@ -36,5 +36,9 @@ export class AppToolbarComponent {
 
   public sidebarOpenHandler(): void {
     void this.store.dispatch(new sidebarUiActions.openSidebar());
+  }
+
+  public toggleChatbot(): void {
+    void this.store.dispatch(new chatbotActions.toggle());
   }
 }

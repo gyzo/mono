@@ -12,6 +12,11 @@ export const APP_ROUTES: Route[] = [
     outlet: 'sidebar',
     loadChildren: () => import('@mono/client-sidebar').then(mod => mod.AppClientSidebarModule),
   },
+  {
+    path: '',
+    outlet: 'chatbot',
+    loadChildren: () => import('@mono/client-chatbot').then(mod => mod.AppClientChatbotModule),
+  },
   { path: '**', redirectTo: '' },
 ];
 

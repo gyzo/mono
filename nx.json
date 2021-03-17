@@ -46,6 +46,9 @@
     "client": {
       "tags": ["scope:client", "type:application"]
     },
+    "client-chatbot": {
+      "tags": ["scope:client-chatbot", "type:feature"]
+    },
     "client-components": {
       "tags": ["scope:client-components", "type:ui"]
     },

@@ -129,6 +129,16 @@ const clientConstraints = [
     onlyDependOnLibsWithTags: ['scope:client-unit-testing', 'scope:client-util', 'scope:proto'],
   },
   {
+    sourceTag: 'scope:client-chatbot',
+    onlyDependOnLibsWithTags: [
+      'scope:client-unit-testing',
+      'scope:proto',
+      'scope:client-material',
+      'scope:client-store',
+      'scope:client-translate',
+    ],
+  },
+  {
     sourceTag: 'scope:client-componnents',
     onlyDependOnLibsWithTags: [
       'scope:client-unit-testing',
@@ -138,6 +148,7 @@ const clientConstraints = [
       'scope:client-util',
     ],
   },
+
   {
     sourceTag: 'scope:client-diagnostics',
     onlyDependOnLibsWithTags: [
@@ -166,6 +177,7 @@ const clientConstraints = [
       'scope:proto',
       'scope:client-store',
       'scope:client-services',
+      'scope:client-chatbot',
       'scope:client-components',
       'scope:client-core',
       'scope:client-diagnostics',
@@ -180,6 +192,7 @@ const clientConstraints = [
       'scope:client-unit-testing',
       'scope:client-store',
       'scope:client-core',
+      'scope:client-chatbot',
       'scope:client-components',
       'scope:client-material',
       'scope:client-translate',
