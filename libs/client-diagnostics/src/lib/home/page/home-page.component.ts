@@ -14,7 +14,7 @@ interface IAppHomePageChanges extends SimpleChanges {
 }
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'app-diagnostics-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

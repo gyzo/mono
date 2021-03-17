@@ -392,6 +392,29 @@
       },
       "sourceRoot": "apps/client/src"
     },
+    "client-chatbot": {
+      "architect": {
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "libs/client-chatbot/.eslintrc.json",
+            "lintFilePatterns": ["libs/client-chatbot/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/client-chatbot/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/client-chatbot"]
+        }
+      },
+      "prefix": "nx-ng-starter",
+      "projectType": "library",
+      "root": "libs/client-chatbot",
+      "sourceRoot": "libs/client-chatbot/src"
+    },
     "client-components": {
       "architect": {
         "build-storybook": {

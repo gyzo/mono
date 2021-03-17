@@ -1,32 +1,35 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { IWebClientAppEnvironment } from '@mono/client-util';
 
-import { AppGithubUserModule } from './github-user/github-user.module';
-import { AppHttpApiModule } from './http-api/http-api.module';
-import { AppHttpProgressModule } from './http-progress/http-progress.module';
-import { AppSidebarModule } from './sidebar/sidebar.module';
-import { AppThemeModule } from './theme/theme.module';
-import { AppUserModule } from './user/user.module';
-import { AppWebsocketModule, wsConfigProvider } from './websocket/websocket.module';
+import { AppChatbotStoreModule } from './chatbot/chatbot.module';
+import { AppGithubUserStoreModule } from './github-user/github-user.module';
+import { AppHttpApiStoreModule } from './http-api/http-api.module';
+import { AppHttpProgressStoreModule } from './http-progress/http-progress.module';
+import { AppSidebarStoreModule } from './sidebar/sidebar.module';
+import { AppThemeStoreModule } from './theme/theme.module';
+import { AppUserStoreModule } from './user/user.module';
+import { AppWebsocketStoreModule, wsConfigProvider } from './websocket/websocket.module';
 
 @NgModule({
   imports: [
-    AppHttpApiModule,
-    AppHttpProgressModule.forRoot(),
-    AppUserModule,
-    AppGithubUserModule,
-    AppSidebarModule,
-    AppWebsocketModule,
-    AppThemeModule,
+    AppHttpApiStoreModule,
+    AppHttpProgressStoreModule.forRoot(),
+    AppUserStoreModule,
+    AppGithubUserStoreModule,
+    AppSidebarStoreModule,
+    AppWebsocketStoreModule,
+    AppThemeStoreModule,
+    AppChatbotStoreModule,
   ],
   exports: [
-    AppHttpApiModule,
-    AppHttpProgressModule,
-    AppUserModule,
-    AppGithubUserModule,
-    AppSidebarModule,
-    AppWebsocketModule,
-    AppThemeModule,
+    AppHttpApiStoreModule,
+    AppHttpProgressStoreModule,
+    AppUserStoreModule,
+    AppGithubUserStoreModule,
+    AppSidebarStoreModule,
+    AppWebsocketStoreModule,
+    AppThemeStoreModule,
+    AppChatbotStoreModule,
   ],
 })
 export class AppClientStoreModule {

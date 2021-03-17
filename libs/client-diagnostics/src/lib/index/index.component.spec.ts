@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppWebsocketModule } from '@mono/client-store';
+import { AppWebsocketStoreModule } from '@mono/client-store';
 import {
   getTestBedConfig,
   newTestBedMetadata,
@@ -15,7 +15,7 @@ describe('AppIndexComponent', () => {
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
     declarations: [AppIndexComponent],
     imports: [
-      AppWebsocketModule.forRoot(testingEnvironment),
+      AppWebsocketStoreModule.forRoot(testingEnvironment),
       RouterTestingModule.withRoutes([
         { path: '', component: AppIndexComponent },
         { path: '', redirectTo: '', pathMatch: 'full' },

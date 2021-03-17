@@ -1,7 +1,6 @@
 import { InjectionToken } from '@angular/core';
 import { IActionPayload } from '@mono/client-util';
 import { StateToken } from '@ngxs/store';
-import { Observable } from 'rxjs';
 import { WebSocketSubjectConfig } from 'rxjs/webSocket';
 
 export interface IWebsocketRequestEvent {
@@ -31,13 +30,6 @@ export interface IAppWebsocketStatePayload {
 }
 
 export type TWebsocketPayload = IActionPayload<IAppWebsocketStatePayload>;
-
-export interface IWebsocketservice {
-  events$: Observable<IWebsocketResponseEvent[]>;
-  users$: Observable<number>;
-  state$: Observable<IAppWebsocketStateModel>;
-  setState(payload: IAppWebsocketStatePayload): void;
-}
 
 export interface IWebsocketConfig extends WebSocketSubjectConfig<IWebsocketRequestEvent> {
   url: string;

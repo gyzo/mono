@@ -12,6 +12,7 @@ module.exports = {
     '<rootDir>/libs/backend-interfaces',
     '<rootDir>/libs/backend-logger',
     '<rootDir>/libs/backend-websocket',
+    '<rootDir>/libs/client-chatbot',
     '<rootDir>/libs/client-components',
     '<rootDir>/libs/client-core',
     '<rootDir>/libs/client-diagnostics',

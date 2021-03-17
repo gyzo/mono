@@ -7,7 +7,7 @@ import { of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-info',
+  selector: 'app-diagnostics-info',
   templateUrl: './info.component.html',
   styleUrls: ['./info.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

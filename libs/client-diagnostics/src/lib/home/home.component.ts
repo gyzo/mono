@@ -7,7 +7,7 @@ import { first, map } from 'rxjs/operators';
 
 @UntilDestroy()
 @Component({
-  selector: 'app-home',
+  selector: 'app-diagnostics-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

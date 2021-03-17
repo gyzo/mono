@@ -12,7 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
 
-import { AppHttpProgressModule } from '../http-progress/http-progress.module';
+import { AppHttpProgressStoreModule } from '../http-progress/http-progress.module';
 import { httpProgressServiceProvider } from '../http-progress/http-progress.service';
 import {
   AppToasterService,
@@ -22,7 +22,7 @@ import { AppHttpHandlersService } from './http-handlers.service';
 
 describe('AppHttpHandlersService', () => {
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    imports: [AppClientTranslateModule.forRoot(), AppHttpProgressModule],
+    imports: [AppClientTranslateModule.forRoot(), AppHttpProgressStoreModule],
     providers: [
       toasterServiceProvider,
       httpProgressServiceProvider,

@@ -6,7 +6,7 @@ import { getTestBedConfig, newTestBedMetadata } from '@mono/client-unit-testing'
 import { of } from 'rxjs';
 
 import {
-  AppHttpProgressModule,
+  AppHttpProgressStoreModule,
   httpProgressModuleProviders,
 } from '../http-progress/http-progress.module';
 import {
@@ -19,7 +19,7 @@ import { AppHttpHandlersService } from './http-handlers.service';
 
 describe('AppHttpApiService', () => {
   const testBedMetadata: TestModuleMetadata = newTestBedMetadata({
-    imports: [AppClientTranslateModule, AppHttpProgressModule.forRoot()],
+    imports: [AppClientTranslateModule, AppHttpProgressStoreModule.forRoot()],
     providers: [...httpProgressModuleProviders, toasterServiceProvider],
   });
   const testBedConfig: TestModuleMetadata = getTestBedConfig(testBedMetadata);

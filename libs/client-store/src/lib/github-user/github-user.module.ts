@@ -6,4 +6,4 @@ import { AppGithubUserState } from './github-user.store';
 @NgModule({
   imports: [NgxsModule.forFeature([AppGithubUserState])],
 })
-export class AppGithubUserModule {}
+export class AppGithubUserStoreModule {}
