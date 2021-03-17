@@ -1,17 +1,16 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AppWebsocketService } from '@mono/client-store';
+import { websocketActions } from '@mono/client-store';
+import { Store } from '@ngxs/store';
 
-/**
- * Application index component.
- */
 @Component({
-  selector: 'app-index',
+  selector: 'app-diagnostics-index',
   templateUrl: './index.component.html',
   styleUrls: ['./index.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppIndexComponent {
-  constructor(private readonly ws: AppWebsocketService) {
-    this.ws.getData();
+  constructor(private readonly store: Store) {
+    void this.store.dispatch(new websocketActions.connect());
+    void this.store.dispatch(new websocketActions.getEvents());
   }
 }
