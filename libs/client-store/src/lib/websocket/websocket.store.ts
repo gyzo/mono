@@ -56,10 +56,10 @@ export class AppWebsocketState {
     return this.api.connect().pipe(
       tap(event => {
         const payload = {
-          users: event.event === 'users' ? event.data : void 0,
+          users: event.event === 'users' ? event.data : 0,
           events: [event],
         };
-        this.setState(ctx, { payload });
+        void ctx.dispatch(new websocketActions.setState(payload));
       }),
     );
   }
