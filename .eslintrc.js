@@ -49,6 +49,7 @@ module.exports = {
       '!no-console',
       '!prettier',
       '!no-labels',
+      '!max-lines-per-function',
     ],
     '@typescript-eslint/await-thenable': 'error',
     '@typescript-eslint/ban-ts-comment': 'error',
@@ -196,7 +197,7 @@ module.exports = {
       {
         ignoreNumericLiteralTypes: true,
         ignoreReadonlyClassProperties: true,
-        ignore: [-1, 0, 1] /* ignore -1, and binary*/,
+        ignore: [-1, 0, 1, 2] /* ignore -1, binary, and common divisor 2 */,
         ignoreEnums: true /* ignore enumerators so that numeric values can be grouped via enums instead of constants */,
       },
     ],
@@ -490,6 +491,95 @@ module.exports = {
           {
             selector: 'property',
             format: ['camelCase', 'snake_case'],
+            leadingUnderscore: 'forbid',
+            trailingUnderscore: 'forbid',
+          },
+          {
+            selector: 'function',
+            format: ['camelCase'],
+            leadingUnderscore: 'forbid',
+            trailingUnderscore: 'forbid',
+          },
+          {
+            selector: 'enum',
+            format: ['UPPER_CASE'],
+            leadingUnderscore: 'forbid',
+            trailingUnderscore: 'forbid',
+          },
+          {
+            selector: 'enumMember',
+            format: ['UPPER_CASE'],
+            leadingUnderscore: 'forbid',
+            trailingUnderscore: 'forbid',
+          },
+          {
+            selector: 'memberLike',
+            modifiers: ['private'],
+            format: ['camelCase'],
+            leadingUnderscore: 'forbid',
+            trailingUnderscore: 'forbid',
+          },
+          {
+            selector: 'typeAlias',
+            prefix: ['T'],
+            format: ['StrictPascalCase'],
+            leadingUnderscore: 'forbid',
+            trailingUnderscore: 'forbid',
+          },
+          {
+            selector: 'typeParameter',
+            format: ['StrictPascalCase'],
+            leadingUnderscore: 'forbid',
+            trailingUnderscore: 'forbid',
+          },
+          {
+            selector: 'interface',
+            prefix: ['I'],
+            format: ['StrictPascalCase'],
+            leadingUnderscore: 'forbid',
+            trailingUnderscore: 'forbid',
+          },
+          {
+            selector: 'class',
+            format: ['StrictPascalCase'],
+            leadingUnderscore: 'forbid',
+            trailingUnderscore: 'forbid',
+          },
+        ],
+      },
+    },
+    {
+      files: ['**/*chart.util.ts'],
+      rules: {
+        '@typescript-eslint/naming-convention': [
+          'error', // rule reference https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/naming-convention.md
+          {
+            selector: 'default',
+            format: ['camelCase'],
+            leadingUnderscore: 'forbid',
+            trailingUnderscore: 'forbid',
+          },
+          {
+            selector: 'variable',
+            format: ['camelCase'],
+            leadingUnderscore: 'forbid',
+            trailingUnderscore: 'forbid',
+          },
+          {
+            selector: 'parameter',
+            format: ['camelCase'],
+            leadingUnderscore: 'forbid',
+            trailingUnderscore: 'forbid',
+          },
+          {
+            selector: 'objectLiteralProperty',
+            format: ['camelCase', 'StrictPascalCase'],
+            leadingUnderscore: 'forbid',
+            trailingUnderscore: 'forbid',
+          },
+          {
+            selector: 'property',
+            format: ['camelCase', 'StrictPascalCase'],
             leadingUnderscore: 'forbid',
             trailingUnderscore: 'forbid',
           },
