@@ -1,1 +1,1 @@
-test.todo('AppChatbotRootComponent');
+test.todo('ChatbotRootComponent');
