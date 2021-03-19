@@ -8,6 +8,10 @@ export const APP_ROUTES: Route[] = [
       import('@mono/client-diagnostics').then(mod => mod.AppClientDiagnosticsModule),
   },
   {
+    path: 'chatbot',
+    loadChildren: () => import('@mono/client-chatbot').then(mod => mod.AppClientChatbotModule),
+  },
+  {
     path: '',
     outlet: 'sidebar',
     loadChildren: () => import('@mono/client-sidebar').then(mod => mod.AppClientSidebarModule),
@@ -15,7 +19,8 @@ export const APP_ROUTES: Route[] = [
   {
     path: '',
     outlet: 'chatbot',
-    loadChildren: () => import('@mono/client-chatbot').then(mod => mod.AppClientChatbotModule),
+    loadChildren: () =>
+      import('@mono/client-chatbot').then(mod => mod.AppClientChatbotWidgetModule),
   },
   { path: '**', redirectTo: '' },
 ];
