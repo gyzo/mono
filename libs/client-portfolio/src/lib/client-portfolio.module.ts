@@ -1,5 +1,6 @@
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { AppClientCoreModule } from '@mono/client-core';
+import { AppClientD3ChartsModule } from '@mono/client-d3-charts';
 import { AppClientMaterialModule } from '@mono/client-material';
 import { AppClientTranslateModule } from '@mono/client-translate';
 
@@ -18,6 +19,7 @@ import { AppPortfolioStatusBadgesComponent } from './components/status-badges/st
     AppClientCoreModule,
     AppClientMaterialModule,
     AppClientTranslateModule,
+    AppClientD3ChartsModule,
     AppClientPortfolioRoutingModule,
   ],
   declarations: [

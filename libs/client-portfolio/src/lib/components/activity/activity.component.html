@@ -1,7 +1,16 @@
 <div fxLayout="row" fxLayoutAlign="start center" *ngIf="publicEvents">
-  <div fxFlex="1 1 auto" [ngStyle]="{ padding: '0 16px' }">
-    <canvas #canvas></canvas>
-  </div>
+  <app-pie-chart
+    fxFlex="1 1 auto"
+    [ngStyle]="{ padding: '0 16px', height: '150px' }"
+    [data]="pieChartData"
+  ></app-pie-chart>
+
+  <app-radar-chart
+    fxFlex="1 1 auto"
+    [ngStyle]="{ padding: '0 16px', height: '150px' }"
+    [chartId]="'radar-1'"
+    [data]="radarChartData"
+  ></app-radar-chart>
 
   <span fxFlex="0 1 auto" fxLayoutAlign="end"> Recent Activity </span>
 </div>

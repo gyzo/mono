@@ -15,6 +15,8 @@ export const drawPieChart = (
     const divisor = 2;
     const radius = Math.min(width, height) / divisor;
 
+    context.clearRect(0, 0, width, height);
+
     const createArc = arc<PieArcDatum<IPieChartDataNode>>()
       .outerRadius(radius - PIE_CHART_ARC_CONFIG.ARC_INNER_RADIUS)
       .innerRadius(PIE_CHART_ARC_CONFIG.ARC_OUTER_RADIUS)
