@@ -148,7 +148,10 @@ const clientConstraints = [
       'scope:client-util',
     ],
   },
-
+  {
+    sourceTag: 'scope:client-d3-charts',
+    onlyDependOnLibsWithTags: ['scope:client-util'],
+  },
   {
     sourceTag: 'scope:client-diagnostics',
     onlyDependOnLibsWithTags: [
@@ -189,7 +192,6 @@ const clientConstraints = [
   {
     sourceTag: 'scope:portfolio',
     onlyDependOnLibsWithTags: [
-      'scope:client-unit-testing',
       'scope:client-store',
       'scope:client-core',
       'scope:client-chatbot',
@@ -197,18 +199,20 @@ const clientConstraints = [
       'scope:client-material',
       'scope:client-translate',
       'scope:client-services',
+      'scope:client-unit-testing',
       'scope:client-util',
     ],
   },
   {
     sourceTag: 'scope:client-portfolio',
     onlyDependOnLibsWithTags: [
-      'scope:client-unit-testing',
       'scope:proto',
+      'scope:client-d3-charts',
       'scope:client-store',
       'scope:client-core',
       'scope:client-material',
       'scope:client-translate',
+      'scope:client-unit-testing',
       'scope:client-util',
     ],
   },

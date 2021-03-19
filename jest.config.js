@@ -24,5 +24,6 @@ module.exports = {
     '<rootDir>/libs/client-util',
     '<rootDir>/libs/client-unit-testing',
     '<rootDir>/libs/client-portfolio',
+    '<rootDir>/libs/client-d3-charts',
   ],
 };

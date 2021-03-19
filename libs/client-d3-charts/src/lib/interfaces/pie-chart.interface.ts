@@ -1,9 +1,9 @@
-export interface IChartDataNode {
+export interface IPieChartDataNode {
   key: string;
   y: number;
 }
 
-export enum ARC_CHART_CONFIG {
+export enum PIE_CHART_ARC_CONFIG {
   ARC_OUTER_RADIUS = 10,
   ARC_INNER_RADIUS = 50,
   LABEL_OUTER_RADIUS = 40,

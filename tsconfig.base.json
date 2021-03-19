@@ -37,6 +37,7 @@
       "@mono/client-chatbot": ["libs/client-chatbot/src/index.ts"],
       "@mono/client-components": ["libs/client-components/src/index.ts"],
       "@mono/client-core": ["libs/client-core/src/index.ts"],
+      "@mono/client-d3-charts": ["libs/client-d3-charts/src/index.ts"],
       "@mono/client-diagnostics": ["libs/client-diagnostics/src/index.ts"],
       "@mono/client-material": ["libs/client-material/src/index.ts"],
       "@mono/client-portfolio": ["libs/client-portfolio/src/index.ts"],
