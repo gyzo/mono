@@ -9,7 +9,10 @@ import {
   ViewChild,
 } from '@angular/core';
 
-import { IRadarChartDataNode } from '../../interfaces/radar-chart-interface';
+import {
+  IDrawRadarChartOptions,
+  IRadarChartDataNode,
+} from '../../interfaces/radar-chart-interface';
 import { drawRadarChart } from '../../util/radar-chart.util';
 
 interface IInputChanges {
@@ -25,16 +28,42 @@ interface IInputChanges {
 export class AppRadarChartComponent implements AfterViewInit, OnChanges {
   @Input() public chartId = '0';
 
-  @Input() public data: IRadarChartDataNode[][] = [];
+  @Input() public data: IRadarChartDataNode[][] = [[]];
 
   /**
    * D3 chart view child reference.
    */
   @ViewChild('container') private readonly container?: ElementRef<HTMLDivElement>;
 
+  private chartOptions() {
+    const margin = { top: 25, right: 25, bottom: 25, left: 25 };
+    const minWidth = 350;
+    const modifiers = {
+      width: 10,
+      height: 20,
+    };
+    const width =
+      Math.min(minWidth, window.innerWidth - modifiers.width) - margin.left - margin.right;
+    const height = Math.min(
+      width,
+      window.innerHeight - margin.top - margin.bottom - modifiers.height,
+    );
+    const options: Partial<IDrawRadarChartOptions> = {
+      w: width,
+      h: height,
+      margin: margin,
+      maxValue: 15,
+      levels: 5,
+      roundStrokes: true,
+    };
+    return options;
+  }
+
   private drawChart() {
     if (typeof this.container !== 'undefined') {
-      drawRadarChart(this.container, this.data, {});
+      const options = this.chartOptions();
+      console.log('this.data', this.data);
+      drawRadarChart(this.container, this.data, options);
     }
   }
 

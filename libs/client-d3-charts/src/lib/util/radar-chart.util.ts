@@ -16,23 +16,23 @@ export const drawRadarChart = (
   const id = container.nativeElement.id ?? 'radar-0';
   const transitionDuration = 200;
   const cfg: IDrawRadarChartOptions = {
-    w: 600, //Width of the circle
-    h: 600, //Height of the circle
+    w: 600,
+    h: 600,
     margin: {
       top: 20,
       right: 20,
       bottom: 20,
       left: 20,
-    }, //The margins of the SVG
-    levels: 3, //How many levels or inner circles should there be drawn
-    maxValue: 0, //What is the value that the biggest circle will represent
-    labelFactor: 1.25, //How much farther than the radius of the outer circle should the labels be placed
-    wrapWidth: 60, //The number of pixels after which a label needs to be given a new line
-    opacityArea: 0.35, //The opacity of the area of the blob
-    dotRadius: 4, //The size of the colored circles of each blog
-    opacityCircles: 0.1, //The opacity of the circles of each blob
-    strokeWidth: 2, //The width of the stroke around each blob
-    roundStrokes: false, //If true the area and stroke will follow a round path (cardinal-closed)
+    },
+    levels: 3, // how many levels or inner circles should there be drawn
+    maxValue: 0, // what is the value that the biggest circle will represent
+    labelFactor: 1.25, // how much farther than the radius of the outer circle should the labels be placed
+    wrapWidth: 60, // the number of pixels after which a label needs to be given a new line
+    opacityArea: 0.35, // the opacity of the area of the blob
+    dotRadius: 4, // the size of the colored circles of each blog
+    opacityCircles: 0.1, // the opacity of the circles of each blob
+    strokeWidth: 2, // the width of the stroke around each blob
+    roundStrokes: false, // if true the area and stroke will follow a round path (cardinal-closed)
     color: d3.scaleOrdinal(d3.schemeCategory10), //Color function
   };
 
@@ -48,56 +48,51 @@ export const drawRadarChart = (
   // If the supplied maxValue is smaller than the actual one, replace by the max in the data
   const maxValue = Math.max(cfg.maxValue, d3.max(data, i => d3.max(i.map(o => o.value))) ?? 0);
 
+  /**
+   * Axis names.
+   */
   const allAxis = data[0].map(function (i, j) {
     return i.axis;
-  }); // Names of each axis
-  const total = allAxis.length; //The number of different axes
-  const radius = Math.min(cfg.w / 2, cfg.h / 2); //Radius of the outermost circle
-  const d3Format = d3.format('%'); //Percentage formatting
-  const angleSlice = (Math.PI * 2) / total; //The width in radians of each "slice"
-
-  // Scale for the radius
+  });
+  const total = allAxis.length; // the number of different axes
+  const radius = Math.min(cfg.w / 2, cfg.h / 2); // eadius of the outermost circle
+  const angleSlice = (Math.PI * 2) / total; // the width in radians of each "slice"
+  // ccale for the radius
   const rScale = d3.scaleLinear([0, radius]).domain([0, maxValue]);
 
-  /////////////////////////////////////////////////////////
-  //////////// Create the container SVG and g /////////////
-  /////////////////////////////////////////////////////////
-
-  // Remove whatever chart with the same id/class was present before
-  d3.select(id).select('svg').remove();
-
-  // Initiate the radar chart SVG
+  /**
+   * Create the container SVG and g,
+   */
+  // clear chart container
+  d3.select(`#${id}`).select('svg').remove();
+  // initialize the radar chart SVG
   const svg = d3
-    .select(id)
+    .select(`#${id}`)
     .append('svg')
     .attr('width', cfg.w + cfg.margin.left + cfg.margin.right)
     .attr('height', cfg.h + cfg.margin.top + cfg.margin.bottom)
-    .attr('class', `radar${id}`);
-  // Append a g element
+    .attr('class', id);
+  // append a g element
   const g = svg
     .append('g')
     .attr('transform', `translate(${cfg.w / 2 + cfg.margin.left},${cfg.h / 2 + cfg.margin.top})`);
 
-  /////////////////////////////////////////////////////////
-  ////////// Glow filter for some extra pizzazz ///////////
-  /////////////////////////////////////////////////////////
-
-  // Filter for the outside glow
+  /**
+   * Glow filter for some extra pizzazz.
+   */
+  // filter for the outside glow
   const filter = g.append('defs').append('filter').attr('id', 'glow');
   filter.append('feGaussianBlur').attr('stdDeviation', '2.5').attr('result', 'coloredBlur');
-
   const feMerge = filter.append('feMerge');
   feMerge.append('feMergeNode').attr('in', 'coloredBlur');
   feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
 
-  /////////////////////////////////////////////////////////
-  /////////////// Draw the Circular grid //////////////////
-  /////////////////////////////////////////////////////////
-
-  //Wrapper for the grid & axes
+  /**
+   * Draw the Circular grid.
+   */
+  // grid & axes wrapper
   const axisGrid = g.append('g').attr('class', 'axisWrapper');
-
-  //Draw the background circles
+  // background circles
   axisGrid
     .selectAll('.levels')
     .data(d3.range(1, cfg.levels + 1).reverse())
@@ -111,8 +106,7 @@ export const drawRadarChart = (
     .style('stroke', '#CDCDCD')
     .style('fill-opacity', cfg.opacityCircles)
     .style('filter', 'url(#glow)');
-
-  //Text indicating at what % each level is
+  // text indicating at what % each level is
   const axisGridX = 4;
   axisGrid
     .selectAll('.axisLabel')
@@ -128,16 +122,15 @@ export const drawRadarChart = (
     .style('font-size', '10px')
     .attr('fill', '#737373')
     .text(function (d, i) {
-      return d3Format((maxValue * d) / cfg.levels);
+      return (maxValue * d) / cfg.levels;
     });
 
-  /////////////////////////////////////////////////////////
-  //////////////////// Draw the axes //////////////////////
-  /////////////////////////////////////////////////////////
-
-  //Create the straight lines radiating outward from the center
+  /**
+   * Draw the axes.
+   */
+  // create the straight lines radiating outward from the center
   const axis = axisGrid.selectAll('.axis').data(allAxis).enter().append('g').attr('class', 'axis');
-  //Append the lines
+  // append the lines
   axis
     .append('line')
     .attr('x1', 0)
@@ -153,8 +146,7 @@ export const drawRadarChart = (
     .attr('class', 'line')
     .style('stroke', 'white')
     .style('stroke-width', '2px');
-
-  //Append the labels at each axis
+  // append the labels at each axis
   axis
     .append('text')
     .attr('class', 'legend')
@@ -172,11 +164,10 @@ export const drawRadarChart = (
     })
     .call(wrap, cfg.wrapWidth);
 
-  /////////////////////////////////////////////////////////
-  ///////////// Draw the radar chart blobs ////////////////
-  /////////////////////////////////////////////////////////
-
-  //The radial line function
+  /**
+   * Draw the radar chart blobs.
+   */
+  // the radial line function
   const radarLine = d3
     .lineRadial<IRadarChartDataNode>()
     .radius(function (d) {
@@ -185,16 +176,14 @@ export const drawRadarChart = (
     .angle(function (d, i) {
       return i * angleSlice;
     });
-
-  //Create a wrapper for the blobs
+  // create a wrapper for the blobs
   const blobWrapper = g
     .selectAll('.radarWrapper')
     .data(data)
     .enter()
     .append('g')
     .attr('class', 'radarWrapper');
-
-  //Append the backgrounds
+  // append the backgrounds
   blobWrapper
     .append('path')
     .attr('class', 'radarArea')
@@ -206,25 +195,24 @@ export const drawRadarChart = (
     })
     .style('fill-opacity', cfg.opacityArea)
     .on('mouseover', function (d, i) {
-      // Dim all blobs
+      // dim all blobs
       const radarAreaFillOpacity = 0.1;
       d3.selectAll('.radarArea')
         .transition()
         .duration(transitionDuration)
         .style('fill-opacity', radarAreaFillOpacity);
-      // Bring back the hovered over blob
+      // bring back the hovered over blob
       const fillOpacity = 0.7;
       d3.select(this).transition().duration(transitionDuration).style('fill-opacity', fillOpacity);
     })
     .on('mouseout', function () {
-      // Bring back all blobs
+      // bring back all blobs
       d3.selectAll('.radarArea')
         .transition()
         .duration(transitionDuration)
         .style('fill-opacity', cfg.opacityArea);
     });
-
-  //Create the outlines
+  // create the outlines
   blobWrapper
     .append('path')
     .attr('class', 'radarStroke')
@@ -237,8 +225,7 @@ export const drawRadarChart = (
     })
     .style('fill', 'none')
     .style('filter', 'url(#glow)');
-
-  //Append the circles
+  // append the circles
   const blobWrapperFillOpacity = 0.8;
   blobWrapper
     .selectAll('.radarCircle')
@@ -260,22 +247,19 @@ export const drawRadarChart = (
     })
     .style('fill-opacity', blobWrapperFillOpacity);
 
-  /////////////////////////////////////////////////////////
-  //////// Append invisible circles for tooltip ///////////
-  /////////////////////////////////////////////////////////
-
-  //Wrapper for the invisible circles on top
+  /**
+   * Append invisible circles for tooltip.
+   */
+  // wrapper for the invisible circles on top
   const blobCircleWrapper = g
     .selectAll('.radarCircleWrapper')
     .data(data)
     .enter()
     .append('g')
     .attr('class', 'radarCircleWrapper');
-
-  //Set up the small tooltip for when you hover over a circle
+  // set up the small tooltip for when you hover over a circle
   const tooltip = g.append('text').attr('class', 'tooltip').style('opacity', 0);
-
-  //Append a set of invisible circles on top for the mouseover pop-up
+  // append a set of invisible circles on top for the mouseover pop-up
   const blobCircleWrapperRadiusMultiplier = 1.5;
   blobCircleWrapper
     .selectAll<SVGElement, IRadarChartDataNode>('.radarInvisibleCircle')
@@ -294,15 +278,17 @@ export const drawRadarChart = (
     })
     .style('fill', 'none')
     .style('pointer-events', 'all')
-    .on('mouseover', function (d: { value: number }, i) {
+    .on('mouseover', function (event: MouseEvent, i) {
       const modifier = 10;
       const newX = parseFloat(d3.select(this).attr('cx')) - modifier;
       const newY = parseFloat(d3.select(this).attr('cy')) - modifier;
 
+      const nodeData = ((event.target as unknown) as Record<string, IRadarChartDataNode>).__data__;
+      const tooltipText = `${nodeData.axis}: ${nodeData.value}`;
       tooltip
         .attr('x', newX)
         .attr('y', newY)
-        .text(d3Format(d.value))
+        .text(tooltipText)
         .transition()
         .duration(transitionDuration)
         .style('opacity', 1);
@@ -312,12 +298,10 @@ export const drawRadarChart = (
     });
 };
 
-/////////////////////////////////////////////////////////
-/////////////////// Helper Function /////////////////////
-/////////////////////////////////////////////////////////
-
-//Taken from http://bl.ocks.org/mbostock/7555321
-//Wraps SVG text
+/**
+ * Wraps SVG text.
+ * Taken from http://bl.ocks.org/mbostock/7555321
+ */
 function wrap(svgText: d3.Selection<SVGTextElement, string, SVGGElement, unknown>, width: number) {
   svgText.each(function () {
     const text = d3.select<SVGElement, string>(this);

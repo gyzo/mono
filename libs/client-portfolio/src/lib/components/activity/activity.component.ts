@@ -35,7 +35,7 @@ export class AppPortfolioActivityComponent {
    * Creates radar chart data array.
    */
   public get radarChartData() {
-    return (this.publicEvents ?? []).reduce(
+    const result = (this.publicEvents ?? []).reduce(
       (accumulator: IRadarChartDataNode[][], event) => {
         const eventTypeName = event.type.replace('Event', '').replace(/(?<!^)([A-Z])/, ' $1');
         const dataNodeIndex = accumulator[0].findIndex(node => node.axis === eventTypeName);
@@ -52,5 +52,6 @@ export class AppPortfolioActivityComponent {
       },
       [[]],
     );
+    return result;
   }
 }
