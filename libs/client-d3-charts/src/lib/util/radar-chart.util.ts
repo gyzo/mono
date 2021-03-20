@@ -15,7 +15,7 @@ export const drawRadarChart = (
 ) => {
   const id = container.nativeElement.id ?? 'radar-0';
   const transitionDuration = 200;
-  const cfg: IDrawRadarChartOptions = {
+  const chartConfig: IDrawRadarChartOptions = {
     w: 600,
     h: 600,
     margin: {
@@ -36,29 +36,44 @@ export const drawRadarChart = (
     color: d3.scaleOrdinal(d3.schemeCategory10), //Color function
   };
 
-  // Put all of the options into a variable called cfg
+  /**
+   * Copy options to configuration object.
+   */
   if (typeof options !== 'undefined') {
     for (const i in options) {
       if (typeof options[i] !== 'undefined') {
-        cfg[i] = options[i];
+        chartConfig[i] = options[i];
       }
     }
   }
 
-  // If the supplied maxValue is smaller than the actual one, replace by the max in the data
-  const maxValue = Math.max(cfg.maxValue, d3.max(data, i => d3.max(i.map(o => o.value))) ?? 0);
+  /**
+   * Set max value.
+   */
+  const maxValue = Math.max(
+    chartConfig.maxValue,
+    d3.max(data, i => d3.max(i.map(o => o.value))) ?? 0,
+  );
 
   /**
-   * Axis names.
+   * Get axis names.
    */
   const allAxis = data[0].map(function (i, j) {
     return i.axis;
   });
-  const total = allAxis.length; // the number of different axes
-  const radius = Math.min(cfg.w / 2, cfg.h / 2); // eadius of the outermost circle
-  const angleSlice = (Math.PI * 2) / total; // the width in radians of each "slice"
+  const totalAxis = allAxis.length;
+  /**
+   * Radius of the outermost circle.
+   */
+  const radius = Math.min(chartConfig.w / 2, chartConfig.h / 2);
+  /**
+   * Slice width in radians.
+   */
+  const angleSlice = (Math.PI * 2) / totalAxis;
 
-  // scale for the radius
+  /**
+   * Radius scale.
+   */
   const rScale = d3.scaleLinear([0, radius]).domain([0, maxValue]);
 
   /**
@@ -70,13 +85,18 @@ export const drawRadarChart = (
   const svg = d3
     .select(`#${id}`)
     .append('svg')
-    .attr('width', cfg.w + cfg.margin.left + cfg.margin.right)
-    .attr('height', cfg.h + cfg.margin.top + cfg.margin.bottom)
+    .attr('width', chartConfig.w + chartConfig.margin.left + chartConfig.margin.right)
+    .attr('height', chartConfig.h + chartConfig.margin.top + chartConfig.margin.bottom)
     .attr('class', id);
   // append a g element
   const g = svg
     .append('g')
-    .attr('transform', `translate(${cfg.w / 2 + cfg.margin.left},${cfg.h / 2 + cfg.margin.top})`);
+    .attr(
+      'transform',
+      `translate(${chartConfig.w / 2 + chartConfig.margin.left},${
+        chartConfig.h / 2 + chartConfig.margin.top
+      })`,
+    );
 
   /**
    * Glow filter for some extra pizzazz.
@@ -89,45 +109,47 @@ export const drawRadarChart = (
   feMerge.append('feMergeNode').attr('in', 'SourceGraphic');
 
   /**
+   * @note TODO: wrap as a separate function.
    * Draw the Circular grid.
    */
-  // grid & axes wrapper
+  // grid & axis wrapper
   const axisGrid = g.append('g').attr('class', 'axisWrapper');
   // background circles
   axisGrid
     .selectAll('.levels')
-    .data(d3.range(1, cfg.levels + 1).reverse())
+    .data(d3.range(1, chartConfig.levels + 1).reverse())
     .enter()
     .append('circle')
     .attr('class', 'gridCircle')
     .attr('r', function (d, i) {
-      return (radius / cfg.levels) * d;
+      return (radius / chartConfig.levels) * d;
     })
     .style('fill', '#CDCDCD')
     .style('stroke', '#CDCDCD')
-    .style('fill-opacity', cfg.opacityCircles)
+    .style('fill-opacity', chartConfig.opacityCircles)
     .style('filter', 'url(#glow)');
   // text indicating at what % each level is
   const axisGridX = 4;
   axisGrid
     .selectAll('.axisLabel')
-    .data(d3.range(1, cfg.levels + 1).reverse())
+    .data(d3.range(1, chartConfig.levels + 1).reverse())
     .enter()
     .append('text')
     .attr('class', 'axisLabel')
     .attr('x', axisGridX)
     .attr('y', function (d) {
-      return (-d * radius) / cfg.levels;
+      return (-d * radius) / chartConfig.levels;
     })
     .attr('dy', '0.4em')
     .style('font-size', '10px')
     .attr('fill', '#737373')
     .text(function (d, i) {
-      return (maxValue * d) / cfg.levels;
+      return (maxValue * d) / chartConfig.levels;
     });
 
   /**
-   * Draw the axes.
+   * @note TODO: wrap as a separate function.
+   * Draw the axis.
    */
   // create the straight lines radiating outward from the center
   const axis = axisGrid.selectAll('.axis').data(allAxis).enter().append('g').attr('class', 'axis');
@@ -155,17 +177,18 @@ export const drawRadarChart = (
     .attr('text-anchor', 'middle')
     .attr('dy', '0.35em')
     .attr('x', function (d, i) {
-      return rScale(maxValue * cfg.labelFactor) * Math.cos(angleSlice * i - Math.PI / 2);
+      return rScale(maxValue * chartConfig.labelFactor) * Math.cos(angleSlice * i - Math.PI / 2);
     })
     .attr('y', function (d, i) {
-      return rScale(maxValue * cfg.labelFactor) * Math.sin(angleSlice * i - Math.PI / 2);
+      return rScale(maxValue * chartConfig.labelFactor) * Math.sin(angleSlice * i - Math.PI / 2);
     })
     .text(function (d) {
       return d;
     })
-    .call(wrap, cfg.wrapWidth);
+    .call(wrapSvgText, chartConfig.wrapWidth);
 
   /**
+   * @note TODO: wrap as a separate function.
    * Draw the radar chart blobs.
    */
   // the radial line function
@@ -192,9 +215,9 @@ export const drawRadarChart = (
       return radarLine(d);
     })
     .style('fill', function (d, i) {
-      return cfg.color(i.toString());
+      return chartConfig.color(i.toString());
     })
-    .style('fill-opacity', cfg.opacityArea)
+    .style('fill-opacity', chartConfig.opacityArea)
     .on('mouseover', function (d, i) {
       // dim all blobs
       const radarAreaFillOpacity = 0.1;
@@ -211,7 +234,7 @@ export const drawRadarChart = (
       d3.selectAll('.radarArea')
         .transition()
         .duration(transitionDuration)
-        .style('fill-opacity', cfg.opacityArea);
+        .style('fill-opacity', chartConfig.opacityArea);
     });
   // create the outlines
   blobWrapper
@@ -220,9 +243,9 @@ export const drawRadarChart = (
     .attr('d', function (d, i) {
       return radarLine(d);
     })
-    .style('stroke-width', `${cfg.strokeWidth}px`)
+    .style('stroke-width', `${chartConfig.strokeWidth}px`)
     .style('stroke', function (d, i) {
-      return cfg.color(i.toString());
+      return chartConfig.color(i.toString());
     })
     .style('fill', 'none')
     .style('filter', 'url(#glow)');
@@ -236,7 +259,7 @@ export const drawRadarChart = (
     .enter()
     .append('circle')
     .attr('class', 'radarCircle')
-    .attr('r', cfg.dotRadius)
+    .attr('r', chartConfig.dotRadius)
     .attr('cx', function (d, i) {
       return rScale(d.value) * Math.cos(angleSlice * i - Math.PI / 2);
     })
@@ -244,11 +267,12 @@ export const drawRadarChart = (
       return rScale(d.value) * Math.sin(angleSlice * i - Math.PI / 2);
     })
     .style('fill', function (d, i, j) {
-      return cfg.color(j.toString());
+      return chartConfig.color(j.toString());
     })
     .style('fill-opacity', blobWrapperFillOpacity);
 
   /**
+   * @note TODO: wrap as a separate function.
    * Append invisible circles for tooltip.
    */
   // wrapper for the invisible circles on top
@@ -270,7 +294,7 @@ export const drawRadarChart = (
     .enter()
     .append('circle')
     .attr('class', 'radarInvisibleCircle')
-    .attr('r', cfg.dotRadius * blobCircleWrapperRadiusMultiplier)
+    .attr('r', chartConfig.dotRadius * blobCircleWrapperRadiusMultiplier)
     .attr('cx', function (d, i) {
       return rScale(d.value) * Math.cos(angleSlice * i - Math.PI / 2);
     })
@@ -299,17 +323,16 @@ export const drawRadarChart = (
     });
 };
 
-/**
- * Wraps SVG text.
- * Taken from http://bl.ocks.org/mbostock/7555321
- */
-function wrap(svgText: d3.Selection<SVGTextElement, string, SVGGElement, unknown>, width: number) {
+function wrapSvgText(
+  svgText: d3.Selection<SVGTextElement, string, SVGGElement, unknown>,
+  width: number,
+) {
   svgText.each(function (this: SVGTextElement) {
     const text = d3.select<SVGElement, string>(this);
     const words = text.text().split(/\s+/).reverse();
     let line: string[] = [];
     let lineNumber = 0;
-    const lineHeight = 1.4; // ems
+    const lineHeight = 1.4;
     const y = text.attr('y');
     const x = text.attr('x');
     const dy = parseFloat(text.attr('dy'));
