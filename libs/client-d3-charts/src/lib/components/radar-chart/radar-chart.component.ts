@@ -62,7 +62,6 @@ export class AppRadarChartComponent implements AfterViewInit, OnChanges {
   private drawChart() {
     if (typeof this.container !== 'undefined') {
       const options = this.chartOptions();
-      console.log('this.data', this.data);
       drawRadarChart(this.container, this.data, options);
     }
   }
