@@ -36,8 +36,8 @@ export class AppRadarChartComponent implements AfterViewInit, OnChanges {
   @ViewChild('container') private readonly container?: ElementRef<HTMLDivElement>;
 
   private chartOptions() {
-    const margin = { top: 25, right: 25, bottom: 25, left: 25 };
-    const minWidth = 350;
+    const margin = { top: 50, right: 50, bottom: 50, left: 50 };
+    const minWidth = 300;
     const modifiers = {
       width: 10,
       height: 20,

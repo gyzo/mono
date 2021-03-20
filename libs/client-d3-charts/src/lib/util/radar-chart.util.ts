@@ -57,7 +57,8 @@ export const drawRadarChart = (
   const total = allAxis.length; // the number of different axes
   const radius = Math.min(cfg.w / 2, cfg.h / 2); // eadius of the outermost circle
   const angleSlice = (Math.PI * 2) / total; // the width in radians of each "slice"
-  // ccale for the radius
+
+  // scale for the radius
   const rScale = d3.scaleLinear([0, radius]).domain([0, maxValue]);
 
   /**
@@ -284,7 +285,7 @@ export const drawRadarChart = (
       const newY = parseFloat(d3.select(this).attr('cy')) - modifier;
 
       const nodeData = ((event.target as unknown) as Record<string, IRadarChartDataNode>).__data__;
-      const tooltipText = `${nodeData.axis}: ${nodeData.value}`;
+      const tooltipText = `${nodeData.value} events`;
       tooltip
         .attr('x', newX)
         .attr('y', newY)
@@ -303,10 +304,9 @@ export const drawRadarChart = (
  * Taken from http://bl.ocks.org/mbostock/7555321
  */
 function wrap(svgText: d3.Selection<SVGTextElement, string, SVGGElement, unknown>, width: number) {
-  svgText.each(function () {
+  svgText.each(function (this: SVGTextElement) {
     const text = d3.select<SVGElement, string>(this);
     const words = text.text().split(/\s+/).reverse();
-    let word: string | undefined;
     let line: string[] = [];
     let lineNumber = 0;
     const lineHeight = 1.4; // ems
@@ -315,7 +315,9 @@ function wrap(svgText: d3.Selection<SVGTextElement, string, SVGGElement, unknown
     const dy = parseFloat(text.attr('dy'));
     let tspan = text.text(null).append('tspan').attr('x', x).attr('y', y).attr('dy', `${dy}em`);
 
-    while (word === words.pop()) {
+    let word = words.pop();
+
+    while (typeof word !== 'undefined') {
       line.push(word ?? '');
       tspan.text(line.join(' '));
       if ((tspan.node()?.getComputedTextLength() ?? 0) > width) {
@@ -330,6 +332,7 @@ function wrap(svgText: d3.Selection<SVGTextElement, string, SVGGElement, unknown
           .attr('dy', `${lineNumber * lineHeight + dy}em`)
           .text(word ?? '');
       }
+      word = words.pop();
     }
   });
 }

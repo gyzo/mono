@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { IPieChartDataNode, IRadarChartDataNode } from '@mono/client-d3-charts';
+import { IRadarChartDataNode } from '@mono/client-d3-charts';
 import { IGithubUserPublicEvent } from '@mono/client-store';
 
 @Component({
@@ -10,26 +10,6 @@ import { IGithubUserPublicEvent } from '@mono/client-store';
 })
 export class AppPortfolioActivityComponent {
   @Input() public publicEvents: IGithubUserPublicEvent<unknown>[] | null = null;
-
-  /**
-   * Creates pie chart data array.
-   */
-  public get pieChartData() {
-    return (this.publicEvents ?? []).reduce((accumulator: IPieChartDataNode[], event) => {
-      const eventTypeName = event.type.replace('Event', '').replace(/(?<!^)([A-Z])/, ' $1');
-      const dataNodeIndex = accumulator.findIndex(node => node.key === eventTypeName);
-      if (dataNodeIndex !== -1) {
-        accumulator[dataNodeIndex].y += 1;
-      } else {
-        const newNode: IPieChartDataNode = {
-          key: eventTypeName,
-          y: 1,
-        };
-        accumulator.push(newNode);
-      }
-      return accumulator;
-    }, []);
-  }
 
   /**
    * Creates radar chart data array.
