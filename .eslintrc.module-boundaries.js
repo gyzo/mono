@@ -187,6 +187,7 @@ const clientConstraints = [
       'scope:client-material',
       'scope:client-translate',
       'scope:client-util',
+      'scope:client-sidebar',
     ],
   },
   {
@@ -201,6 +202,7 @@ const clientConstraints = [
       'scope:client-services',
       'scope:client-unit-testing',
       'scope:client-util',
+      'scope:client-portfolio',
     ],
   },
   {
