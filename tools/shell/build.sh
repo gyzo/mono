@@ -26,20 +26,20 @@ reportUsage() {
 }
 
 ##
-# Builds Nx Ng Starter client app in production mode.
+# Builds client app in production mode.
 ##
-buildNxNgStarterClientProd() {
-  printInfoTitle "<< BUILDING Nx Ng Starter client app PRODUCTION mode >>"
+buildClientProd() {
+  printInfoTitle "<< BUILDING client app PRODUCTION mode >>"
   printGap
 
   ng build --project client --configuration production || exit 1
 }
 
 ##
-# Builds Nx Ng Starter documentation app in production mode.
+# Builds documentation app in production mode.
 ##
-buildNxNgStarterDocs() {
-  printInfoTitle "<< BUILDING Nx Ng Starter documentation app PRODUCTION mode >>"
+buildDocs() {
+  printInfoTitle "<< BUILDING documentation app PRODUCTION mode >>"
   printNameAndValue "configuration" "$1"
   printGap
 
@@ -83,8 +83,8 @@ buildAllProd() {
   printGap
 
   buildAPIProd
-  buildNxNgStarterClientProd
-  buildNxNgStarterDocs "prod"
+  buildClientProd
+  buildDocs "prod"
 }
 
 ##
@@ -104,7 +104,7 @@ if [ $# -lt 1 ]; then
   reportUsage
 elif [ "$1" = "dev" ]; then
   if [ "$2" = "documentation" ]; then
-    buildNxNgStarterDocs "$1"
+    buildDocs "$1"
   else
     buildAllDev
   fi
@@ -112,9 +112,9 @@ elif [ "$1" = "prod" ]; then
   if [ "$2" = "api" ]; then
     buildAPIProd
   elif [ "$2" = "client" ]; then
-    buildNxNgStarterClientProd
+    buildClientProd
   elif [ "$2" = "documentation" ]; then
-    buildNxNgStarterDocs "$1"
+    buildDocs "$1"
   else
     buildAllProd
   fi
