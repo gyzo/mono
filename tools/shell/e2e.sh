@@ -103,9 +103,9 @@ performModuleTesting() {
   printGap
 
   if [ "$4" = "headless" ]; then
-    npx nx e2e "$1" --headless
+    npx nx e2e "$1" --headless --watch=false
   else
-    npx nx e2e "$1"
+    npx nx e2e "$1" --watch=false
   fi
 
   copyReportToDist "$2" "$3" "$5"
