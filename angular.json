@@ -410,7 +410,7 @@
           "outputs": ["coverage/libs/client-chatbot"]
         }
       },
-      "prefix": "nx-ng-starter",
+      "prefix": "mono",
       "projectType": "library",
       "root": "libs/client-chatbot",
       "sourceRoot": "libs/client-chatbot/src"
@@ -448,6 +448,7 @@
             }
           },
           "options": {
+            "projectBuildConfig": "client",
             "config": {
               "configFolder": "libs/client-components/.storybook"
             },
@@ -585,6 +586,7 @@
             }
           },
           "options": {
+            "projectBuildConfig": "client",
             "config": {
               "configFolder": "libs/client-diagnostics/.storybook"
             },
