@@ -1,8 +1,8 @@
 {
-  "compilerOptions": {
-    "emitDecoratorMetadata": true
-  },
   "exclude": ["../../../libs/**/src/lib/test-setup.ts", "../../../libs/**/src/lib/**/*.spec.ts"],
   "extends": "../tsconfig.json",
-  "include": ["../../../libs/client-components/src/lib/*"]
+  "include": [
+    "../../../libs/client-components/src/lib/**/*.ts",
+    "../../../libs/client-diagnostics/src/lib/**/*.ts"
+  ]
 }
