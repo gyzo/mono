@@ -1,10 +1,9 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { FormBuilder, ValidatorFn, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { IContactForm } from '@mono/client-interfaces';
+import { AppEmailService } from '@mono/client-store';
 import { tap } from 'rxjs/operators';
-
-import { IContactForm } from '../../interfaces/contact-form.interface';
-import { AppSendEmailService } from '../../services/send-email/send-email.service';
 
 /**
  * Application contact component.
@@ -26,9 +25,6 @@ export class AppPortfolioContactComponent {
    */
   private readonly textValidator: ValidatorFn = Validators.pattern(/[a-zA-Zа-яА-Я\s-.]{3,}/);
 
-  /**
-   * Contact form.
-   */
   public readonly contactForm: IContactForm = this.fb.group({
     name: ['', Validators.compose([Validators.required, this.textValidator])],
     email: ['', Validators.compose([Validators.required, Validators.email])],
@@ -41,7 +37,7 @@ export class AppPortfolioContactComponent {
     @Inject(MAT_DIALOG_DATA) public data: { domain: string }, // TODO
     private readonly dialogRef: MatDialogRef<AppPortfolioContactComponent>,
     private readonly fb: FormBuilder,
-    private readonly sendEmailService: AppSendEmailService,
+    private readonly sendEmailService: AppEmailService,
   ) {}
 
   /**

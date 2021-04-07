@@ -1,21 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import { AppHttpHandlersService, IMailerResponse } from '@mono/client-store';
+import { IContactFormValue } from '@mono/client-interfaces';
 import { WINDOW } from '@mono/client-util';
 import { Observable } from 'rxjs';
 
-import { IContectFormValue } from '../../interfaces/contact-form.interface';
+import { IMailerResponse } from '../../../github-user/github-user.config';
+import { AppHttpHandlersService } from '../../http-handlers.service';
 
-/**
- * Send email service.
- */
 @Injectable({
   providedIn: 'root',
 })
-export class AppSendEmailService {
-  /**
-   * Endpoint.
-   */
+export class AppEmailService {
   private readonly url: string = `${this.win.location.origin}/api/sendEmail`;
 
   constructor(
@@ -24,10 +19,7 @@ export class AppSendEmailService {
     @Inject(WINDOW) private readonly win: Window,
   ) {}
 
-  /**
-   * Sends email.
-   */
-  public sendEmail(formData: IContectFormValue): Observable<IMailerResponse> {
+  public sendEmail(formData: IContactFormValue): Observable<IMailerResponse> {
     return this.handlers.pipeHttpResponse(this.http.post<IMailerResponse>(this.url, formData));
   }
 }

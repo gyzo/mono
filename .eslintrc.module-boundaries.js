@@ -122,7 +122,12 @@ const clientConstraints = [
       'scope:proto',
       'scope:client-util',
       'scope:client-translate',
+      'scope:client-interfaces',
     ],
+  },
+  {
+    sourceTag: 'scope:client-interfaces',
+    onlyDependOnLibsWithTags: [],
   },
   {
     sourceTag: 'scope:client-services',
@@ -199,10 +204,10 @@ const clientConstraints = [
       'scope:client-components',
       'scope:client-material',
       'scope:client-translate',
-      'scope:client-services',
       'scope:client-unit-testing',
       'scope:client-util',
       'scope:client-portfolio',
+      'scope:client-services',
     ],
   },
   {
@@ -213,6 +218,7 @@ const clientConstraints = [
       'scope:client-store',
       'scope:client-core',
       'scope:client-material',
+      'scope:client-interfaces',
       'scope:client-translate',
       'scope:client-unit-testing',
       'scope:client-util',

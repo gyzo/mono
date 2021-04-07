@@ -73,6 +73,9 @@
       "implicitDependencies": ["client"],
       "tags": ["scope:client-e2e", "type:e2e"]
     },
+    "client-interfaces": {
+      "tags": ["scope:client-interfaces", "type:data-access"]
+    },
     "client-material": {
       "tags": ["scope:client-material", "type:ui"]
     },
