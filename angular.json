@@ -448,11 +448,11 @@
             }
           },
           "options": {
-            "projectBuildConfig": "client",
             "config": {
               "configFolder": "libs/client-components/.storybook"
             },
             "port": 4400,
+            "projectBuildConfig": "client",
             "uiFramework": "@storybook/angular"
           }
         },
@@ -586,11 +586,11 @@
             }
           },
           "options": {
-            "projectBuildConfig": "client",
             "config": {
               "configFolder": "libs/client-diagnostics/.storybook"
             },
             "port": 4400,
+            "projectBuildConfig": "client",
             "uiFramework": "@storybook/angular"
           }
         },
@@ -666,6 +666,29 @@
       "projectType": "application",
       "root": "apps/client-e2e",
       "sourceRoot": "apps/client-e2e/src"
+    },
+    "client-interfaces": {
+      "architect": {
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "libs/client-interfaces/.eslintrc.json",
+            "lintFilePatterns": ["libs/client-interfaces/src/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/client-interfaces/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/client-interfaces"]
+        }
+      },
+      "prefix": "mono",
+      "projectType": "library",
+      "root": "libs/client-interfaces",
+      "sourceRoot": "libs/client-interfaces/src"
     },
     "client-material": {
       "architect": {

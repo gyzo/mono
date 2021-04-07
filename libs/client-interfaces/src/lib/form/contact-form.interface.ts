@@ -10,7 +10,7 @@ export interface IContactForm extends FormGroup {
   };
 }
 
-export interface IContectFormValue {
+export interface IContactFormValue {
   name: string;
   email: string;
   header: string;

@@ -14,7 +14,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientMaterialModule } from '@mono/client-material';
-import { AppHttpHandlersService } from '@mono/client-store';
+import { AppEmailService, AppHttpHandlersService } from '@mono/client-store';
 import { AppDialogRefMock, AppDummyComponent, testingEnvironment } from '@mono/client-unit-testing';
 import {
   IWebClientAppEnvironment,
@@ -25,7 +25,6 @@ import {
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NgxsModule, Store } from '@ngxs/store';
 
-import { AppSendEmailService } from '../../services/send-email/send-email.service';
 import { AppPortfolioContactComponent } from './contact.component';
 
 describe('AppPortfolioContactComponent', () => {
@@ -72,9 +71,9 @@ describe('AppPortfolioContactComponent', () => {
         deps: [Store, TranslateService, WINDOW, WEB_CLIENT_APP_ENV],
       },
       {
-        provide: AppSendEmailService,
+        provide: AppEmailService,
         useFactory: (http: HttpClient, handlers: AppHttpHandlersService, window: Window) =>
-          new AppSendEmailService(http, handlers, window),
+          new AppEmailService(http, handlers, window),
         deps: [HttpClient, AppHttpHandlersService, WINDOW],
       },
     ],
