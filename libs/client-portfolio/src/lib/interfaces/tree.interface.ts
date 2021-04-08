@@ -3,6 +3,7 @@
  */
 export interface ITreeNode {
   name: string; // Profile + app node
+  description?: string; // app node
   link?: string; // Profile node
   imgRef?: string; // Profile + app node
   tag?: string; // App node

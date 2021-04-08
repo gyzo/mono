@@ -24,6 +24,10 @@
           fxLayoutGap="5px"
           [ngStyle]="{ 'border-bottom': '1px #000000 dotted', padding: '5px 0 5px 0' }"
         >
+          <div fxFlex="100" fxFlexAlign="center" [ngStyle]="{ 'text-align': 'left' }">
+            {{ node.name }}
+          </div>
+
           <a
             [ngStyle]="{ padding: '0 10px 0 10px' }"
             [href]="node.link"
@@ -77,9 +81,9 @@
             <mat-icon class="material-icons">code</mat-icon>
           </a>
 
-          <span fxFlex="100" fxFlexAlign="center" [ngStyle]="{ 'text-align': 'left' }">
-            {{ node.name }}
-          </span>
+          <div fxFlex="100" fxFlexAlign="center" [ngStyle]="{ 'text-align': 'left' }">
+            <small>{{ node.description }}</small>
+          </div>
         </div>
       </mat-tree-node>
 

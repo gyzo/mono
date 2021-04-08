@@ -2,7 +2,8 @@
   "apps": [
     {
       "imgRef": "assets/logos/firebase-logo.svg",
-      "name": "NX Angular NestJS starter",
+      "name": "Nx Ng Starter",
+      "description": "Monorepo starter: Nx, Angular, Angular Elements, Electron, NodeJS, NestJS, Firebase",
       "tag": "angular",
       "urls": {
         "android": "",
@@ -12,7 +13,8 @@
     },
     {
       "imgRef": "assets/logos/firebase-logo.svg",
-      "name": "NX Angular NestJS webapps monorepo",
+      "name": "Mono",
+      "description": "Webapps monorepo: Nx, Angular, NestJS, Firebase",
       "tag": "angular",
       "urls": {
         "android": "",
@@ -21,8 +23,20 @@
       }
     },
     {
+      "imgRef": "assets/logos/firebase-logo.svg",
+      "name": "Upgraded Enigma",
+      "description": "Organizer and productivity tools monorepo: Nx, Angular, Angular Elements, Electron, NodeJS, NestJS, Firebase",
+      "tag": "angular",
+      "urls": {
+        "android": "",
+        "repo": "https://github.com/upgraded-enigma/upgraded-enigma",
+        "web": "https://upgraded-enigma-documentation.web.app/"
+      }
+    },
+    {
       "imgRef": "assets/logos/swagger-logo.svg",
       "name": "Sample Swagger API Documentation",
+      "description": "Sample api documentaiton based on Swagger.",
       "tag": "other",
       "urls": {
         "android": "",
@@ -33,6 +47,7 @@
     {
       "imgRef": "assets/logos/protractor-logo.svg",
       "name": "Protractor Bot",
+      "description": "End to end testing tool for an arbitrary website.",
       "tag": "other",
       "urls": {
         "android": "",
@@ -43,6 +58,7 @@
     {
       "imgRef": "assets/logos/debian-logo.svg",
       "name": "Web Development Setup Debian/Ubuntu",
+      "description": "An installation script and instructions for Debian/Ubuntu web-development environment deployment.",
       "tag": "other",
       "urls": {
         "android": "",
@@ -52,7 +68,8 @@
     },
     {
       "imgRef": "assets/logos/bookdictionary-logo.svg",
-      "name": "Dictionaries: Country codes, international telephone codes",
+      "name": "Dictionaries",
+      "description": "Country codes, international telephone codes",
       "tag": "other",
       "urls": {
         "android": "",
