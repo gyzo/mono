@@ -14,6 +14,7 @@ function transformer(node: ITreeNode, level: number) {
   return {
     expandable: (node?.children?.length ?? 0) > 0,
     name: node.name,
+    description: node.description,
     link: node.link ?? '',
     imgRef: node.imgRef ?? '',
     urls: node.urls ?? {
