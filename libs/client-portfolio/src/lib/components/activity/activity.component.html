@@ -1,10 +1,9 @@
 <div fxLayout="row" fxLayoutAlign="start stretch" *ngIf="publicEvents">
   <app-radar-chart
     fxFlex="1 1 auto"
-    [ngStyle]="{ padding: '0 16px' }"
     [chartId]="'radar-1'"
     [data]="radarChartData"
   ></app-radar-chart>
 
-  <span fxFlex="0 1 auto" fxLayoutAlign="end"> Recent Activity </span>
+  <span fxFlex="0 1 auto" fxLayoutAlign="end" fxShow fxHide.xs> Recent Activity </span>
 </div>
