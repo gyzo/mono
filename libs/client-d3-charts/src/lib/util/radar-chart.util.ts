@@ -5,7 +5,7 @@ import {
   IDrawRadarChartOptions,
   IRadarChartDataNode,
   TRadarChartData,
-} from '../interfaces/radar-chart-interface';
+} from '../interfaces/radar-chart.interface';
 
 // eslint-disable-next-line max-lines-per-function -- TODO: tech debt
 export const drawRadarChart = (
@@ -98,9 +98,6 @@ export const drawRadarChart = (
       })`,
     );
 
-  /**
-   * Glow filter for some extra pizzazz.
-   */
   // filter for the outside glow
   const filter = g.append('defs').append('filter').attr('id', 'glow');
   filter.append('feGaussianBlur').attr('stdDeviation', '2.5').attr('result', 'coloredBlur');

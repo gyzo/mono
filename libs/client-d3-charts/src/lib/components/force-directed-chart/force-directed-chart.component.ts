@@ -10,25 +10,30 @@ import {
 } from '@angular/core';
 
 import {
-  IDrawRadarChartOptions,
-  IRadarChartDataNode,
-} from '../../interfaces/radar-chart.interface';
-import { drawRadarChart } from '../../util/radar-chart.util';
+  IDrawForceDirectedChartOptions,
+  IForceDirectedChartData,
+} from '../../interfaces/force-directed-chart.interface';
+import { drawForceDirectedChart } from '../../util/force-directed-chart.util';
 
 interface IInputChanges {
   data?: SimpleChange | null;
 }
 
 @Component({
-  selector: 'app-radar-chart',
-  templateUrl: './radar-chart.component.html',
-  styleUrls: ['./radar-chart.component.scss'],
+  selector: 'app-force-directed-chart',
+  templateUrl: './force-directed-chart.component.html',
+  styleUrls: ['./force-directed-chart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppRadarChartComponent implements AfterViewInit, OnChanges {
+export class AppForceDirectedChartComponent implements AfterViewInit, OnChanges {
   @Input() public chartId = '0';
 
-  @Input() public data: IRadarChartDataNode[][] = [[]];
+  @Input() public data: IForceDirectedChartData = {
+    domains: [],
+    entities: [],
+    links: [],
+    nodes: [],
+  };
 
   /**
    * D3 chart view child reference.
@@ -48,13 +53,10 @@ export class AppRadarChartComponent implements AfterViewInit, OnChanges {
       width,
       window.innerHeight - margin.top - margin.bottom - modifiers.height,
     );
-    const options: Partial<IDrawRadarChartOptions> = {
+    const options: Partial<IDrawForceDirectedChartOptions> = {
       w: width,
       h: height,
       margin: margin,
-      maxValue: 15,
-      levels: 5,
-      roundStrokes: true,
     };
     return options;
   }
@@ -62,7 +64,7 @@ export class AppRadarChartComponent implements AfterViewInit, OnChanges {
   private drawChart() {
     if (typeof this.container !== 'undefined') {
       const options = this.chartOptions();
-      drawRadarChart(this.container, this.data, options);
+      drawForceDirectedChart(this.container, this.data, options);
     }
   }
 

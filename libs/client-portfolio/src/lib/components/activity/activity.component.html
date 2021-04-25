@@ -1,4 +1,4 @@
-<div fxLayout="row" fxLayoutAlign="start stretch" *ngIf="publicEvents">
+<!-- <div fxLayout="row" fxLayoutAlign="start stretch" *ngIf="publicEvents">
   <app-radar-chart
     fxFlex="1 1 auto"
     [chartId]="'radar-1'"
@@ -6,4 +6,12 @@
   ></app-radar-chart>
 
   <span fxFlex="0 1 auto" fxLayoutAlign="end" fxShow fxHide.xs> Recent Activity </span>
+</div> -->
+
+<div fxLayout="row" fxLayoutAlign="start stretch" *ngIf="publicEvents">
+  <app-force-directed-chart
+    fxFlex="1 1 auto"
+    [chartId]="'force-directed-1'"
+    [data]="forceDirectedChartData"
+  ></app-force-directed-chart>
 </div>
