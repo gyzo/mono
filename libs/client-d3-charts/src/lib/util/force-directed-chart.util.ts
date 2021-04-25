@@ -49,7 +49,7 @@ export const drawForceDirectedChart = (
     w: 600,
     h: 600,
     charge: -10,
-    distance: 100,
+    distance: 75,
     fontSize: 10,
     margin: {
       top: 20,
@@ -129,19 +129,6 @@ export const drawForceDirectedChart = (
       return val.img;
     });
 
-  const force = d3
-    .forceSimulation(data.nodes)
-    .force('charge', d3.forceManyBody().strength(chartConfig.charge))
-    .force('center', d3.forceCenter(chartConfig.w / 2, chartConfig.h / 2))
-    .force(
-      'link',
-      d3
-        .forceLink()
-        .id(d => d.index ?? 0)
-        .distance(chartConfig.distance)
-        .strength(chartConfig.charge),
-    );
-
   const link = svg
     .selectAll('.link')
     .data(data.links)
@@ -184,7 +171,18 @@ export const drawForceDirectedChart = (
     .append('text')
     .text(val => val.domain ?? val.username ?? '');
 
-  force.nodes(data.nodes).on('tick', () => {
-    ticked(link, node, text);
-  });
+  d3.forceSimulation(data.nodes)
+    .force('charge', d3.forceManyBody().strength(chartConfig.charge))
+    .force('center', d3.forceCenter(chartConfig.w / 2, chartConfig.h / 2))
+    .force(
+      'link',
+      d3
+        .forceLink(data.links)
+        .id(d => d.index ?? 0)
+        .distance(chartConfig.distance)
+        .links(data.links),
+    )
+    .on('tick', () => {
+      ticked(link, node, text);
+    });
 };
