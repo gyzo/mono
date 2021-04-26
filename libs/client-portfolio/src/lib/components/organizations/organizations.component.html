@@ -1,6 +1,14 @@
-<div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px">
+<div
+  fxFlex="100"
+  fxLayout="row wrap"
+  fxLayoutAlign="start center"
+  fxLayoutGap="16px"
+  [ngStyle]="{ position: 'relative' }"
+>
+  <small [ngStyle]="{ position: 'absolute', top: '-10px', right: '0px' }"> Organizations </small>
+
   <div
-    fxFlex="1 1 auto"
+    fxFlex="100"
     fxLayout="row"
     fxLayoutAlign="start center"
     fxLayoutGap="16px"
@@ -14,6 +22,4 @@
       />
     </a>
   </div>
-
-  <span fxFlex="0 1 auto" fxLayoutAlign="end"> Organizations </span>
 </div>

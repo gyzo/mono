@@ -44,7 +44,7 @@ export class AppPortfolioActivityComponent {
     const dataMock = [
       {
         id: '1',
-        link: 'https://www.domain1.dummy/link1',
+        link: 'https://www.domain1.tld/link1',
         author: {
           username: 'username 1',
           picture: 'https://image.flaticon.com/icons/svg/145/145867.svg',
@@ -53,7 +53,7 @@ export class AppPortfolioActivityComponent {
       },
       {
         id: '2',
-        link: 'https://www.domain2.dummy/link2',
+        link: 'https://www.domain2.tld/link2',
         author: {
           username: 'username 2',
           picture: 'https://image.flaticon.com/icons/svg/145/145852.svg',
@@ -62,7 +62,7 @@ export class AppPortfolioActivityComponent {
       },
       {
         id: '3',
-        link: 'https://www.domain3.dummy/link3',
+        link: 'https://www.domain3.tld/link3',
         author: {
           username: 'username 3',
           picture: 'https://image.flaticon.com/icons/svg/145/145859.svg',
@@ -71,7 +71,7 @@ export class AppPortfolioActivityComponent {
       },
       {
         id: '4',
-        link: 'https://www.domain4.dummy/link2',
+        link: 'https://www.domain4.tld/link2',
         author: {
           username: 'username 4',
           picture: 'https://image.flaticon.com/icons/svg/145/145862.svg',
@@ -80,7 +80,7 @@ export class AppPortfolioActivityComponent {
       },
       {
         id: '5',
-        link: 'https://www.domain3.dummy/link3',
+        link: 'https://www.domain3.tld/link3',
         author: {
           username: 'username 2',
           picture: 'https://image.flaticon.com/icons/svg/145/145852.svg',
@@ -109,20 +109,21 @@ export class AppPortfolioActivityComponent {
         domain = domain.substr(start, domain.length);
       }
       const domId = domainArrCheckDupl.indexOf(domain);
-      let tempDomIndex = 0;
       if (domId !== -1) {
         domains[domId].value += 1;
-        tempDomIndex = domId;
       } else {
         domainArrCheckDupl.push(domain);
-        domains.push({ index: uniqueDomCounter, domain: domain, value: domainValue });
-        tempDomIndex = uniqueDomCounter;
+        domains.push({ index: uniqueDomCounter, domain, value: domainValue });
         uniqueDomCounter += 1;
       }
       const usrId = entitiesArrCheckDupl.indexOf(dataMock[i].author.username);
       if (usrId !== -1) {
         entities[usrId].linksCount += 1;
-        links.push({ source: entities[usrId].index, target: tempDomIndex });
+        const link = {
+          source: entities.findIndex(value => value.name === entities[usrId].name),
+          target: domains.findIndex(value => value.domain === domain),
+        };
+        links.push(link);
       } else {
         entitiesArrCheckDupl.push(dataMock[i].author.username);
         entities.push({
@@ -131,7 +132,11 @@ export class AppPortfolioActivityComponent {
           img: dataMock[i].author.picture,
           linksCount: 1,
         });
-        links.push({ source: uniqueUsrsCounter, target: tempDomIndex });
+        const link = {
+          source: entities.findIndex(value => value.name === dataMock[i].author.username),
+          target: domains.findIndex(value => value.domain === domain),
+        };
+        links.push(link);
         uniqueUsrsCounter += 1;
       }
     }
@@ -148,11 +153,12 @@ export class AppPortfolioActivityComponent {
       entities[i].index = domains.length + i;
       nodes.push(entities[i]);
     }
-    return {
+    const chartData = {
       domains,
       entities,
       links,
       nodes,
     };
+    return chartData;
   }
 }

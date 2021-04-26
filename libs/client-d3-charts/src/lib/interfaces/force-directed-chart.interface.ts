@@ -35,6 +35,7 @@ export interface IDrawForceDirectedChartOptions {
   charge: number;
   distance: number;
   fontSize: number;
+  collisionRadius: number;
   margin: {
     top: number;
     right: number;

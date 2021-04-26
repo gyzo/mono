@@ -51,14 +51,15 @@ export const drawForceDirectedChart = (
     charge: -10,
     distance: 75,
     fontSize: 10,
+    collisionRadius: 30,
     margin: {
       top: 20,
       right: 20,
       bottom: 20,
       left: 20,
     },
-    strokeWidth: 2, // the width of the stroke around each blob
-    color: d3.scaleOrdinal(d3.schemeCategory10), //Color function
+    strokeWidth: 1.5,
+    color: d3.scaleOrdinal(d3.schemeCategory10),
   };
 
   /**
@@ -129,14 +130,16 @@ export const drawForceDirectedChart = (
       return val.img;
     });
 
+  let force: d3.Simulation<IForceDirectedChartDataNode, undefined> | undefined = void 0;
+
   const link = svg
     .selectAll('.link')
     .data(data.links)
     .enter()
     .append('line')
     .attr('class', 'link')
-    .style('stroke-width', chartConfig.strokeWidth)
-    .attr('marker-end', 'url(#arrowhead)');
+    .style('stroke', '#000000')
+    .style('stroke-width', chartConfig.strokeWidth);
 
   const node = svg
     .selectAll('.node')
@@ -161,7 +164,51 @@ export const drawForceDirectedChart = (
     })
     .style('fill', val => {
       return typeof val.value !== 'undefined' ? '#f00000' : `url(#img-${val.index})`;
-    });
+    })
+    .call(
+      d3
+        .drag<SVGCircleElement, IForceDirectedChartDataNode>()
+        .on(
+          'start',
+          function (
+            this: SVGCircleElement,
+            event: d3.D3DragEvent<SVGCircleElement, IForceDirectedChartDataNode, unknown>,
+            datum: IForceDirectedChartDataNode,
+          ) {
+            if (!event.active && typeof force !== 'undefined') {
+              const alphaTarget = 0.3;
+              force.alphaTarget(alphaTarget).restart();
+            }
+            datum.fx = datum.x;
+            datum.fy = datum.y;
+          },
+        )
+        .on(
+          'drag',
+          function (
+            this: SVGCircleElement,
+            event: d3.D3DragEvent<SVGCircleElement, IForceDirectedChartDataNode, unknown>,
+            datum: IForceDirectedChartDataNode,
+          ) {
+            datum.fx = event.x;
+            datum.fy = event.y;
+          },
+        )
+        .on(
+          'end',
+          function (
+            this: SVGCircleElement,
+            event: d3.D3DragEvent<SVGCircleElement, IForceDirectedChartDataNode, unknown>,
+            datum: IForceDirectedChartDataNode,
+          ) {
+            if (!event.active && typeof force !== 'undefined') {
+              force.alphaTarget(0);
+            }
+            datum.fx = null;
+            datum.fy = null;
+          },
+        ),
+    );
 
   const text = svg
     .append('g')
@@ -171,9 +218,14 @@ export const drawForceDirectedChart = (
     .append('text')
     .text(val => val.domain ?? val.username ?? '');
 
-  d3.forceSimulation(data.nodes)
+  force = d3
+    .forceSimulation(data.nodes)
     .force('charge', d3.forceManyBody().strength(chartConfig.charge))
     .force('center', d3.forceCenter(chartConfig.w / 2, chartConfig.h / 2))
+    .force(
+      'collision',
+      d3.forceCollide().radius(d => chartConfig.collisionRadius),
+    )
     .force(
       'link',
       d3
