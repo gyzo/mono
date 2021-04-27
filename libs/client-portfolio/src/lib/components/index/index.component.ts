@@ -1,11 +1,14 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { AppGithubUserService, sidebarUiActions } from '@mono/client-store';
+import { AppGithubUserService, AppGithubUserState, sidebarUiActions } from '@mono/client-store';
 import { WINDOW } from '@mono/client-util';
 import { Store } from '@ngxs/store';
 import { Subscription } from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
 
 import { AppPortfolioContactComponent } from '../contact/contact.component';
+
+const streamDebounceTime = 500;
 
 /**
  * Application index component.
@@ -17,20 +20,23 @@ import { AppPortfolioContactComponent } from '../contact/contact.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppPortfolioIndexComponent {
-  /**
-   * User data.
-   */
-  public data$ = this.user.userData$;
+  public readonly userData$ = this.user.userData$.pipe(debounceTime(streamDebounceTime));
 
-  /**
-   * Github orgs..
-   */
-  public githubOrgs$ = this.user.githubOrgs$;
+  public readonly githubOrgs$ = this.user.githubOrgs$.pipe(debounceTime(streamDebounceTime));
 
-  /**
-   * Public events.
-   */
-  public publicEvents$ = this.user.publicEvents$;
+  public readonly publicEvents$ = this.user.publicEvents$;
+
+  public readonly userConfig$ = this.store.select(AppGithubUserState.getState).pipe(
+    map(
+      state =>
+        state.userConfig ?? {
+          apps: [],
+          languageIcons: [],
+          profiles: [],
+          username: {},
+        },
+    ),
+  );
 
   /**
    * Material dialog instance.

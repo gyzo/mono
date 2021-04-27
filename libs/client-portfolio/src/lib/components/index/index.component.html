@@ -1,25 +1,30 @@
-<div class="container" fxLayout="row wrap" fxLayoutAlign="stretch" *ngIf="data$ | async as data">
-  <mat-card fxFlex="100" class="container__content" *ngIf="data.github">
+<div
+  class="container"
+  fxLayout="row wrap"
+  fxLayoutAlign="stretch"
+  *ngIf="userData$ | async as userData"
+>
+  <mat-card fxFlex="100" class="container__content" *ngIf="userData.github">
     <mat-card-header>
       <div mat-card-avatar>
-        <img class="container__content--avatar" [src]="data.github?.avatar_url" />
+        <img class="container__content--avatar" [src]="userData.github?.avatar_url" />
       </div>
-      <mat-card-title> {{ data.github?.login }}</mat-card-title>
+      <mat-card-title> {{ userData.github?.login }}</mat-card-title>
       <mat-card-subtitle matTooltip="Hireability status">
-        {{ data.github?.bio }}
+        {{ userData.github?.bio }}
       </mat-card-subtitle>
     </mat-card-header>
 
     <mat-card-content fxLayout="row wrap">
       <div fxFlex="100" class="container__content--marge-top">
-        <app-status-badges [github]="data.github"></app-status-badges>
+        <app-status-badges [github]="userData.github"></app-status-badges>
       </div>
 
       <div fxFlex="100" class="container__content--divider">
         <mat-divider></mat-divider>
       </div>
 
-      <div fxFlex="100" *ngIf="data.github?.company" class="container__content--marge-top">
+      <div fxFlex="100" *ngIf="userData.github?.company" class="container__content--marge-top">
         <app-organizations [githubOrgs]="githubOrgs$ | async"></app-organizations>
       </div>
 
@@ -28,18 +33,24 @@
       </div>
 
       <div fxFlex="100" class="container__content--marge-top">
-        <app-profiles [profiles]="data.profiles"></app-profiles>
+        <app-profiles [profiles]="userData.profiles"></app-profiles>
       </div>
 
       <div fxFlex="100" class="container__content--divider">
         <mat-divider></mat-divider>
       </div>
 
-      <div fxFlex="100" class="container__content--marge-top">
+      <div
+        fxFlex="100"
+        class="container__content--marge-top"
+        *ngIf="userConfig$ | async as userConfig"
+      >
         <app-languages
-          [githubLanguages]="data.githubLanguages"
-          [githubLanguagesKeys]="data.githubLanguagesKeys"
-          [githubLanguagesRate]="data.githubLanguagesRate"
+          [githubLanguages]="userData.githubLanguages"
+          [githubRepos]="userData.githubRepos"
+          [githubLanguagesKeys]="userData.githubLanguagesKeys"
+          [githubLanguagesRate]="userData.githubLanguagesRate"
+          [userConfig]="userConfig"
         ></app-languages>
       </div>
 
@@ -52,7 +63,7 @@
       </div>
     </mat-card-content>
 
-    <div class="email-form-toggler" *ngIf="data.github?.hireable">
+    <div class="email-form-toggler" *ngIf="userData.github?.hireable">
       <button mat-fab color="primary" (click)="showContactDialog()" matTooltip="Send email">
         <mat-icon class="material-icons">email</mat-icon>
       </button>
