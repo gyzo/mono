@@ -1,6 +1,15 @@
-<div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px" *ngIf="profiles">
+<div
+  fxFlex="100"
+  fxLayout="row"
+  fxLayoutAlign="start center"
+  fxLayoutGap="16px"
+  *ngIf="profiles"
+  [ngStyle]="{ position: 'relative' }"
+>
+  <small [ngStyle]="{ position: 'absolute', top: '-10px', right: '0px' }"> Profiles </small>
+
   <div
-    fxFlex="1 1 auto"
+    fxFlex="100"
     fxLayout="row wrap"
     fxLayoutAlign="start center"
     fxLayoutGap="16px"
@@ -21,6 +30,4 @@
       />
     </a>
   </div>
-
-  <span fxFlex="0 1 auto" fxLayoutAlign="end"> Profiles </span>
 </div>

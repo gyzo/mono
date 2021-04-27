@@ -1,20 +1,20 @@
 <div
   fxFlex="100"
-  fxLayout="row"
+  fxLayout="row wrap"
   fxLayoutAlign="start center"
-  *ngIf="githubLanguages && githubLanguagesKeys && githubLanguagesRate"
+  *ngIf="languageIcons$ | async as languageIcons"
+  [ngStyle]="{ position: 'relative' }"
 >
+  <small [ngStyle]="{ position: 'absolute', top: '-10px', right: '0px' }"> Languages </small>
+
   <div
-    fxFlex="1 1 auto"
+    fxFlex="100"
     fxLayout="row wrap"
-    fxLayoutAlign="start denter"
+    fxLayoutAlign="start center"
     fxLayoutGap="16px"
     [ngStyle]="{ padding: '0 16px' }"
   >
-    <div
-      fxFlex="0 1 auto"
-      *ngFor="let githubLang of languageIcon$(githubLanguagesKeys) | async as githubLangs"
-    >
+    <div fxFlex="0 1 auto" *ngFor="let githubLangs of languageIcons">
       <div
         fxLayout="row"
         fxLayoutAlign="center center"
@@ -36,10 +36,10 @@
           opacity: '0.8',
           margin: '0 10px 0 0'
         }"
-        [matTooltip]="githubLang.key"
+        [matTooltip]="githubLangs.key"
       >
         <img
-          [src]="githubLang.url"
+          [src]="githubLangs.url"
           [ngStyle]="{
             'max-height': '90px',
             height: 'auto!important',
@@ -58,18 +58,20 @@
             width: '100%',
             'border-radius': '5px'
           }"
-          (load)="imgLoaded(githubLang.key)"
-          (error)="imgError(githubLang.key)"
-          (showImage)="showImage(githubLang.key)"
         />
       </div>
 
       <div [ngStyle]="{ width: '100%', 'text-align': 'center', 'font-weight': 'bold' }">
-        <div>{{ $any(githubLanguagesRate)[githubLang.key] }}%</div>
-        <div class="mat-caption">{{ $any(githubLanguages)[githubLang.key] }}</div>
+        <div>{{ $any(githubLanguagesRate)[githubLangs.key] }}%</div>
+        <div class="mat-caption">{{ $any(githubLanguages)[githubLangs.key] }}</div>
       </div>
     </div>
   </div>
 
-  <span fxFlex="0 1 auto" fxLayoutAlign="end"> Languages </span>
+  <!-- TODO: configure chart
+     <app-force-directed-chart
+    fxFlex="100"
+    [chartId]="'force-directed-1'"
+    [data]="forceDirectedChartData"
+  ></app-force-directed-chart> -->
 </div>
