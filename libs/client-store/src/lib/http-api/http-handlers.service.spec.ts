@@ -11,6 +11,7 @@ import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV, WINDOW } from '@mono/clie
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { AppHttpProgressStoreModule } from '../http-progress/http-progress.module';
 import { httpProgressServiceProvider } from '../http-progress/http-progress.service';
@@ -88,15 +89,17 @@ describe('AppHttpHandlersService', () => {
           status: 400,
           statusText: 'error status text',
         });
-        service
+        void service
           .handleError(errRes)
-          .toPromise()
-          .then(
-            () => true,
-            (error: string) => {
-              expect(error).toEqual(service.getErrorMessage(errRes));
-            },
-          );
+          .pipe(
+            tap(
+              () => true,
+              (error: string) => {
+                expect(error).toEqual(service.getErrorMessage(errRes));
+              },
+            ),
+          )
+          .subscribe();
       }),
     );
 
@@ -104,15 +107,17 @@ describe('AppHttpHandlersService', () => {
       'should handle errors properly #2',
       waitForAsync(() => {
         const errRes = new HttpErrorResponse({});
-        service
+        void service
           .handleError(errRes)
-          .toPromise()
-          .then(
-            () => true,
-            (error: string) => {
-              expect(error).toEqual(service.getErrorMessage(errRes));
-            },
-          );
+          .pipe(
+            tap(
+              () => true,
+              (error: string) => {
+                expect(error).toEqual(service.getErrorMessage(errRes));
+              },
+            ),
+          )
+          .subscribe();
       }),
     );
   });

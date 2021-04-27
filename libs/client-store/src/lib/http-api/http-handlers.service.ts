@@ -91,6 +91,6 @@ export class AppHttpHandlersService {
     if (unauthorized) {
       void this.store.dispatch(new Navigate(['/']));
     }
-    return throwError(errorMessage);
+    return throwError(new Error(errorMessage));
   }
 }
