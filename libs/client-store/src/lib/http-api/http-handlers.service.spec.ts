@@ -11,7 +11,7 @@ import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV, WINDOW } from '@mono/clie
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
 import { Observable, of } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { AppHttpProgressStoreModule } from '../http-progress/http-progress.module';
 import { httpProgressServiceProvider } from '../http-progress/http-progress.service';
@@ -92,12 +92,10 @@ describe('AppHttpHandlersService', () => {
         void service
           .handleError(errRes)
           .pipe(
-            tap(
-              () => true,
-              (error: string) => {
-                expect(error).toEqual(service.getErrorMessage(errRes));
-              },
-            ),
+            catchError((error: Error) => {
+              expect(error.message).toEqual(service.getErrorMessage(errRes));
+              return of(null);
+            }),
           )
           .subscribe();
       }),
@@ -110,12 +108,10 @@ describe('AppHttpHandlersService', () => {
         void service
           .handleError(errRes)
           .pipe(
-            tap(
-              () => true,
-              (error: string) => {
-                expect(error).toEqual(service.getErrorMessage(errRes));
-              },
-            ),
+            catchError((error: Error) => {
+              expect(error.message).toEqual(service.getErrorMessage(errRes));
+              return of(null);
+            }),
           )
           .subscribe();
       }),
