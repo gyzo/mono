@@ -44,13 +44,13 @@ export class BackendGrpcController implements OnModuleInit {
 
   @Get()
   public getMany(): Observable<mono.IEntity[]> {
-    const ids$ = new ReplaySubject<mono.IEntityById>();
-    ids$.next({ id: 'id1' });
-    ids$.next({ id: 'id2' });
-    ids$.complete();
+    const idsSubject = new ReplaySubject<mono.IEntityById>();
+    idsSubject.next({ id: 'id1' });
+    idsSubject.next({ id: 'id2' });
+    idsSubject.complete();
 
     return typeof this.sampleService !== 'undefined'
-      ? this.sampleService.findMany(ids$.asObservable()).pipe(toArray())
+      ? this.sampleService.findMany(idsSubject.asObservable()).pipe(toArray())
       : of([]);
   }
 
@@ -78,17 +78,17 @@ export class BackendGrpcController implements OnModuleInit {
     data$: Observable<mono.IEntityById>,
     metadata: Record<string, unknown>,
   ): Observable<mono.IEntity> {
-    const entity$ = new Subject<mono.IEntity>();
+    const entitySubject = new Subject<mono.IEntity>();
 
     const onNext = (entityById: mono.IEntityById) => {
       const item = this.items.find(({ id }) => id === entityById.id);
-      entity$.next(item);
+      entitySubject.next(item);
     };
     const onComplete = () => {
-      entity$.complete();
+      entitySubject.complete();
     };
     void data$.subscribe(onNext, null, onComplete);
 
-    return entity$.asObservable();
+    return entitySubject.asObservable();
   }
 }

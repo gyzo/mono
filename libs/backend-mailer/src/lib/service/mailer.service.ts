@@ -47,7 +47,6 @@ export class BackendMailerService {
           messsage: `Try again later, please. Error: ${error}`,
         });
         subscriber.error(result);
-        subscriber.complete();
       });
   }
 

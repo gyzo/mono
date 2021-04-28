@@ -20,13 +20,13 @@ import { AppUserConfigService } from './github-user-config.service';
   providedIn: 'root',
 })
 export class AppGithubUserService implements IUserService {
-  private readonly githubOrgs = new BehaviorSubject<IGithubUserOrganization[]>([]);
+  private readonly githubOrgsSubject = new BehaviorSubject<IGithubUserOrganization[]>([]);
 
-  public readonly githubOrgs$ = this.githubOrgs.asObservable();
+  public readonly githubOrgs$ = this.githubOrgsSubject.asObservable();
 
-  private readonly publicEvents = new BehaviorSubject<IGithubUserPublicEvent<unknown>[]>([]);
+  private readonly publicEventsSubject = new BehaviorSubject<IGithubUserPublicEvent<unknown>[]>([]);
 
-  public readonly publicEvents$ = this.publicEvents.asObservable();
+  public readonly publicEvents$ = this.publicEventsSubject.asObservable();
 
   public readonly userData$ = this.store.select(AppGithubUserState.getState);
 
@@ -180,7 +180,7 @@ export class AppGithubUserService implements IUserService {
   public getGithubUserOrganizations(username: string) {
     return this.githubApi.getUserOrganizations(username).pipe(
       concatMap((githubOrgs: IGithubUserOrganization[]) => {
-        this.githubOrgs.next(githubOrgs);
+        this.githubOrgsSubject.next(githubOrgs);
         return this.store
           .dispatch(new userActions.setUserState({ githubOrgs }))
           .pipe(mapTo(githubOrgs));
@@ -199,7 +199,7 @@ export class AppGithubUserService implements IUserService {
         void timer(0)
           .pipe(
             tap(() => {
-              this.publicEvents.next(publicEvents);
+              this.publicEventsSubject.next(publicEvents);
             }),
           )
           .subscribe();
