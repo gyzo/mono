@@ -346,10 +346,10 @@ module.exports = {
       'off', // TODO: turn on
       {
         require: {
-          FunctionDeclaration: true,
-          MethodDefinition: true,
+          FunctionDeclaration: false,
+          MethodDefinition: false,
           ClassDeclaration: true,
-          ArrowFunctionExpression: true,
+          ArrowFunctionExpression: false,
         },
       },
     ],

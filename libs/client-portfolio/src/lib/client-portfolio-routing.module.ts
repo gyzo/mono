@@ -1,14 +1,13 @@
 import { NgModule } from '@angular/core';
 import { Route, RouterModule } from '@angular/router';
+import { AppGithubUserResolver } from '@mono/client-store';
 
 import { AppPortfolioIndexComponent } from './components/index/index.component';
 
-/**
- * Application routes config.
- */
-const ROUTES: Route[] = [
+const PORTFOLIO_ROUTES: Route[] = [
   {
     path: '',
+    resolve: [AppGithubUserResolver],
     component: AppPortfolioIndexComponent,
   },
   {
@@ -17,11 +16,8 @@ const ROUTES: Route[] = [
   },
 ];
 
-/**
- * Application routing module.
- */
 @NgModule({
-  imports: [RouterModule.forChild(ROUTES)],
+  imports: [RouterModule.forChild(PORTFOLIO_ROUTES)],
   exports: [RouterModule],
 })
 export class AppClientPortfolioRoutingModule {}
