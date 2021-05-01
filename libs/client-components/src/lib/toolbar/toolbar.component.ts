@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { AppSidebarState, chatbotActions, sidebarUiActions } from '@mono/client-store';
+import { chatbotActions } from '@mono/client-chatbot-store';
+import { AppSidebarState, sidebarUiActions } from '@mono/client-store';
 import { IToolbarButton } from '@mono/client-util';
 import { Store } from '@ngxs/store';
 import { map } from 'rxjs/operators';

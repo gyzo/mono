@@ -1,7 +1,6 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
 import { IWebClientAppEnvironment } from '@mono/client-util';
 
-import { AppChatbotStoreModule } from './chatbot/chatbot.module';
 import { AppGithubUserStoreModule } from './github-user/github-user.module';
 import { AppHttpApiStoreModule } from './http-api/http-api.module';
 import { AppHttpProgressStoreModule } from './http-progress/http-progress.module';
@@ -19,7 +18,6 @@ import { AppWebsocketStoreModule, wsConfigProvider } from './websocket/websocket
     AppSidebarStoreModule,
     AppWebsocketStoreModule,
     AppThemeStoreModule,
-    AppChatbotStoreModule,
   ],
   exports: [
     AppHttpApiStoreModule,
@@ -29,7 +27,6 @@ import { AppWebsocketStoreModule, wsConfigProvider } from './websocket/websocket
     AppSidebarStoreModule,
     AppWebsocketStoreModule,
     AppThemeStoreModule,
-    AppChatbotStoreModule,
   ],
 })
 export class AppClientStoreModule {

@@ -26,5 +26,6 @@ module.exports = {
     '<rootDir>/libs/client-portfolio',
     '<rootDir>/libs/client-d3-charts',
     '<rootDir>/libs/client-interfaces',
+    '<rootDir>/libs/client-chatbot-store',
   ],
 };
