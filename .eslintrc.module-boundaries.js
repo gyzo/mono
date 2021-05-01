@@ -6,6 +6,7 @@ const typeConstraints = [
     sourceTag: 'type:application',
     onlyDependOnLibsWithTags: [
       'type:feature',
+      'type:store',
       'type:data-access',
       'type:ui',
       'type:util',
@@ -14,15 +15,31 @@ const typeConstraints = [
   },
   {
     sourceTag: 'type:feature',
-    onlyDependOnLibsWithTags: ['type:data-access', 'type:ui', 'type:util', 'type:unit-testing'],
+    onlyDependOnLibsWithTags: [
+      'type:store',
+      'type:data-access',
+      'type:ui',
+      'type:util',
+      'type:unit-testing',
+    ],
+  },
+  {
+    sourceTag: 'type:ui',
+    onlyDependOnLibsWithTags: [
+      'type:store',
+      'type:data-access',
+      'type:ui',
+      'type:util',
+      'type:unit-testing',
+    ],
   },
   {
     sourceTag: 'type:data-access',
     onlyDependOnLibsWithTags: ['type:data-access', 'type:ui', 'type:util', 'type:unit-testing'],
   },
   {
-    sourceTag: 'type:ui',
-    onlyDependOnLibsWithTags: ['type:data-access', 'type:ui', 'type:util', 'type:unit-testing'],
+    sourceTag: 'type:store',
+    onlyDependOnLibsWithTags: ['type:data-access', 'type:util', 'type:unit-testing'],
   },
   {
     sourceTag: 'type:util',
@@ -136,12 +153,16 @@ const clientConstraints = [
   {
     sourceTag: 'scope:client-chatbot',
     onlyDependOnLibsWithTags: [
+      'scope:client-chatbot-store',
       'scope:client-unit-testing',
       'scope:proto',
       'scope:client-material',
-      'scope:client-store',
       'scope:client-translate',
     ],
+  },
+  {
+    sourceTag: 'scope:client-chatbot-store',
+    onlyDependOnLibsWithTags: ['scope:client-util', 'scope:proto'],
   },
   {
     sourceTag: 'scope:client-componnents',
@@ -150,6 +171,7 @@ const clientConstraints = [
       'scope:client-core',
       'scope:client-material',
       'scope:client-store',
+      'scope:client-chatbot-store',
       'scope:client-util',
     ],
   },

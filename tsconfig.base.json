@@ -48,7 +48,8 @@
       "@mono/client-translate": ["libs/client-translate/src/index.ts"],
       "@mono/client-unit-testing": ["libs/client-unit-testing/src/index.ts"],
       "@mono/client-util": ["libs/client-util/src/index.ts"],
-      "@mono/proto": ["libs/proto/src/index.ts"]
+      "@mono/proto": ["libs/proto/src/index.ts"],
+      "@mono/client-chatbot-store": ["libs/client-chatbot-store/src/index.ts"]
     },
     "rootDir": ".",
     "skipDefaultLibCheck": true,

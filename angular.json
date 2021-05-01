@@ -398,7 +398,10 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "eslintConfig": "libs/client-chatbot/.eslintrc.json",
-            "lintFilePatterns": ["libs/client-chatbot/src/**/*.ts"]
+            "lintFilePatterns": [
+              "libs/client-chatbot/src/**/*.ts",
+              "libs/client-chatbot-store/src/**/*.html"
+            ]
           }
         },
         "test": {
@@ -414,6 +417,32 @@
       "projectType": "library",
       "root": "libs/client-chatbot",
       "sourceRoot": "libs/client-chatbot/src"
+    },
+    "client-chatbot-store": {
+      "architect": {
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "libs/client-chatbot/.eslintrc.json",
+            "lintFilePatterns": [
+              "libs/client-chatbot-store/src/**/*.ts",
+              "libs/client-chatbot-store/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/client-chatbot-store/jest.config.js",
+            "passWithNoTests": true
+          },
+          "outputs": ["coverage/libs/client-chatbot-store"]
+        }
+      },
+      "prefix": "mono",
+      "projectType": "library",
+      "root": "libs/client-chatbot-store",
+      "sourceRoot": "libs/client-chatbot-store/src"
     },
     "client-components": {
       "architect": {
