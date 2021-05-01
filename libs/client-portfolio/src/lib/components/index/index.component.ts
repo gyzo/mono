@@ -1,6 +1,11 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { AppGithubUserService, AppGithubUserState, sidebarUiActions } from '@mono/client-store';
+import {
+  AppGithubUserService,
+  AppGithubUserState,
+  defaultUserConfig,
+  sidebarUiActions,
+} from '@mono/client-store';
 import { WINDOW } from '@mono/client-util';
 import { Store } from '@ngxs/store';
 import { Subscription } from 'rxjs';
@@ -10,9 +15,6 @@ import { AppPortfolioContactComponent } from '../contact/contact.component';
 
 const streamDebounceTime = 500;
 
-/**
- * Application index component.
- */
 @Component({
   selector: 'app-index',
   templateUrl: './index.component.html',
@@ -30,23 +32,14 @@ export class AppPortfolioIndexComponent {
     map(
       state =>
         state.userConfig ?? {
-          apps: [],
-          languageIcons: [],
-          profiles: [],
-          username: {},
+          ...defaultUserConfig,
         },
     ),
   );
 
-  /**
-   * Material dialog instance.
-   */
   private dialogInstance?: MatDialogRef<AppPortfolioContactComponent>;
 
-  /**
-   * Material dialog subscription.
-   */
-  private dialogSub?: Subscription;
+  private dialogSubscription?: Subscription;
 
   constructor(
     private readonly store: Store,
@@ -54,19 +47,13 @@ export class AppPortfolioIndexComponent {
     private readonly user: AppGithubUserService,
     @Inject(WINDOW) private readonly win: Window,
   ) {
-    void this.user.getUserData().subscribe();
+    // void this.user.getUserData().subscribe();
   }
 
-  /**
-   * Toggles sidebar state.
-   */
   public toggleSidenav(): void {
     void this.store.dispatch(new sidebarUiActions.openSidebar());
   }
 
-  /**
-   * Shows contact dialog.
-   */
   public showContactDialog(): void {
     this.dialogInstance = this.dialog.open(AppPortfolioContactComponent, {
       height: '80vh',
@@ -78,8 +65,8 @@ export class AppPortfolioIndexComponent {
         domain: this.win.location.origin,
       },
     });
-    this.dialogSub = this.dialogInstance.afterClosed().subscribe(() => {
-      this.dialogSub?.unsubscribe();
+    this.dialogSubscription = this.dialogInstance.afterClosed().subscribe(() => {
+      this.dialogSubscription?.unsubscribe();
       this.dialogInstance = void 0;
     });
   }

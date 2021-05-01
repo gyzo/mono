@@ -3,7 +3,7 @@ import { Route, RouterModule } from '@angular/router';
 
 import { AppPortfolioApplicationsComponent } from '../../components/applications/applications.component';
 
-export const SIDEBAR_ROUTES: Route[] = [
+const SIDEBAR_ROUTES: Route[] = [
   {
     path: 'root',
     component: AppPortfolioApplicationsComponent,

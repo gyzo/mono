@@ -4,9 +4,6 @@ import { AppSidebarState, AppThemeState, sidebarUiActions, themeActions } from '
 import { Store } from '@ngxs/store';
 import { map, tap } from 'rxjs/operators';
 
-/**
- * Application root component.
- */
 @Component({
   selector: 'app-portfolio-root',
   templateUrl: './root.component.html',
@@ -14,13 +11,10 @@ import { map, tap } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppPortfolioRootComponent implements OnInit {
-  /**
-   * Defines if UI should use alternative dark material theme.
-   */
   @HostBinding('class.unicorn-dark-theme') public darkTheme = false;
 
   /**
-   * Asyncronous material theme state.
+   * Material theme state.
    */
   public readonly getTheme$ = this.store.select(AppThemeState.getTheme).pipe(
     tap(theme => {
@@ -38,7 +32,7 @@ export class AppPortfolioRootComponent implements OnInit {
   constructor(private readonly store: Store, private readonly dateAdapter: DateAdapter<Date>) {}
 
   /**
-   * Closes sidebar.
+   * Synchronizes state when sidebar is closed.
    */
   public sidebarCloseHandler(): void {
     void this.store.dispatch(new sidebarUiActions.closeSidebar());

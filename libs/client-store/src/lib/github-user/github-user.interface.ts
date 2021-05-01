@@ -37,7 +37,6 @@ export interface IGithubUserState {
 export type TUserPayload = IActionPayload<Partial<IGithubUserState>>;
 
 export interface IUserService {
-  getUserData(): void;
   readonly githubOrgs$: Observable<IGithubUserOrganization[]>;
   readonly publicEvents$: Observable<IGithubUserPublicEvent<unknown>[]>;
 }

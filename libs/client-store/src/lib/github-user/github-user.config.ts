@@ -31,6 +31,13 @@ export interface IUserConfig {
   username: IUserConfigUsername;
 }
 
+export const defaultUserConfig: IUserConfig = {
+  apps: [],
+  languageIcons: [],
+  profiles: [],
+  username: {},
+};
+
 export interface IMailerResponse {
   [key: string]: string;
 }
