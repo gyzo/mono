@@ -108,7 +108,7 @@ jobs:
       - name: Unit test all (with code coverage)
         if: steps.changes.outputs.nx == 'true'
         run: |
-          npx nx run-many --target=test --all --passWithNoTests --code-coverage=true --watch=false --run-in-band --ci --updateSnapshot
+          npx nx run-many --target=test --all --passWithNoTests --code-coverage=true --watch=false --run-in-band --ci
           ng run tools:coverage-stats
           cat ./tools/ts/UNIT_COVERAGE.md
 
@@ -142,8 +142,8 @@ jobs:
           npx cypress install
           yarn build:documentation
 
-      - name: Deploy documentation app
+      - name: Deploy documentation app (optional)
         if: steps.changes.outputs.nx == 'true'
-        run: bash tools/shell/firebase-deploy.sh "$FIREBASE_DEPLOY_TOKEN" documentation || exit 1
+        run: bash tools/shell/firebase-deploy.sh "$FIREBASE_DEPLOY_TOKEN" documentation || exit 0
         env:
           FIREBASE_DEPLOY_TOKEN: ${{ secrets.FIREBASE_DEPLOY_TOKEN }}
