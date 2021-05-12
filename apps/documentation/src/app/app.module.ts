@@ -52,11 +52,7 @@ const markdownModuleConfig: MarkdownModuleConfig = {
     { provide: DOCUMENT, useFactory: documentFactory },
     { provide: DOC_APP_ENV, useValue: environment },
   ],
-  declarations: [
-    AppDocRootComponent,
-    AppDocMarkdownReferenceTreeComponent,
-    AppDocMarkdownReferenceComponent,
-  ],
+  declarations: [AppDocRootComponent, AppDocMarkdownReferenceTreeComponent, AppDocMarkdownReferenceComponent],
   bootstrap: [AppDocRootComponent],
 })
 export class AppDocModule {}

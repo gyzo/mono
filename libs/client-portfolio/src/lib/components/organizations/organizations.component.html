@@ -1,10 +1,4 @@
-<div
-  fxFlex="100"
-  fxLayout="row"
-  fxLayoutAlign="start center"
-  fxLayoutGap="16px"
-  [ngStyle]="{ position: 'relative' }"
->
+<div fxFlex="100" fxLayout="row" fxLayoutAlign="start center" fxLayoutGap="16px" [ngStyle]="{ position: 'relative' }">
   <small [ngStyle]="{ position: 'absolute', top: '-15px', right: '0px' }"> Organizations </small>
 
   <div
@@ -16,10 +10,7 @@
     [ngStyle]="{ padding: '0 16px' }"
   >
     <a *ngFor="let org of githubOrgs" [href]="org.url" target="_blank" matTooltip="{{ org.login }}">
-      <img
-        [ngStyle]="{ height: '42px', width: 'auto!important', 'border-radius': '5px' }"
-        [src]="org.avatar_url"
-      />
+      <img [ngStyle]="{ height: '42px', width: 'auto!important', 'border-radius': '5px' }" [src]="org.avatar_url" />
     </a>
   </div>
 </div>

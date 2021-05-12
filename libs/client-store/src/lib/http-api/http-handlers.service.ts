@@ -1,11 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Inject, Injectable } from '@angular/core';
-import {
-  HTTP_STATUS,
-  IWebClientAppEnvironment,
-  WEB_CLIENT_APP_ENV,
-  WINDOW,
-} from '@mono/client-util';
+import { HTTP_STATUS, IWebClientAppEnvironment, WEB_CLIENT_APP_ENV, WINDOW } from '@mono/client-util';
 import { TranslateService } from '@ngx-translate/core';
 import { Navigate } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
@@ -71,11 +66,7 @@ export class AppHttpHandlersService {
 
   public getErrorMessage(error: HttpErrorResponse): string {
     const msg: string = error.message ? error.message : error.error;
-    const errorMessage: string = msg
-      ? msg
-      : error.status
-      ? `${error.status} - ${error.statusText}`
-      : 'Server error';
+    const errorMessage: string = msg ? msg : error.status ? `${error.status} - ${error.statusText}` : 'Server error';
     return errorMessage;
   }
 
@@ -84,9 +75,7 @@ export class AppHttpHandlersService {
    */
   public handleError(error: HttpErrorResponse): Observable<never> {
     const errorMessage = this.getErrorMessage(error);
-    void this.store.dispatch(
-      new httpProgressActions.displayToast({ message: errorMessage, type: 'error' }),
-    );
+    void this.store.dispatch(new httpProgressActions.displayToast({ message: errorMessage, type: 'error' }));
     const unauthorized: boolean = error.status === HTTP_STATUS.UNAUTHORIZED;
     if (unauthorized) {
       void this.store.dispatch(new Navigate(['/']));

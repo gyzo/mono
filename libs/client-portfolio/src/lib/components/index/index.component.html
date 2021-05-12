@@ -1,9 +1,4 @@
-<div
-  class="container"
-  fxLayout="row wrap"
-  fxLayoutAlign="stretch"
-  *ngIf="userData$ | async as userData"
->
+<div class="container" fxLayout="row wrap" fxLayoutAlign="stretch" *ngIf="userData$ | async as userData">
   <mat-card fxFlex="100" class="container__content" *ngIf="userData.github">
     <mat-card-header>
       <div mat-card-avatar>
@@ -40,11 +35,7 @@
         <mat-divider></mat-divider>
       </div>
 
-      <div
-        fxFlex="100"
-        class="container__content--marge-top"
-        *ngIf="userConfig$ | async as userConfig"
-      >
+      <div fxFlex="100" class="container__content--marge-top" *ngIf="userConfig$ | async as userConfig">
         <app-languages
           [githubLanguages]="userData.githubLanguages"
           [githubRepos]="userData.githubRepos"
@@ -71,12 +62,7 @@
   </mat-card>
 
   <div class="sidenav-toggler">
-    <button
-      mat-fab
-      color="accent"
-      (click)="toggleSidenav()"
-      matTooltip="Toggle applications sidebar"
-    >
+    <button mat-fab color="accent" (click)="toggleSidenav()" matTooltip="Toggle applications sidebar">
       <mat-icon>apps</mat-icon>
     </button>
   </div>

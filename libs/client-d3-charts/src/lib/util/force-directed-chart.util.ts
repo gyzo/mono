@@ -8,12 +8,7 @@ import {
 } from '../interfaces/force-directed-chart.interface';
 
 const ticked = (
-  link?: d3.Selection<
-    SVGLineElement,
-    d3.SimulationLinkDatum<IForceDirectedChartDataNode>,
-    SVGSVGElement,
-    unknown
-  >,
+  link?: d3.Selection<SVGLineElement, d3.SimulationLinkDatum<IForceDirectedChartDataNode>, SVGSVGElement, unknown>,
   node?: d3.Selection<SVGCircleElement, IForceDirectedChartDataNode, SVGSVGElement, unknown>,
   text?: d3.Selection<SVGTextElement, IForceDirectedChartDataNode, SVGGElement, unknown>,
 ) => {
@@ -89,12 +84,7 @@ export const drawForceDirectedChart = (
   // append a g element
   const g = svg
     .append('g')
-    .attr(
-      'transform',
-      `translate(${chartConfig.w / 2 + chartConfig.margin.left},${
-        chartConfig.h / 2 + chartConfig.margin.top
-      })`,
-    );
+    .attr('transform', `translate(${chartConfig.w / 2 + chartConfig.margin.left},${chartConfig.h / 2 + chartConfig.margin.top})`);
 
   const imageXY = 10;
   g.append('defs')
@@ -151,16 +141,12 @@ export const drawForceDirectedChart = (
       const baseValue = 25;
       const valueMultiplier = 3;
       const linksCountMultiplier = 1.001;
-      return typeof val.value !== 'undefined'
-        ? 2 + val.value * valueMultiplier
-        : baseValue + (val.linksCount ?? 0) * linksCountMultiplier;
+      return typeof val.value !== 'undefined' ? 2 + val.value * valueMultiplier : baseValue + (val.linksCount ?? 0) * linksCountMultiplier;
     })
     .style('stroke-width', val => {
       const valueMultiplier = 3;
       const linksCountMultiplier = 1.001;
-      return typeof val.value !== 'undefined'
-        ? 2 + val.value * valueMultiplier
-        : 2 + (val.linksCount ?? 0) * linksCountMultiplier;
+      return typeof val.value !== 'undefined' ? 2 + val.value * valueMultiplier : 2 + (val.linksCount ?? 0) * linksCountMultiplier;
     })
     .style('fill', val => {
       return typeof val.value !== 'undefined' ? '#f00000' : `url(#img-${val.index})`;

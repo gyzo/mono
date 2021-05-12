@@ -2,11 +2,7 @@ import { HttpErrorResponse, HttpRequest } from '@angular/common/http';
 import { HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { AppClientTranslateModule } from '@mono/client-translate';
-import {
-  AppLocalStorageMock,
-  getTestBedConfig,
-  newTestBedMetadata,
-} from '@mono/client-unit-testing';
+import { AppLocalStorageMock, getTestBedConfig, newTestBedMetadata } from '@mono/client-unit-testing';
 import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV, WINDOW } from '@mono/client-util';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngxs/store';
@@ -15,10 +11,7 @@ import { catchError } from 'rxjs/operators';
 
 import { AppHttpProgressStoreModule } from '../http-progress/http-progress.module';
 import { httpProgressServiceProvider } from '../http-progress/http-progress.service';
-import {
-  AppToasterService,
-  toasterServiceProvider,
-} from '../http-progress/services/toaster/toaster.service';
+import { AppToasterService, toasterServiceProvider } from '../http-progress/services/toaster/toaster.service';
 import { AppHttpHandlersService } from './http-handlers.service';
 
 describe('AppHttpHandlersService', () => {
@@ -29,12 +22,8 @@ describe('AppHttpHandlersService', () => {
       httpProgressServiceProvider,
       {
         provide: AppHttpHandlersService,
-        useFactory: (
-          store: Store,
-          translate: TranslateService,
-          win: Window,
-          env: IWebClientAppEnvironment,
-        ) => new AppHttpHandlersService(store, translate, win, env),
+        useFactory: (store: Store, translate: TranslateService, win: Window, env: IWebClientAppEnvironment) =>
+          new AppHttpHandlersService(store, translate, win, env),
         deps: [Store, TranslateService, WINDOW, WEB_CLIENT_APP_ENV],
       },
     ],

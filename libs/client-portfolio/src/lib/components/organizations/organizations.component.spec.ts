@@ -12,13 +12,7 @@ import { AppPortfolioOrganizationsComponent } from './organizations.component';
 describe('AppPortfolioOrganizationsComponent', () => {
   const testBedConfig: TestModuleMetadata = {
     declarations: [AppPortfolioOrganizationsComponent, AppDummyComponent],
-    imports: [
-      BrowserDynamicTestingModule,
-      NoopAnimationsModule,
-      HttpClientTestingModule,
-      AppClientMaterialModule,
-      FlexLayoutModule,
-    ],
+    imports: [BrowserDynamicTestingModule, NoopAnimationsModule, HttpClientTestingModule, AppClientMaterialModule, FlexLayoutModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
   };
 

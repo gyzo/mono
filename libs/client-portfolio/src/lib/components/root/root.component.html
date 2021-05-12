@@ -1,10 +1,5 @@
 <mat-sidenav-container *ngIf="getTheme$ | async" class="sidenav">
-  <mat-sidenav
-    #appSidenav
-    mode="over"
-    [opened]="sidebarOpened$ | async"
-    (closedStart)="sidebarCloseHandler()"
-  >
+  <mat-sidenav #appSidenav mode="over" [opened]="sidebarOpened$ | async" (closedStart)="sidebarCloseHandler()">
     <app-applications></app-applications>
   </mat-sidenav>
 

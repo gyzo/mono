@@ -12,16 +12,14 @@ export class BackendGithubService {
   private readonly endpoints = {
     user: (userName: string) => `${this.apiUrl}/users/${userName}`,
     repos: (userName: string) => `${this.apiUrl}/users/${userName}/repos`,
-    languages: (userName: string, repoName: string) =>
-      `${this.apiUrl}/repos/${userName}/${repoName}/languages`,
+    languages: (userName: string, repoName: string) => `${this.apiUrl}/repos/${userName}/${repoName}/languages`,
   };
 
   constructor(private readonly http: HttpService) {}
 
   public ping(): mono.Result {
     return mono.Result.fromObject({
-      message:
-        'Github service is online. Public methods: githubAccessToken, githubUser, githubUserRepos, githubUserReposLanguages.',
+      message: 'Github service is online. Public methods: githubAccessToken, githubUser, githubUserRepos, githubUserReposLanguages.',
     });
   }
 

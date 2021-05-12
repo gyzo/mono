@@ -25,9 +25,7 @@ export class AppPortfolioRootComponent implements OnInit {
   /**
    * Sidenav opened state.
    */
-  public readonly sidebarOpened$ = this.store
-    .select(AppSidebarState.getState)
-    .pipe(map(state => state.sidebarOpened));
+  public readonly sidebarOpened$ = this.store.select(AppSidebarState.getState).pipe(map(state => state.sidebarOpened));
 
   constructor(private readonly store: Store, private readonly dateAdapter: DateAdapter<Date>) {}
 

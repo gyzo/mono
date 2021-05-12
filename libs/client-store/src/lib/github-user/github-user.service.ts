@@ -75,9 +75,7 @@ export class AppGithubUserService implements IUserService {
       concatMap((data: IUserConfig) => {
         const userConfig = data;
         const profiles = data.profiles;
-        return this.store
-          .dispatch(new userActions.setUserState({ userConfig, profiles }))
-          .pipe(mapTo(data));
+        return this.store.dispatch(new userActions.setUserState({ userConfig, profiles })).pipe(mapTo(data));
       }),
     );
   }
@@ -103,9 +101,7 @@ export class AppGithubUserService implements IUserService {
     return this.githubApi.getRepos(username).pipe(
       concatMap((data: IGithubUserRepo[]) => {
         const githubRepos = data;
-        return this.store
-          .dispatch(new userActions.setUserState({ githubRepos }))
-          .pipe(mapTo(githubRepos));
+        return this.store.dispatch(new userActions.setUserState({ githubRepos })).pipe(mapTo(githubRepos));
       }),
       concatMap((repos: IGithubUserRepo[]) => {
         const languageObservables: Observable<IGithubRepoLanguages>[] = [];
@@ -124,9 +120,7 @@ export class AppGithubUserService implements IUserService {
    */
   private getGithubRepoLanguages(username: string, repoName: string) {
     return this.githubApi.getRepoLanguages(username, repoName).pipe(
-      concatMap(data =>
-        this.store.selectOnce(GITHUB_USER_STATE_TOKEN).pipe(map(state => ({ state, data }))),
-      ),
+      concatMap(data => this.store.selectOnce(GITHUB_USER_STATE_TOKEN).pipe(map(state => ({ state, data })))),
       map(({ state, data }) => {
         const githubLanguages: IGithubRepoLanguages = { ...state.githubLanguages };
         const githubLanguagesRate = { ...state.githubLanguagesRate };
@@ -140,9 +134,7 @@ export class AppGithubUserService implements IUserService {
             break loop;
           }
           githubLanguagesTotal += data[lang];
-          githubLanguages[lang] = githubLanguages[lang]
-            ? githubLanguages[lang] + data[lang]
-            : data[lang];
+          githubLanguages[lang] = githubLanguages[lang] ? githubLanguages[lang] + data[lang] : data[lang];
 
           githubLanguagesKeys = Object.keys(githubLanguages);
 
@@ -154,10 +146,7 @@ export class AppGithubUserService implements IUserService {
           const multiplier = 100;
           const fixed = 2;
 
-          githubLanguagesRate[lang] = (
-            (githubLanguages[lang] * multiplier) /
-            githubLanguagesTotal
-          ).toFixed(fixed);
+          githubLanguagesRate[lang] = ((githubLanguages[lang] * multiplier) / githubLanguagesTotal).toFixed(fixed);
         }
         void this.store.dispatch(
           new userActions.setUserState({
@@ -181,9 +170,7 @@ export class AppGithubUserService implements IUserService {
     return this.githubApi.getUserOrganizations(username).pipe(
       concatMap((githubOrgs: IGithubUserOrganization[]) => {
         this.githubOrgsSubject.next(githubOrgs);
-        return this.store
-          .dispatch(new userActions.setUserState({ githubOrgs }))
-          .pipe(mapTo(githubOrgs));
+        return this.store.dispatch(new userActions.setUserState({ githubOrgs })).pipe(mapTo(githubOrgs));
       }),
     );
   }
@@ -203,9 +190,7 @@ export class AppGithubUserService implements IUserService {
             }),
           )
           .subscribe();
-        return this.store
-          .dispatch(new userActions.setUserState({ publicEvents }))
-          .pipe(mapTo(publicEvents));
+        return this.store.dispatch(new userActions.setUserState({ publicEvents })).pipe(mapTo(publicEvents));
       }),
     );
   }

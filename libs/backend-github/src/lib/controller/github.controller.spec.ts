@@ -19,8 +19,7 @@ describe('BackendGithubController', () => {
     it('should return "Github service is online. Public methods: githubAccessToken, githubUser, githubUserRepos, githubUserReposLanguages."', () => {
       const appController = app.get<BackendGithubController>(BackendGithubController);
       expect(appController.ping()).toEqual({
-        message:
-          'Github service is online. Public methods: githubAccessToken, githubUser, githubUserRepos, githubUserReposLanguages.',
+        message: 'Github service is online. Public methods: githubAccessToken, githubUser, githubUserRepos, githubUserReposLanguages.',
       });
     });
   });

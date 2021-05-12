@@ -1,12 +1,7 @@
 import { ChangeDetectionStrategy, Component, Input, OnChanges, SimpleChange } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { IForceDirectedChartData, IForceDirectedChartDataNode } from '@mono/client-d3-charts';
-import {
-  IGithubRepoLanguages,
-  IGithubRepoLanguagesRate,
-  IGithubUserRepo,
-  IUserConfig,
-} from '@mono/client-store';
+import { IGithubRepoLanguages, IGithubRepoLanguagesRate, IGithubUserRepo, IUserConfig } from '@mono/client-store';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
@@ -42,9 +37,7 @@ export class AppPortfolioLanguagesComponent implements OnChanges {
 
   private readonly changesSubject = new BehaviorSubject<null>(null);
 
-  public readonly languageIcons$: Observable<
-    { url: SafeResourceUrl; key: string }[] | null
-  > = this.changesSubject.asObservable().pipe(
+  public readonly languageIcons$: Observable<{ url: SafeResourceUrl; key: string }[] | null> = this.changesSubject.asObservable().pipe(
     map(() => {
       const result: { url: SafeResourceUrl; key: string }[] = [];
       for (const key of this.githubLanguagesKeys) {
@@ -64,17 +57,13 @@ export class AppPortfolioLanguagesComponent implements OnChanges {
   }
 
   public get forceDirectedChartData() {
-    const domains: IForceDirectedChartData['domains'] = this.githubLanguagesKeys.map(
-      (domain, index) => ({ index, domain, value: 1 }),
-    );
-    const entities: IForceDirectedChartData['entities'] = [...this.userConfig.apps].map(
-      (app, index) => ({
-        index: index,
-        name: app.name,
-        img: app.imgRef,
-        linksCount: 0,
-      }),
-    );
+    const domains: IForceDirectedChartData['domains'] = this.githubLanguagesKeys.map((domain, index) => ({ index, domain, value: 1 }));
+    const entities: IForceDirectedChartData['entities'] = [...this.userConfig.apps].map((app, index) => ({
+      index: index,
+      name: app.name,
+      img: app.imgRef,
+      linksCount: 0,
+    }));
     const links: IForceDirectedChartData['links'] = [...this.userConfig.apps]
       .map(app => {
         const source = entities.findIndex(value => value.name === app.name);

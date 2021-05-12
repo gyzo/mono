@@ -49,9 +49,7 @@ export class BackendGrpcController implements OnModuleInit {
     idsSubject.next({ id: 'id2' });
     idsSubject.complete();
 
-    return typeof this.sampleService !== 'undefined'
-      ? this.sampleService.findMany(idsSubject.asObservable()).pipe(toArray())
-      : of([]);
+    return typeof this.sampleService !== 'undefined' ? this.sampleService.findMany(idsSubject.asObservable()).pipe(toArray()) : of([]);
   }
 
   @Get(':id')
@@ -66,18 +64,12 @@ export class BackendGrpcController implements OnModuleInit {
   }
 
   @GrpcMethod('EntityService', 'FindOne')
-  public findOne(
-    data: mono.IEntityById,
-    metadata: Record<string, unknown>,
-  ): mono.IEntity | undefined {
+  public findOne(data: mono.IEntityById, metadata: Record<string, unknown>): mono.IEntity | undefined {
     return this.items.find(({ id }) => id === data.id);
   }
 
   @GrpcStreamMethod('EntityService', 'FindMany')
-  public findMany(
-    data$: Observable<mono.IEntityById>,
-    metadata: Record<string, unknown>,
-  ): Observable<mono.IEntity> {
+  public findMany(data$: Observable<mono.IEntityById>, metadata: Record<string, unknown>): Observable<mono.IEntity> {
     const entitySubject = new Subject<mono.IEntity>();
 
     const onNext = (entityById: mono.IEntityById) => {

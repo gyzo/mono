@@ -4,9 +4,7 @@
     &nbsp; Location: {{ github?.location }}
   </mat-chip>
 
-  <mat-chip color="primary" *ngIf="github?.email" [selectable]="false" disabled>
-    Email: {{ github?.email }}
-  </mat-chip>
+  <mat-chip color="primary" *ngIf="github?.email" [selectable]="false" disabled> Email: {{ github?.email }} </mat-chip>
 
   <mat-chip color="primary" [selectable]="false" disabled>
     <mat-icon color="primary">library_books</mat-icon>

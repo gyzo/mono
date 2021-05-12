@@ -18,39 +18,19 @@
     </mat-form-field>
 
     <mat-form-field fxFlex>
-      <input
-        matInput
-        type="text"
-        name="email"
-        formControlName="email"
-        placeholder="Your email address"
-      />
-      <mat-error *ngIf="contactForm.controls.email.invalid" class="mat-body-1">
-        Invalid email address.
-      </mat-error>
+      <input matInput type="text" name="email" formControlName="email" placeholder="Your email address" />
+      <mat-error *ngIf="contactForm.controls.email.invalid" class="mat-body-1"> Invalid email address. </mat-error>
     </mat-form-field>
 
     <mat-form-field fxFlex>
-      <input
-        matInput
-        type="text"
-        name="header"
-        formControlName="header"
-        placeholder="Email header"
-      />
+      <input matInput type="text" name="header" formControlName="header" placeholder="Email header" />
       <mat-error *ngIf="contactForm.controls.header.invalid" class="mat-body-1">
         {{ inputError }}
       </mat-error>
     </mat-form-field>
 
     <mat-form-field fxFlex>
-      <textarea
-        matInput
-        type="text"
-        name="message"
-        formControlName="message"
-        placeholder="Email message text"
-      ></textarea>
+      <textarea matInput type="text" name="message" formControlName="message" placeholder="Email message text"></textarea>
       <mat-error *ngIf="contactForm.controls.message.invalid" class="mat-body-1">
         {{ inputError }}
       </mat-error>

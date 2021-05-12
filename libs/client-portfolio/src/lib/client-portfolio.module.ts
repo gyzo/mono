@@ -32,11 +32,7 @@ import { AppPortfolioStatusBadgesComponent } from './components/status-badges/st
     AppPortfolioContactComponent,
     AppPortfolioActivityComponent,
   ],
-  entryComponents: [
-    AppPortfolioProfilesComponent,
-    AppPortfolioLanguagesComponent,
-    AppPortfolioContactComponent,
-  ],
+  entryComponents: [AppPortfolioProfilesComponent, AppPortfolioLanguagesComponent, AppPortfolioContactComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class AppClientPortfolioModule {}

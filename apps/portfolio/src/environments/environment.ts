@@ -20,18 +20,11 @@ export const environment: IWebClientAppEnvironment = {
   production: false,
   platform,
   appName: 'Portfolio',
-  api: window.location.origin.includes('localhost')
-    ? 'http://localhost:8080/api'
-    : `${window.location.origin}/api`,
+  api: window.location.origin.includes('localhost') ? 'http://localhost:8080/api' : `${window.location.origin}/api`,
   envoyUrl: 'http://localhost:8082',
   sentry: {
     env: 'development',
     dsn: 'https://8d1b8e74d9e64ab7946fa0f0aac9704b@o551250.ingest.sentry.io/5674548',
-    tracingOrigins: [
-      'localhost:4200',
-      'https://rfprod-2cda1.web.app',
-      'https://rfprod-2cda1.firebaseapp.com',
-      'https://rfprod.tk',
-    ],
+    tracingOrigins: ['localhost:4200', 'https://rfprod-2cda1.web.app', 'https://rfprod-2cda1.firebaseapp.com', 'https://rfprod.tk'],
   },
 };

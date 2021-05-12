@@ -1,10 +1,4 @@
-<div
-  [ngStyle]="{ width: '100%' }"
-  fxFlex="100"
-  fxLayout="row"
-  fxLayoutAlign="stretch"
-  *ngIf="data$ | async as data"
->
+<div [ngStyle]="{ width: '100%' }" fxFlex="100" fxLayout="row" fxLayoutAlign="stretch" *ngIf="data$ | async as data">
   <div [ngStyle]="{ margin: '0.5em' }" fxFlex="100" fxLayout="column">
     <div fxLayout="row" fxLayoutAlign="end center">
       <button mat-icon-button (click)="sidebarCloseHandler()">

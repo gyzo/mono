@@ -16,9 +16,7 @@ export class AppInfoComponent {
   /**
    * Ping result.
    */
-  public readonly ping$ = this.store
-    .select(AppHttpApiState.allData)
-    .pipe(map(ping => `${ping.pingAuth}.\n${ping.pingMailer}`));
+  public readonly ping$ = this.store.select(AppHttpApiState.allData).pipe(map(ping => `${ping.pingAuth}.\n${ping.pingMailer}`));
 
   /**
    * Sample processed markdown.
