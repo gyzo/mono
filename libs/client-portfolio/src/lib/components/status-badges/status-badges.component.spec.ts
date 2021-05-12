@@ -12,13 +12,7 @@ import { AppPortfolioStatusBadgesComponent } from './status-badges.component';
 describe('AppPortfolioStatusBadgesComponent', () => {
   const testBedConfig: TestModuleMetadata = {
     declarations: [AppPortfolioStatusBadgesComponent, AppDummyComponent],
-    imports: [
-      BrowserDynamicTestingModule,
-      NoopAnimationsModule,
-      HttpClientTestingModule,
-      AppClientMaterialModule,
-      FlexLayoutModule,
-    ],
+    imports: [BrowserDynamicTestingModule, NoopAnimationsModule, HttpClientTestingModule, AppClientMaterialModule, FlexLayoutModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
   };
 

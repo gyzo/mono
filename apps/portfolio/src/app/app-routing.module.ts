@@ -12,8 +12,7 @@ const ROUTES: Route[] = [
   {
     path: '',
     outlet: 'sidebar',
-    loadChildren: () =>
-      import('@mono/client-portfolio').then(mod => mod.AppClientPortfolioSidebarModule),
+    loadChildren: () => import('@mono/client-portfolio').then(mod => mod.AppClientPortfolioSidebarModule),
   },
   {
     path: '**',

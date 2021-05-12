@@ -1,10 +1,4 @@
-import {
-  UserContacts,
-  UserLoginCredentials,
-  UserLogoutCredentials,
-  UserName,
-  UserProfile,
-} from '@mono/backend-interfaces';
+import { UserContacts, UserLoginCredentials, UserLogoutCredentials, UserName, UserProfile } from '@mono/backend-interfaces';
 import { mono } from '@mono/proto';
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';

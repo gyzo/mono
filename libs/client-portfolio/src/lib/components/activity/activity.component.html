@@ -1,9 +1,4 @@
-<div
-  fxLayout="row"
-  fxLayoutAlign="start stretch"
-  *ngIf="publicEvents"
-  [ngStyle]="{ position: 'relative' }"
->
+<div fxLayout="row" fxLayoutAlign="start stretch" *ngIf="publicEvents" [ngStyle]="{ position: 'relative' }">
   <small [ngStyle]="{ position: 'absolute', top: '-15px', right: '0px' }"> Recent Activity </small>
 
   <app-radar-chart fxFlex="100" [chartId]="'radar-1'" [data]="radarChartData"></app-radar-chart>

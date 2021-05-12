@@ -40,12 +40,10 @@ export class AppGithubApiService {
     githubAccessToken: (): string => `${this.win.location.origin}/api/githubAccessToken`,
     user: (username: string): string => `${this.githubApiBaseUrl}/users/${username}`,
     repos: (username: string): string => `${this.githubApiBaseUrl}/users/${username}/repos`,
-    languages: (username: string, reponame: string) =>
-      `${this.githubApiBaseUrl}/repos/${username}/${reponame}/languages`,
+    languages: (username: string, reponame: string) => `${this.githubApiBaseUrl}/repos/${username}/${reponame}/languages`,
     organizations: (username: string): string => `${this.githubApiBaseUrl}/users/${username}/orgs`,
     organization: (organization: string): string => `${this.githubApiBaseUrl}/orgs/${organization}`,
-    publicEvents: (username: string): string =>
-      `${this.githubApiBaseUrl}/users/${username}/events/public`,
+    publicEvents: (username: string): string => `${this.githubApiBaseUrl}/users/${username}/events/public`,
   };
 
   constructor(

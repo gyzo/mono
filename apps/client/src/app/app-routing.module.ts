@@ -4,8 +4,7 @@ import { Route, RouterModule } from '@angular/router';
 export const APP_ROUTES: Route[] = [
   {
     path: '',
-    loadChildren: () =>
-      import('@mono/client-diagnostics').then(mod => mod.AppClientDiagnosticsModule),
+    loadChildren: () => import('@mono/client-diagnostics').then(mod => mod.AppClientDiagnosticsModule),
   },
   {
     path: 'chatbot',
@@ -19,8 +18,7 @@ export const APP_ROUTES: Route[] = [
   {
     path: '',
     outlet: 'chatbot',
-    loadChildren: () =>
-      import('@mono/client-chatbot').then(mod => mod.AppClientChatbotWidgetModule),
+    loadChildren: () => import('@mono/client-chatbot').then(mod => mod.AppClientChatbotWidgetModule),
   },
   { path: '**', redirectTo: '' },
 ];

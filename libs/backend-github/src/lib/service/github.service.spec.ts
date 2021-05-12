@@ -18,8 +18,7 @@ describe('BackendGithubService', () => {
   describe('ping', () => {
     it('should return "Github service is online. Public methods: githubAccessToken, githubUser, githubUserRepos, githubUserReposLanguages."', () => {
       expect(service.ping()).toEqual({
-        message:
-          'Github service is online. Public methods: githubAccessToken, githubUser, githubUserRepos, githubUserReposLanguages.',
+        message: 'Github service is online. Public methods: githubAccessToken, githubUser, githubUserRepos, githubUserReposLanguages.',
       });
     });
   });

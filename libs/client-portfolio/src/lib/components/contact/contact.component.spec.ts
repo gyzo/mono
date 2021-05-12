@@ -1,9 +1,5 @@
 import { HttpClient, HttpRequest } from '@angular/common/http';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-  TestRequest,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@angular/core/testing';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -16,12 +12,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientMaterialModule } from '@mono/client-material';
 import { AppEmailService, AppHttpHandlersService } from '@mono/client-store';
 import { AppDialogRefMock, AppDummyComponent, testingEnvironment } from '@mono/client-unit-testing';
-import {
-  IWebClientAppEnvironment,
-  WEB_CLIENT_APP_ENV,
-  WINDOW,
-  windowFactory,
-} from '@mono/client-util';
+import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@mono/client-util';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NgxsModule, Store } from '@ngxs/store';
 
@@ -62,18 +53,13 @@ describe('AppPortfolioContactComponent', () => {
       },
       {
         provide: AppHttpHandlersService,
-        useFactory: (
-          store: Store,
-          translate: TranslateService,
-          win: Window,
-          appEnv: IWebClientAppEnvironment,
-        ) => new AppHttpHandlersService(store, translate, win, appEnv),
+        useFactory: (store: Store, translate: TranslateService, win: Window, appEnv: IWebClientAppEnvironment) =>
+          new AppHttpHandlersService(store, translate, win, appEnv),
         deps: [Store, TranslateService, WINDOW, WEB_CLIENT_APP_ENV],
       },
       {
         provide: AppEmailService,
-        useFactory: (http: HttpClient, handlers: AppHttpHandlersService, window: Window) =>
-          new AppEmailService(http, handlers, window),
+        useFactory: (http: HttpClient, handlers: AppHttpHandlersService, window: Window) => new AppEmailService(http, handlers, window),
         deps: [HttpClient, AppHttpHandlersService, WINDOW],
       },
     ],

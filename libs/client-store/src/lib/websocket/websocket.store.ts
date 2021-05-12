@@ -3,12 +3,7 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 
 import { connect, getEvents, setState } from './websocket.actions';
-import {
-  IAppWebsocketStateModel,
-  TWebsocketPayload,
-  WEBSOCKET_STATE_TOKEN,
-  websocketInitialState,
-} from './websocket.interface';
+import { IAppWebsocketStateModel, TWebsocketPayload, WEBSOCKET_STATE_TOKEN, websocketInitialState } from './websocket.interface';
 import { AppWebsocketApiService } from './websocket-api.service';
 
 export const websocketActions = {
