@@ -6,20 +6,18 @@ import { IGithubUserOrganization, IGithubUserPublicEvent, IGithubUserRepo, IGuth
 import { IUserConfig } from './github-user.config';
 import { AppGithubUserService } from './github-user.service';
 
+interface ICombinedGithubData {
+  userConfig: IUserConfig;
+  github: IGuthubUser;
+  githubOrgs: IGithubUserOrganization[];
+  publicEvents: IGithubUserPublicEvent<unknown>[];
+  githubRepos: IGithubUserRepo[];
+}
+
 @Injectable({
   providedIn: 'root',
 })
-export class AppGithubUserResolver
-  implements
-    Resolve<
-      Observable<{
-        userConfig: IUserConfig;
-        github: IGuthubUser;
-        githubOrgs: IGithubUserOrganization[];
-        publicEvents: IGithubUserPublicEvent<unknown>[];
-        githubRepos: IGithubUserRepo[];
-      }>
-    > {
+export class AppGithubUserResolver implements Resolve<Observable<ICombinedGithubData>> {
   constructor(private readonly github: AppGithubUserService) {}
 
   public resolve() {

@@ -273,7 +273,7 @@ export const drawRadarChart = (container: ElementRef<HTMLDivElement>, data: TRad
       const newX = parseFloat(d3.select(this).attr('cx')) - modifier;
       const newY = parseFloat(d3.select(this).attr('cy')) - modifier;
 
-      const nodeData = ((event.target as unknown) as Record<string, IRadarChartDataNode>).__data__;
+      const nodeData = (event.target as unknown as Record<string, IRadarChartDataNode>).__data__;
       const tooltipText = `${nodeData.value} events`;
       tooltip.attr('x', newX).attr('y', newY).text(tooltipText).transition().duration(transitionDuration).style('opacity', 1);
     })

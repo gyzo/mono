@@ -11,15 +11,12 @@ import { catchError, finalize, take, timeout } from 'rxjs/operators';
 import { httpProgressActions } from '../http-progress/http-progress.store';
 
 /**
- * Http handers service.
+ * Handlers to work with http requests.
  */
 @Injectable({
   providedIn: 'root',
 })
 export class AppHttpHandlersService {
-  /**
-   * Default timeout interval for http-requests.
-   */
   public readonly defaultHttpTimeout = 10000;
 
   constructor(
@@ -43,8 +40,8 @@ export class AppHttpHandlersService {
    */
   @memo()
   public getEndpoint(path: string): string {
-    const p = /^\/.*$/.test(path) ? path : `/${path}`;
-    return this.env.api + p;
+    const endpoint = /^\/.*$/.test(path) ? path : `/${path}`;
+    return `${this.env.api}${endpoint}`;
   }
 
   /**
