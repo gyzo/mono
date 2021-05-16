@@ -1,4 +1,5 @@
 const { nxModuleBoundaryRules } = require('./.eslintrc.module-boundaries');
+const { join } = require('path');
 
 /**
  * Roadmap typescript-eslint
@@ -12,7 +13,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
-    project: ['./tsconfig.base.json'],
+    project: [join(__dirname, './tsconfig.base.json')],
   },
   extends: [
     'eslint:recommended',
@@ -369,7 +370,7 @@ module.exports = {
       parserOptions: {
         ecmaVersion: 2020,
         sourceType: 'module',
-        project: ['./tsconfig.eslint-js.json'],
+        project: [join(__dirname, './tsconfig.eslint-js.json')],
       },
       extends: ['eslint:recommended', 'plugin:prettier/recommended', 'plugin:@angular-eslint/recommended'],
       plugins: [
