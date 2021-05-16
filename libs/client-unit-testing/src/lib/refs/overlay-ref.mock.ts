@@ -20,7 +20,7 @@ export const overlayRefMockProviders: Provider[] = [
     provide: Overlay,
     useValue: {
       create: (config?: OverlayConfig | undefined): OverlayRef => {
-        return (new AppOverlayRefMock() as unknown) as OverlayRef;
+        return new AppOverlayRefMock() as unknown as OverlayRef;
       },
       position: () => ({
         global: () => ({

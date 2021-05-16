@@ -73,9 +73,7 @@ export class AppGithubApiService {
   public getProfile(username: string): Observable<IGuthubUser> {
     const url = this.endpoints.user(username);
     const headers = this.getAuthHeaders();
-    return this.handlers.pipeHttpResponse(
-      this.http.get<IGuthubUser>(url, { headers }),
-    );
+    return this.handlers.pipeHttpResponse(this.http.get<IGuthubUser>(url, { headers }));
   }
 
   /**
@@ -85,9 +83,7 @@ export class AppGithubApiService {
   public getRepos(username: string): Observable<IGithubUserRepo[]> {
     const url = this.endpoints.repos(username);
     const headers = this.getAuthHeaders();
-    return this.handlers.pipeHttpResponse(
-      this.http.get<IGithubUserRepo[]>(url, { headers }),
-    );
+    return this.handlers.pipeHttpResponse(this.http.get<IGithubUserRepo[]>(url, { headers }));
   }
 
   /**
@@ -98,9 +94,7 @@ export class AppGithubApiService {
   public getRepoLanguages(username: string, repo: string): Observable<IGithubRepoLanguages> {
     const url = this.endpoints.languages(username, repo);
     const headers = this.getAuthHeaders();
-    return this.handlers.pipeHttpResponse(
-      this.http.get<IGithubRepoLanguages>(url, { headers }),
-    );
+    return this.handlers.pipeHttpResponse(this.http.get<IGithubRepoLanguages>(url, { headers }));
   }
 
   /**
@@ -110,9 +104,7 @@ export class AppGithubApiService {
   public getUserOrganizations(username: string): Observable<IGithubUserOrganization[]> {
     const url = this.endpoints.organizations(username);
     const headers = this.getAuthHeaders();
-    return this.handlers.pipeHttpResponse(
-      this.http.get<IGithubUserOrganization[]>(url, { headers }),
-    );
+    return this.handlers.pipeHttpResponse(this.http.get<IGithubUserOrganization[]>(url, { headers }));
   }
 
   /**
@@ -122,9 +114,7 @@ export class AppGithubApiService {
   public getOrganization(organization: string): Observable<IGithubOrganization> {
     const url = this.endpoints.organization(organization);
     const headers = this.getAuthHeaders();
-    return this.handlers.pipeHttpResponse(
-      this.http.get<IGithubOrganization>(url, { headers }),
-    );
+    return this.handlers.pipeHttpResponse(this.http.get<IGithubOrganization>(url, { headers }));
   }
 
   /**
@@ -134,9 +124,7 @@ export class AppGithubApiService {
   public getPublicEvents(username: string): Observable<IGithubUserPublicEvent<unknown>[]> {
     const url = this.endpoints.publicEvents(username);
     const headers = this.getAuthHeaders();
-    return this.handlers.pipeHttpResponse(
-      this.http.get<IGithubUserPublicEvent<unknown>[]>(url, { headers }),
-    );
+    return this.handlers.pipeHttpResponse(this.http.get<IGithubUserPublicEvent<unknown>[]>(url, { headers }));
   }
 
   /**
