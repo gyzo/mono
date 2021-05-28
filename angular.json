@@ -50,8 +50,7 @@
             "main": "apps/api/src/main.ts",
             "outputPath": "dist/apps/api",
             "tsConfig": "apps/api/tsconfig.app.json"
-          },
-          "outputs": ["{options.outputPath}"]
+          }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
@@ -79,8 +78,7 @@
           "options": {
             "jestConfig": "apps/api/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/apps/api"]
+          }
         }
       },
       "prefix": "api",
@@ -103,8 +101,7 @@
           "options": {
             "jestConfig": "libs/backend-auth/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/backend-auth"]
+          }
         }
       },
       "projectType": "library",
@@ -125,8 +122,7 @@
           "options": {
             "jestConfig": "libs/backend-github/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/backend-github"]
+          }
         }
       },
       "projectType": "library",
@@ -147,8 +143,7 @@
           "options": {
             "jestConfig": "libs/backend-grpc/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/backend-grpc"]
+          }
         }
       },
       "projectType": "library",
@@ -169,8 +164,7 @@
           "options": {
             "jestConfig": "libs/backend-interfaces/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/backend-interfaces"]
+          }
         }
       },
       "projectType": "library",
@@ -192,8 +186,7 @@
           "options": {
             "jestConfig": "libs/backend-logger/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/backend-logger"]
+          }
         }
       },
       "projectType": "library",
@@ -214,8 +207,7 @@
           "options": {
             "jestConfig": "libs/backend-mailer/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/backend-mailer"]
+          }
         }
       },
       "projectType": "library",
@@ -236,8 +228,7 @@
           "options": {
             "jestConfig": "libs/backend-websocket/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/backend-websocket"]
+          }
         }
       },
       "projectType": "library",
@@ -294,6 +285,13 @@
               "subscriptions-transport-ws"
             ],
             "aot": true,
+            "buildOptimizer": false,
+            "extractLicenses": true,
+            "namedChunks": true,
+            "optimization": false,
+            "outputHashing": "none",
+            "sourceMap": true,
+            "vendorChunk": true,
             "assets": [
               "apps/client/src/favicon.ico",
               "apps/client/src/assets",
@@ -329,8 +327,7 @@
               "libs/client-core/src/lib/styles/styles.scss"
             ],
             "tsConfig": "apps/client/tsconfig.app.json"
-          },
-          "outputs": ["{options.outputPath}"]
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -378,8 +375,7 @@
               "apps/client/src/styles.scss",
               "libs/client-core/src/lib/styles/styles.scss"
             ]
-          },
-          "outputs": ["coverage/apps/client"]
+          }
         }
       },
       "prefix": "client",
@@ -398,10 +394,7 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "eslintConfig": "libs/client-chatbot/.eslintrc.json",
-            "lintFilePatterns": [
-              "libs/client-chatbot/src/**/*.ts",
-              "libs/client-chatbot-store/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/client-chatbot/src/**/*.ts", "libs/client-chatbot-store/src/**/*.html"]
           }
         },
         "test": {
@@ -409,8 +402,7 @@
           "options": {
             "jestConfig": "libs/client-chatbot/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-chatbot"]
+          }
         }
       },
       "prefix": "mono",
@@ -424,10 +416,7 @@
           "builder": "@angular-eslint/builder:lint",
           "options": {
             "eslintConfig": "libs/client-chatbot/.eslintrc.json",
-            "lintFilePatterns": [
-              "libs/client-chatbot-store/src/**/*.ts",
-              "libs/client-chatbot-store/src/**/*.html"
-            ]
+            "lintFilePatterns": ["libs/client-chatbot-store/src/**/*.ts", "libs/client-chatbot-store/src/**/*.html"]
           }
         },
         "test": {
@@ -435,8 +424,7 @@
           "options": {
             "jestConfig": "libs/client-chatbot-store/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-chatbot-store"]
+          }
         }
       },
       "prefix": "mono",
@@ -459,8 +447,7 @@
             },
             "outputPath": "dist/storybook/client-components",
             "uiFramework": "@storybook/angular"
-          },
-          "outputs": ["{options.outputPath}"]
+          }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
@@ -490,8 +477,7 @@
           "options": {
             "jestConfig": "libs/client-components/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-components"]
+          }
         }
       },
       "prefix": "mono",
@@ -545,8 +531,7 @@
           "options": {
             "jestConfig": "libs/client-core/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-core"]
+          }
         }
       },
       "prefix": "client",
@@ -573,8 +558,7 @@
           "options": {
             "jestConfig": "libs/client-d3-charts/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-d3-charts"]
+          }
         }
       },
       "prefix": "mono",
@@ -597,8 +581,7 @@
             },
             "outputPath": "dist/storybook/client-diagnostics",
             "uiFramework": "@storybook/angular"
-          },
-          "outputs": ["{options.outputPath}"]
+          }
         },
         "lint": {
           "builder": "@angular-eslint/builder:lint",
@@ -628,8 +611,7 @@
           "options": {
             "jestConfig": "libs/client-diagnostics/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-diagnostics"]
+          }
         }
       },
       "prefix": "mono",
@@ -710,8 +692,7 @@
           "options": {
             "jestConfig": "libs/client-interfaces/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-interfaces"]
+          }
         }
       },
       "prefix": "mono",
@@ -733,8 +714,7 @@
           "options": {
             "jestConfig": "libs/client-material/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-material"]
+          }
         }
       },
       "prefix": "client",
@@ -761,8 +741,7 @@
           "options": {
             "jestConfig": "libs/client-portfolio/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-portfolio"]
+          }
         }
       },
       "prefix": "mono",
@@ -784,8 +763,7 @@
           "options": {
             "jestConfig": "libs/client-services/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-services"]
+          }
         }
       },
       "prefix": "client",
@@ -812,8 +790,7 @@
           "options": {
             "jestConfig": "libs/client-sidebar/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-sidebar"]
+          }
         }
       },
       "prefix": "mono",
@@ -835,8 +812,7 @@
           "options": {
             "jestConfig": "libs/client-store/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-store"]
+          }
         }
       },
       "prefix": "client",
@@ -863,8 +839,7 @@
           "options": {
             "jestConfig": "libs/client-translate/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-translate"]
+          }
         }
       },
       "prefix": "client",
@@ -891,8 +866,7 @@
           "options": {
             "jestConfig": "libs/client-unit-testing/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-unit-testing"]
+          }
         }
       },
       "prefix": "client",
@@ -919,8 +893,7 @@
           "options": {
             "jestConfig": "libs/client-util/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/client-util"]
+          }
         }
       },
       "prefix": "client",
@@ -978,6 +951,13 @@
               "extract-files/public/extractFiles"
             ],
             "aot": true,
+            "buildOptimizer": false,
+            "extractLicenses": true,
+            "namedChunks": true,
+            "optimization": false,
+            "outputHashing": "none",
+            "sourceMap": true,
+            "vendorChunk": true,
             "assets": [
               "apps/documentation/src/favicon.ico",
               "apps/documentation/src/assets",
@@ -1045,8 +1025,7 @@
               "node_modules/katex/dist/katex.min.css"
             ],
             "tsConfig": "apps/documentation/tsconfig.app.json"
-          },
-          "outputs": ["{options.outputPath}"]
+          }
         },
         "build-storybook": {
           "builder": "@nrwl/storybook:build",
@@ -1061,8 +1040,7 @@
             },
             "outputPath": "dist/storybook/documentation",
             "uiFramework": "@storybook/angular"
-          },
-          "outputs": ["{options.outputPath}"]
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -1093,8 +1071,7 @@
           "options": {
             "jestConfig": "apps/documentation/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/apps/documentation"]
+          }
         }
       },
       "prefix": "mono",
@@ -1184,6 +1161,13 @@
               "subscriptions-transport-ws"
             ],
             "aot": true,
+            "buildOptimizer": false,
+            "extractLicenses": true,
+            "namedChunks": true,
+            "optimization": false,
+            "outputHashing": "none",
+            "sourceMap": true,
+            "vendorChunk": true,
             "assets": [
               "apps/portfolio/src/favicon.ico",
               "apps/portfolio/src/assets",
@@ -1267,8 +1251,7 @@
               "apps/portfolio/src/styles.scss",
               "libs/client-core/src/lib/styles/styles.scss"
             ]
-          },
-          "outputs": ["coverage/apps/portfolio"]
+          }
         }
       },
       "prefix": "mono",
@@ -1316,8 +1299,7 @@
           "options": {
             "jestConfig": "libs/proto/jest.config.js",
             "passWithNoTests": true
-          },
-          "outputs": ["coverage/libs/proto"]
+          }
         }
       },
       "prefix": "client",
