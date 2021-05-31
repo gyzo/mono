@@ -241,38 +241,30 @@
           "builder": "@angular-devkit/build-angular:browser",
           "configurations": {
             "analyze-bundle": {
-              "aot": true,
               "buildOptimizer": true,
-              "extractLicenses": true,
               "fileReplacements": [
                 {
                   "replace": "apps/client/src/environments/environment.ts",
                   "with": "apps/client/src/environments/environment.prod.ts"
                 }
               ],
-              "namedChunks": true,
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": true,
-              "vendorChunk": true
+              "sourceMap": true
             },
             "production": {
-              "aot": true,
               "buildOptimizer": true,
-              "extractLicenses": true,
               "fileReplacements": [
                 {
                   "replace": "apps/client/src/environments/environment.ts",
                   "with": "apps/client/src/environments/environment.prod.ts"
                 }
               ],
-              "namedChunks": true,
               "ngswConfigPath": "apps/client/ngsw-config.json",
               "optimization": true,
               "outputHashing": "all",
               "serviceWorker": true,
-              "sourceMap": false,
-              "vendorChunk": true
+              "sourceMap": false
             }
           },
           "options": {
@@ -912,35 +904,28 @@
           "builder": "@angular-devkit/build-angular:browser",
           "configurations": {
             "analyze-bundle": {
-              "aot": true,
               "buildOptimizer": true,
-              "extractLicenses": true,
               "fileReplacements": [
                 {
                   "replace": "apps/documentation/src/environments/environment.ts",
                   "with": "apps/documentation/src/environments/environment.prod.ts"
                 }
               ],
-              "namedChunks": true,
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": true,
-              "vendorChunk": true
+              "sourceMap": true
             },
             "production": {
               "buildOptimizer": true,
-              "extractLicenses": true,
               "fileReplacements": [
                 {
                   "replace": "apps/documentation/src/environments/environment.ts",
                   "with": "apps/documentation/src/environments/environment.prod.ts"
                 }
               ],
-              "namedChunks": false,
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "vendorChunk": false
+              "sourceMap": false
             }
           },
           "options": {
@@ -1117,38 +1102,30 @@
           "builder": "@angular-devkit/build-angular:browser",
           "configurations": {
             "analyze-bundle": {
-              "aot": true,
               "buildOptimizer": true,
-              "extractLicenses": true,
               "fileReplacements": [
                 {
                   "replace": "apps/portfolio/src/environments/environment.ts",
                   "with": "apps/portfolio/src/environments/environment.prod.ts"
                 }
               ],
-              "namedChunks": true,
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": true,
-              "vendorChunk": true
+              "sourceMap": true
             },
             "production": {
-              "aot": true,
               "buildOptimizer": true,
-              "extractLicenses": true,
               "fileReplacements": [
                 {
                   "replace": "apps/portfolio/src/environments/environment.ts",
                   "with": "apps/portfolio/src/environments/environment.prod.ts"
                 }
               ],
-              "namedChunks": true,
               "ngswConfigPath": "apps/portfolio/ngsw-config.json",
               "optimization": true,
               "outputHashing": "all",
               "serviceWorker": true,
-              "sourceMap": false,
-              "vendorChunk": true
+              "sourceMap": false
             }
           },
           "options": {
