@@ -1,3 +1,4 @@
+import { BackendDotenvService } from '@mono/backend-core';
 import { DynamicModule, Module, OnModuleInit, Provider } from '@nestjs/common';
 
 import { BackendMailerController } from './controller/mailer.controller';
@@ -6,6 +7,7 @@ import { BackendMailerService } from './service/mailer.service';
 const moduleProviders: Provider[] = [BackendMailerService];
 
 @Module({
+  providers: [BackendDotenvService],
   controllers: [BackendMailerController],
 })
 export class BackendMailerModule implements OnModuleInit {

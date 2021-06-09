@@ -70,6 +70,7 @@ const backendConstraints = [
     onlyDependOnLibsWithTags: [
       'scope:proto',
       'scope:backend-auth',
+      'scope:backend-core',
       'scope:backend-github',
       'scope:backend-grpc',
       'scope:backend-mailer',
@@ -81,6 +82,10 @@ const backendConstraints = [
   {
     sourceTag: 'scope:backend-auth',
     onlyDependOnLibsWithTags: ['scope:proto', 'scope:backend-interfaces'],
+  },
+  {
+    sourceTag: 'scope:backend-core',
+    onlyDependOnLibsWithTags: [],
   },
   {
     sourceTag: 'scope:backend-github',
@@ -100,7 +105,7 @@ const backendConstraints = [
   },
   {
     sourceTag: 'scope:backend-mailer',
-    onlyDependOnLibsWithTags: ['scope:proto', 'scope:backend-interfaces'],
+    onlyDependOnLibsWithTags: ['scope:proto', 'scope:backend-core', 'scope:backend-interfaces'],
   },
   {
     sourceTag: 'scope:backend-websocket',

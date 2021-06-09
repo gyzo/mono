@@ -25,6 +25,9 @@
     "backend-auth": {
       "tags": ["scope:backend-auth", "type:data-access"]
     },
+    "backend-core": {
+      "tags": ["scope:backend-core", "type:data-access"]
+    },
     "backend-github": {
       "tags": ["scope:backend-github", "type:feature"]
     },

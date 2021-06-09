@@ -9,6 +9,7 @@ import { WsAdapter } from '@nestjs/platform-ws';
 import e from 'express';
 import * as admin from 'firebase-admin';
 import * as functions from 'firebase-functions';
+import * as process from 'process';
 
 import { ApiAppModule } from './app/app.module';
 import { environment } from './environments/environment';
