@@ -6,6 +6,7 @@ module.exports = {
     '<rootDir>/apps/portfolio',
     '<rootDir>/apps/documentation',
     '<rootDir>/libs/backend-auth',
+    '<rootDir>/libs/backend-core',
     '<rootDir>/libs/backend-github',
     '<rootDir>/libs/backend-grpc',
     '<rootDir>/libs/backend-mailer',

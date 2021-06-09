@@ -108,6 +108,27 @@
       "root": "libs/backend-auth",
       "sourceRoot": "libs/backend-auth/src"
     },
+    "backend-core": {
+      "architect": {
+        "lint": {
+          "builder": "@angular-eslint/builder:lint",
+          "options": {
+            "eslintConfig": "libs/backend-core/.eslintrc.json",
+            "lintFilePatterns": ["libs/backend-core/**/*.ts"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "options": {
+            "jestConfig": "libs/backend-core/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      },
+      "projectType": "library",
+      "root": "libs/backend-core",
+      "sourceRoot": "libs/backend-core/src"
+    },
     "backend-github": {
       "architect": {
         "lint": {
@@ -277,13 +298,6 @@
               "subscriptions-transport-ws"
             ],
             "aot": true,
-            "buildOptimizer": false,
-            "extractLicenses": true,
-            "namedChunks": true,
-            "optimization": false,
-            "outputHashing": "none",
-            "sourceMap": true,
-            "vendorChunk": true,
             "assets": [
               "apps/client/src/favicon.ico",
               "apps/client/src/assets",
@@ -307,18 +321,25 @@
                 "type": "anyComponentStyle"
               }
             ],
+            "buildOptimizer": false,
+            "extractLicenses": true,
             "index": "apps/client/src/index.html",
             "main": "apps/client/src/main.ts",
+            "namedChunks": true,
+            "optimization": false,
+            "outputHashing": "none",
             "outputPath": "dist/apps/client",
             "polyfills": "apps/client/src/polyfills.ts",
             "scripts": [],
+            "sourceMap": true,
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
               "apps/client/src/styles.scss",
               "libs/client-core/src/lib/styles/styles.scss"
             ],
-            "tsConfig": "apps/client/tsconfig.app.json"
+            "tsConfig": "apps/client/tsconfig.app.json",
+            "vendorChunk": true
           }
         },
         "extract-i18n": {
@@ -936,20 +957,6 @@
               "extract-files/public/extractFiles"
             ],
             "aot": true,
-            "buildOptimizer": false,
-            "extractLicenses": true,
-            "namedChunks": true,
-            "optimization": {
-              "fonts": false,
-              "scripts": false,
-              "styles": {
-                "minify": false,
-                "inlineCritical": false
-              }
-            },
-            "outputHashing": "none",
-            "sourceMap": true,
-            "vendorChunk": true,
             "assets": [
               "apps/documentation/src/favicon.ico",
               "apps/documentation/src/assets",
@@ -992,8 +999,20 @@
                 "type": "anyComponentStyle"
               }
             ],
+            "buildOptimizer": false,
+            "extractLicenses": true,
             "index": "apps/documentation/src/index.html",
             "main": "apps/documentation/src/main.ts",
+            "namedChunks": true,
+            "optimization": {
+              "fonts": false,
+              "scripts": false,
+              "styles": {
+                "inlineCritical": false,
+                "minify": false
+              }
+            },
+            "outputHashing": "none",
             "outputPath": "dist/apps/documentation",
             "polyfills": "apps/documentation/src/polyfills.ts",
             "scripts": [
@@ -1006,6 +1025,7 @@
               "node_modules/emoji-toolkit/lib/js/joypixels.min.js",
               "node_modules/katex/dist/katex.min.js"
             ],
+            "sourceMap": true,
             "styles": [
               "apps/documentation/src/styles.scss",
               "libs/client-core/src/lib/styles/styles.scss",
@@ -1016,7 +1036,8 @@
               "node_modules/prismjs/plugins/line-highlight/prism-line-highlight.css",
               "node_modules/katex/dist/katex.min.css"
             ],
-            "tsConfig": "apps/documentation/tsconfig.app.json"
+            "tsConfig": "apps/documentation/tsconfig.app.json",
+            "vendorChunk": true
           }
         },
         "build-storybook": {
@@ -1145,13 +1166,6 @@
               "subscriptions-transport-ws"
             ],
             "aot": true,
-            "buildOptimizer": false,
-            "extractLicenses": true,
-            "namedChunks": true,
-            "optimization": false,
-            "outputHashing": "none",
-            "sourceMap": true,
-            "vendorChunk": true,
             "assets": [
               "apps/portfolio/src/favicon.ico",
               "apps/portfolio/src/assets",
@@ -1175,18 +1189,25 @@
                 "type": "anyComponentStyle"
               }
             ],
+            "buildOptimizer": false,
+            "extractLicenses": true,
             "index": "apps/portfolio/src/index.html",
             "main": "apps/portfolio/src/main.ts",
+            "namedChunks": true,
+            "optimization": false,
+            "outputHashing": "none",
             "outputPath": "dist/apps/portfolio",
             "polyfills": "apps/portfolio/src/polyfills.ts",
             "scripts": [],
+            "sourceMap": true,
             "styles": [
               "node_modules/roboto-fontface/css/roboto/roboto-fontface.css",
               "node_modules/material-design-icon-fonts/iconfont/material-icons.css",
               "apps/portfolio/src/styles.scss",
               "libs/client-core/src/lib/styles/styles.scss"
             ],
-            "tsConfig": "apps/portfolio/tsconfig.app.json"
+            "tsConfig": "apps/portfolio/tsconfig.app.json",
+            "vendorChunk": true
           }
         },
         "extract-i18n": {

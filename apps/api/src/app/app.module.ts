@@ -1,4 +1,5 @@
 import { BackendAuthModule } from '@mono/backend-auth';
+import { BackendCoreModule } from '@mono/backend-core';
 import { BackendGithubModule } from '@mono/backend-github';
 import { BackendGrpcModule } from '@mono/backend-grpc';
 import { API_ENV } from '@mono/backend-interfaces';
@@ -20,6 +21,7 @@ import { environment } from '../environments/environment';
         maxRedirects: 5,
       }),
     }),
+    BackendCoreModule.forRoot(),
     BackendAuthModule.forRoot(),
     BackendMailerModule.forRoot(),
     BackendWebsocketModule.forRoot(),

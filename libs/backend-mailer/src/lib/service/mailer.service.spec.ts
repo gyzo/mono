@@ -1,3 +1,4 @@
+import { BackendDotenvService } from '@mono/backend-core';
 import { Test } from '@nestjs/testing';
 
 import { BackendMailerService } from './mailer.service';
@@ -7,7 +8,7 @@ describe('BackendMailerService', () => {
 
   beforeAll(async () => {
     const app = await Test.createTestingModule({
-      providers: [BackendMailerService],
+      providers: [BackendMailerService, BackendDotenvService],
     }).compile();
 
     service = app.get<BackendMailerService>(BackendMailerService);

@@ -1,28 +1,30 @@
+import { BackendDotenvService } from '@mono/backend-core';
 import { mono } from '@mono/proto';
 import { Injectable } from '@nestjs/common';
 import admin from 'firebase-admin';
 import * as nodemailer from 'nodemailer';
 import SMTPTransport from 'nodemailer/lib/smtp-transport';
-import * as process from 'process';
 import { Observable, Subscriber } from 'rxjs';
 
 @Injectable()
 export class BackendMailerService {
   private readonly smtpConfig: SMTPTransport.Options = {
-    host: process.env.MAILER_HOST ?? '',
-    port: Number(process.env.MAILER_PORT ?? 0),
+    host: this.dotenv.get('MAILER_HOST') ?? '',
+    port: Number(this.dotenv.get('MAILER_PORT') ?? 0),
     secure: true, // use SSL
     auth: {
       type: 'OAUTH2',
-      user: process.env.MAILER_EMAIL ?? '',
-      clientId: process.env.MAILER_CLIENT_ID ?? '',
-      clientSecret: process.env.MAILER_CLIENT_SECRET ?? '',
-      refreshToken: process.env.MAILER_REFRESH_TOKEN ?? '',
+      user: this.dotenv.get('MAILER_EMAIL') ?? '',
+      clientId: this.dotenv.get('MAILER_CLIENT_ID') ?? '',
+      clientSecret: this.dotenv.get('MAILER_CLIENT_SECRET') ?? '',
+      refreshToken: this.dotenv.get('MAILER_REFRESH_TOKEN') ?? '',
       accessToken: 'empty',
     },
   };
 
   public readonly mailTransporter = nodemailer.createTransport(this.smtpConfig);
+
+  constructor(private readonly dotenv: BackendDotenvService) {}
 
   private saveEmailToDB(email: mono.Email, subscriber: Subscriber<mono.Result>) {
     const entry = {
@@ -55,9 +57,9 @@ export class BackendMailerService {
    */
   private sendEmail(email: mono.Email) {
     const mailOptions = {
-      from: `"PORTFOLIO 👥" <${process.env.MAILER_EMAIL}>`,
-      to: process.env.MAILER_RECIPIENT_EMAIL,
-      subject: `PORTFOLIO: ${email.header} ✔`,
+      from: `"MONO 👥" <${this.dotenv.get('MAILER_EMAIL')}>`,
+      to: this.dotenv.get('MAILER_RECIPIENT_EMAIL'),
+      subject: `MONO: ${email.header} ✔`,
       text: `${email.message}\n\nMessage was sent from domain: ${email.domain}`,
       html: `<h3>${email.header}</h3>
       <p>${email.message}</p>
