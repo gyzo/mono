@@ -1,3 +1,4 @@
+import { BackendDotenvService } from '@mono/backend-core';
 import { JwtModule } from '@nestjs/jwt';
 import { Test, TestingModule } from '@nestjs/testing';
 
@@ -15,7 +16,7 @@ describe('BackendMailerController', () => {
         }),
       ],
       controllers: [BackendMailerController],
-      providers: [BackendMailerService],
+      providers: [BackendMailerService, BackendDotenvService],
     }).compile();
   });
 
