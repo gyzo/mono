@@ -1,4 +1,15 @@
-import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, Input, OnChanges, SimpleChange, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  ChangeDetectionStrategy,
+  Component,
+  ElementRef,
+  Inject,
+  Input,
+  OnChanges,
+  SimpleChange,
+  ViewChild,
+} from '@angular/core';
+import { WINDOW } from '@mono/client-util';
 
 import { IDrawForceDirectedChartOptions, IForceDirectedChartData } from '../../interfaces/force-directed-chart.interface';
 import { drawForceDirectedChart } from '../../util/force-directed-chart.util';
@@ -28,15 +39,17 @@ export class AppForceDirectedChartComponent implements AfterViewInit, OnChanges 
    */
   @ViewChild('container') private readonly container?: ElementRef<HTMLDivElement>;
 
+  constructor(@Inject(WINDOW) private readonly win: Window) {}
+
   private chartOptions() {
     const margin = { top: 50, right: 50, bottom: 50, left: 50 };
-    const minWidth = 300;
+    const minWidth = 600;
     const modifiers = {
       width: 10,
       height: 20,
     };
-    const width = Math.min(minWidth, window.innerWidth - modifiers.width) - margin.left - margin.right;
-    const height = Math.min(width, window.innerHeight - margin.top - margin.bottom - modifiers.height);
+    const width = Math.min(minWidth, this.win.innerWidth - modifiers.width) - margin.left - margin.right;
+    const height = Math.min(width, this.win.innerHeight - margin.top - margin.bottom - modifiers.height);
     const options: Partial<IDrawForceDirectedChartOptions> = {
       w: width,
       h: height,
@@ -63,7 +76,9 @@ export class AppForceDirectedChartComponent implements AfterViewInit, OnChanges 
    * Redraws chart on changes.
    */
   public ngOnChanges(changes: IInputChanges): void {
-    if (Boolean(changes.data?.currentValue)) {
+    const prevData: IForceDirectedChartData | undefined = changes.data?.previousValue;
+    const nextData: IForceDirectedChartData | undefined = changes.data?.currentValue;
+    if (Boolean(changes.data?.currentValue) && (prevData?.nodes ?? []).length !== (nextData?.nodes ?? []).length) {
       this.drawChart();
     }
   }
