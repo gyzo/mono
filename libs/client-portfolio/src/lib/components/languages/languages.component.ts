@@ -64,16 +64,16 @@ export class AppPortfolioLanguagesComponent implements OnChanges {
       img: app.imgRef,
       linksCount: 0,
     }));
+    const nodes: IForceDirectedChartDataNode[] = [...domains, ...entities];
     const links: IForceDirectedChartData['links'] = [...this.userConfig.apps]
       .map(app => {
-        const source = entities.findIndex(value => value.name === app.name);
+        const source = nodes.findIndex(value => value.name === app.name);
         const repoData = this.githubRepos.find(item => item.html_url === app.urls.repo);
-        const target = domains.findIndex(value => value.domain === repoData?.language);
+        const target = nodes.findIndex(value => value.domain === repoData?.language);
         const link = { source, target };
         return link;
       })
-      .filter(link => typeof link.target === 'undefined');
-    const nodes: IForceDirectedChartDataNode[] = [...domains, ...entities];
+      .filter(link => link.source !== -1 && link.target !== -1 && typeof link.target !== 'undefined');
     const chartData = {
       domains,
       entities,

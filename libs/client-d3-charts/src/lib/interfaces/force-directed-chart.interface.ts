@@ -17,7 +17,7 @@ export interface IForceDirectedChartDataNode extends d3.SimulationNodeDatum {
   index: number;
   domain?: string;
   value?: number;
-  username?: string;
+  name?: string;
   pic?: string;
   linksCount?: number;
 }
@@ -32,7 +32,12 @@ export interface IForceDirectedChartData {
 export interface IDrawForceDirectedChartOptions {
   w: number;
   h: number;
-  charge: number;
+  centerCalcMod: number;
+  charge: {
+    strength: number;
+    theta: number;
+    distanceMax: number;
+  };
   distance: number;
   fontSize: number;
   collisionRadius: number;

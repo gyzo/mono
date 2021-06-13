@@ -23,17 +23,6 @@
       }
     },
     {
-      "imgRef": "assets/logos/firebase-logo.svg",
-      "name": "Upgraded Enigma",
-      "description": "Organizer and productivity tools monorepo: Nx, Angular, Angular Elements, Electron, NodeJS, NestJS, Firebase",
-      "tag": "angular",
-      "urls": {
-        "android": "",
-        "repo": "https://github.com/upgraded-enigma/upgraded-enigma",
-        "web": "https://upgraded-enigma-documentation.web.app/"
-      }
-    },
-    {
       "imgRef": "assets/logos/swagger-logo.svg",
       "name": "Sample Swagger API Documentation",
       "description": "Sample api documentaiton based on Swagger.",
@@ -64,17 +53,6 @@
         "android": "",
         "repo": "https://github.com/rfprod/wdsdu",
         "web": "https://rfprod.github.io/wdsdu"
-      }
-    },
-    {
-      "imgRef": "assets/logos/bookdictionary-logo.svg",
-      "name": "Dictionaries",
-      "description": "Country codes, international telephone codes",
-      "tag": "other",
-      "urls": {
-        "android": "",
-        "repo": "https://github.com/rfprod/dictionaries",
-        "web": "https://rfprod.github.io/dictionaries"
       }
     }
   ],

@@ -43,7 +43,12 @@ export const drawForceDirectedChart = (
   const chartConfig: IDrawForceDirectedChartOptions = {
     w: 600,
     h: 600,
-    charge: -10,
+    centerCalcMod: 1.6,
+    charge: {
+      strength: -10,
+      theta: 0.6,
+      distanceMax: 2000,
+    },
     distance: 75,
     fontSize: 10,
     collisionRadius: 30,
@@ -202,12 +207,19 @@ export const drawForceDirectedChart = (
     .data(data.nodes)
     .enter()
     .append('text')
-    .text(val => val.domain ?? val.username ?? '');
+    .text(val => val.domain ?? val.name ?? '');
 
   force = d3
     .forceSimulation(data.nodes)
-    .force('charge', d3.forceManyBody().strength(chartConfig.charge))
-    .force('center', d3.forceCenter(chartConfig.w / 2, chartConfig.h / 2))
+    .force(
+      'link',
+      d3.forceLink().id(d => d.index ?? 0),
+    )
+    .force(
+      'charge',
+      d3.forceManyBody().strength(chartConfig.charge.strength).theta(chartConfig.charge.theta).distanceMax(chartConfig.charge.distanceMax),
+    )
+    .force('center', d3.forceCenter(chartConfig.w / chartConfig.centerCalcMod, chartConfig.h / chartConfig.centerCalcMod))
     .force(
       'collision',
       d3.forceCollide().radius(d => chartConfig.collisionRadius),
