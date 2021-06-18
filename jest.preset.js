@@ -1,21 +1,16 @@
 const nxPreset = require('@nrwl/jest/preset');
+
 module.exports = {
-  ...nxPreset,
+    ...nxPreset,
   testMatch: ['**/+(*.)+(spec|test).+(ts|js)?(x)'],
   globals: {
     'ts-jest': {
       tsconfig: '<rootDir>/tsconfig.spec.json',
       stringifyContentPathRegex: '\\.(html|svg)$',
-      astTransformers: {
-        before: [
-          'jest-preset-angular/build/InlineFilesTransformer',
-          'jest-preset-angular/build/StripStylesTransformer',
-        ],
-      },
     },
   },
   transform: {
-    '^.+\\.(ts|js|html)$': 'ts-jest',
+    '^.+\\.(ts|js|html)$': 'jest-preset-angular',
   },
   transformIgnorePatterns: ['node_modules/(?!@ngxs|simple-git)'],
   moduleFileExtensions: ['ts', 'html', 'js', 'json'],
@@ -30,5 +25,5 @@ module.exports = {
     },
   },
   collectCoverage: true,
-  cacheDirectory: '/tmp/jest_rs/nx-ng-starter',
+  cacheDirectory: '/tmp/jest_rs/mono',
 };
