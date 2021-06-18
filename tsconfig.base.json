@@ -37,6 +37,7 @@
       "@mono/backend-mailer": ["libs/backend-mailer/src/index.ts"],
       "@mono/backend-websocket": ["libs/backend-websocket/src/index.ts"],
       "@mono/client-chatbot": ["libs/client-chatbot/src/index.ts"],
+      "@mono/client-chatbot-store": ["libs/client-chatbot-store/src/index.ts"],
       "@mono/client-components": ["libs/client-components/src/index.ts"],
       "@mono/client-core": ["libs/client-core/src/index.ts"],
       "@mono/client-d3-charts": ["libs/client-d3-charts/src/index.ts"],
@@ -50,8 +51,7 @@
       "@mono/client-translate": ["libs/client-translate/src/index.ts"],
       "@mono/client-unit-testing": ["libs/client-unit-testing/src/index.ts"],
       "@mono/client-util": ["libs/client-util/src/index.ts"],
-      "@mono/proto": ["libs/proto/src/index.ts"],
-      "@mono/client-chatbot-store": ["libs/client-chatbot-store/src/index.ts"]
+      "@mono/proto": ["libs/proto/src/index.ts"]
     },
     "rootDir": ".",
     "skipDefaultLibCheck": true,
