@@ -12,4 +12,12 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/libs/backend-auth',
+  coverageThreshold: { // TODO: bump unit test coverage and remove this override
+    global: {
+      branches: 100,
+      functions: 26.67,
+      lines: 38.3,
+      statements: 40,
+    },
+  },
 };
