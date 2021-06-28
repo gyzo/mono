@@ -1079,6 +1079,22 @@
             "browserTarget": "documentation:build"
           }
         },
+        "storybook": {
+          "builder": "@nrwl/storybook:storybook",
+          "configurations": {
+            "ci": {
+              "quiet": true
+            }
+          },
+          "options": {
+            "config": {
+              "configFolder": "apps/documentation/.storybook"
+            },
+            "port": 4400,
+            "projectBuildConfig": "documentation",
+            "uiFramework": "@storybook/angular"
+          }
+        },
         "test": {
           "builder": "@nrwl/jest:jest",
           "options": {
