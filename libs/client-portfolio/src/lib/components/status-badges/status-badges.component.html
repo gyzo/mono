@@ -1,28 +1,31 @@
 <mat-chip-list>
   <mat-chip color="primary" *ngIf="github?.location" [selectable]="false" disabled>
-    <mat-icon color="primary">my_location</mat-icon>
-    &nbsp; Location: {{ github?.location }}
+    <mat-icon color="primary" matTooltip="Location">my_location</mat-icon>
+    &nbsp; <span fxHide fxShow.gt-sm>Location:</span>&nbsp;{{ github?.location }}
   </mat-chip>
 
-  <mat-chip color="primary" *ngIf="github?.email" [selectable]="false" disabled> Email: {{ github?.email }} </mat-chip>
-
-  <mat-chip color="primary" [selectable]="false" disabled>
-    <mat-icon color="primary">library_books</mat-icon>
-    &nbsp; Gists: {{ github?.public_gists }}
-  </mat-chip>
-
-  <mat-chip color="primary" [selectable]="false" disabled>
-    <mat-icon color="primary">code</mat-icon>
-    &nbsp; Repos: {{ github?.public_repos }}
+  <mat-chip color="primary" *ngIf="github?.email" [selectable]="false" disabled>
+    <mat-icon color="primary" matTooltip="Email">email</mat-icon>
+    &nbsp; <span fxHide fxShow.gt-sm>Email:</span>&nbsp;{{ github?.email }}
   </mat-chip>
 
   <mat-chip color="primary" [selectable]="false" disabled>
-    <mat-icon color="primary">date_range</mat-icon>
-    &nbsp; Created: {{ github?.created_at | date }}
+    <mat-icon color="primary" matTooltip="Gists">library_books</mat-icon>
+    &nbsp; <span fxHide fxShow.gt-sm>Gists:</span>&nbsp;{{ github?.public_gists }}
   </mat-chip>
 
   <mat-chip color="primary" [selectable]="false" disabled>
-    <mat-icon color="primary">update</mat-icon>
-    &nbsp; Updated: {{ github?.updated_at | date }}
+    <mat-icon color="primary" matTooltip="Repos">code</mat-icon>
+    &nbsp; <span fxHide fxShow.gt-sm>Repos:</span>&nbsp;{{ github?.public_repos }}
+  </mat-chip>
+
+  <mat-chip color="primary" [selectable]="false" disabled>
+    <mat-icon color="primary" matTooltip="Created">date_range</mat-icon>
+    &nbsp; <span fxHide fxShow.gt-sm>Created:</span>&nbsp;{{ github?.created_at | date }}
+  </mat-chip>
+
+  <mat-chip color="primary" [selectable]="false" disabled>
+    <mat-icon color="primary" matTooltip="Updated">update</mat-icon>
+    &nbsp; <span fxHide fxShow.gt-sm>Updated:</span>&nbsp;{{ github?.updated_at | date }}
   </mat-chip>
 </mat-chip-list>
