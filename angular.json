@@ -81,7 +81,7 @@
           }
         }
       },
-      "prefix": "api",
+      "prefix": "app",
       "projectType": "application",
       "root": "apps/api",
       "schematics": {},
@@ -391,7 +391,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "application",
       "root": "apps/client",
       "schematics": {
@@ -418,7 +418,7 @@
           }
         }
       },
-      "prefix": "mono",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-chatbot",
       "sourceRoot": "libs/client-chatbot/src"
@@ -440,7 +440,7 @@
           }
         }
       },
-      "prefix": "mono",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-chatbot-store",
       "sourceRoot": "libs/client-chatbot-store/src"
@@ -493,7 +493,7 @@
           }
         }
       },
-      "prefix": "mono",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-components",
       "schematics": {
@@ -547,7 +547,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-core",
       "schematics": {
@@ -574,7 +574,7 @@
           }
         }
       },
-      "prefix": "mono",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-d3-charts",
       "sourceRoot": "libs/client-d3-charts/src"
@@ -627,7 +627,7 @@
           }
         }
       },
-      "prefix": "mono",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-diagnostics",
       "schematics": {
@@ -708,7 +708,7 @@
           }
         }
       },
-      "prefix": "mono",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-interfaces",
       "sourceRoot": "libs/client-interfaces/src"
@@ -730,7 +730,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-material",
       "schematics": {
@@ -757,7 +757,7 @@
           }
         }
       },
-      "prefix": "mono",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-portfolio",
       "sourceRoot": "libs/client-portfolio/src"
@@ -779,7 +779,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-services",
       "schematics": {
@@ -806,7 +806,7 @@
           }
         }
       },
-      "prefix": "mono",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-sidebar",
       "sourceRoot": "libs/client-sidebar/src"
@@ -828,7 +828,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-store",
       "schematics": {
@@ -855,7 +855,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-translate",
       "schematics": {
@@ -882,7 +882,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-unit-testing",
       "schematics": {
@@ -909,7 +909,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/client-util",
       "schematics": {
@@ -1103,7 +1103,7 @@
           }
         }
       },
-      "prefix": "mono",
+      "prefix": "app",
       "projectType": "application",
       "root": "apps/documentation",
       "schematics": {
@@ -1275,7 +1275,7 @@
           }
         }
       },
-      "prefix": "mono",
+      "prefix": "app",
       "projectType": "application",
       "root": "apps/portfolio",
       "sourceRoot": "apps/portfolio/src"
@@ -1323,7 +1323,7 @@
           }
         }
       },
-      "prefix": "client",
+      "prefix": "app",
       "projectType": "library",
       "root": "libs/proto",
       "schematics": {
