@@ -1,7 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { sidebarUiActions } from '@mono/client-store';
+import { AppHttpProgressState, sidebarActions } from '@mono/client-store';
 import { Navigate } from '@ngxs/router-plugin';
 import { Store } from '@ngxs/store';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-sidebar-root',
@@ -10,6 +11,8 @@ import { Store } from '@ngxs/store';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppSidebarRootComponent {
+  public readonly loading$ = this.store.select(AppHttpProgressState.sidebarProgress).pipe(map(state => state.loading));
+
   constructor(private readonly store: Store) {}
 
   /**
@@ -17,7 +20,14 @@ export class AppSidebarRootComponent {
    * Propagates sidebar close event from UI to state store.
    */
   public sidebarCloseHandler(): void {
-    void this.store.dispatch(new sidebarUiActions.closeSidebar());
+    void this.store.dispatch(new sidebarActions.closeSidebar());
+  }
+
+  /**
+   * Closes sidebar, and navigate to info page.
+   */
+  public navigateToInfoPage(): void {
+    this.sidebarCloseHandler();
     void this.store.dispatch(new Navigate([{ outlets: { primary: 'info' } }]));
   }
 }

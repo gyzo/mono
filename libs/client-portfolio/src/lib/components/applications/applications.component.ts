@@ -1,7 +1,7 @@
 import { FlatTreeControl } from '@angular/cdk/tree';
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatTreeFlatDataSource, MatTreeFlattener } from '@angular/material/tree';
-import { AppGithubUserService, IUserConfig, sidebarUiActions } from '@mono/client-store';
+import { AppGithubUserService, IUserConfig, sidebarActions } from '@mono/client-store';
 import { Store } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 
@@ -107,6 +107,6 @@ export class AppPortfolioApplicationsComponent {
    * Closes sidebar.
    */
   public sidebarCloseHandler(): void {
-    void this.store.dispatch(new sidebarUiActions.closeSidebar());
+    void this.store.dispatch(new sidebarActions.closeSidebar());
   }
 }

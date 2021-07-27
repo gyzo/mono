@@ -76,7 +76,7 @@ const firebaseConfig = process.env.FIREBASE_CONFIG;
 /**
  * Initialize admin and export firebase functions only in cloud environment.
  */
-if (Boolean(firebaseConfig)) {
+if (typeof firebaseConfig !== 'undefined') {
   admin.initializeApp();
   /**
    * @note TODO: handle websocket events

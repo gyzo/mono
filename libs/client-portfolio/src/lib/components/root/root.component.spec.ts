@@ -7,7 +7,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientMaterialModule } from '@mono/client-material';
 import { AppGithubUserState, AppSidebarState } from '@mono/client-store';
-import { AppDummyComponent } from '@mono/client-unit-testing';
+import { AppTestingComponent } from '@mono/client-unit-testing';
 import { WINDOW, windowFactory } from '@mono/client-util';
 import { NgxsModule } from '@ngxs/store';
 
@@ -15,14 +15,14 @@ import { AppPortfolioRootComponent } from './root.component';
 
 describe('AppPortfolioRootComponent', () => {
   const testBedConfig: TestModuleMetadata = {
-    declarations: [AppPortfolioRootComponent, AppDummyComponent],
+    declarations: [AppPortfolioRootComponent, AppTestingComponent],
     imports: [
       BrowserDynamicTestingModule,
       NoopAnimationsModule,
       AppClientMaterialModule.forRoot(),
       FlexLayoutModule,
       NgxsModule.forRoot([AppGithubUserState, AppSidebarState]),
-      RouterTestingModule.withRoutes([{ path: '', component: AppDummyComponent }]),
+      RouterTestingModule.withRoutes([{ path: '', component: AppTestingComponent }]),
     ],
     providers: [
       { provide: WINDOW, useFactory: windowFactory },

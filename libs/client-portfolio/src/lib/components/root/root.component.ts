@@ -1,8 +1,8 @@
-import { ChangeDetectionStrategy, Component, HostBinding, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { DateAdapter } from '@angular/material/core';
-import { AppSidebarState, AppThemeState, sidebarUiActions, themeActions } from '@mono/client-store';
+import { AppSidebarState, sidebarActions, themeActions } from '@mono/client-store';
 import { Store } from '@ngxs/store';
-import { map, tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-portfolio-root',
@@ -11,17 +11,6 @@ import { map, tap } from 'rxjs/operators';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppPortfolioRootComponent implements OnInit {
-  @HostBinding('class.unicorn-dark-theme') public darkTheme = false;
-
-  /**
-   * Material theme state.
-   */
-  public readonly getTheme$ = this.store.select(AppThemeState.getTheme).pipe(
-    tap(theme => {
-      this.darkTheme = theme.darkThemeEnabled;
-    }),
-  );
-
   /**
    * Sidenav opened state.
    */
@@ -33,7 +22,7 @@ export class AppPortfolioRootComponent implements OnInit {
    * Synchronizes state when sidebar is closed.
    */
   public sidebarCloseHandler(): void {
-    void this.store.dispatch(new sidebarUiActions.closeSidebar());
+    void this.store.dispatch(new sidebarActions.closeSidebar());
   }
 
   /**
@@ -44,7 +33,7 @@ export class AppPortfolioRootComponent implements OnInit {
     const morning = 9;
     const evening = 18;
     const darkThemeEnabled = hours <= morning || hours >= evening ? true : false;
-    void this.store.dispatch(new themeActions.setThemeState({ darkThemeEnabled })).subscribe();
+    void this.store.dispatch(new themeActions.setState({ darkThemeEnabled })).subscribe();
   }
 
   /**

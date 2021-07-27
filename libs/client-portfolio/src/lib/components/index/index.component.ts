@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { AppGithubUserService, AppGithubUserState, defaultUserConfig, sidebarUiActions } from '@mono/client-store';
+import { AppGithubUserService, AppGithubUserState, defaultUserConfig, sidebarActions } from '@mono/client-store';
 import { WINDOW } from '@mono/client-util';
 import { Store } from '@ngxs/store';
 import { Subscription } from 'rxjs';
@@ -46,7 +46,7 @@ export class AppPortfolioIndexComponent {
   }
 
   public toggleSidenav(): void {
-    void this.store.dispatch(new sidebarUiActions.openSidebar());
+    void this.store.dispatch(new sidebarActions.openSidebar());
   }
 
   public showContactDialog(): void {

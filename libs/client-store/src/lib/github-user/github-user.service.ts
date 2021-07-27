@@ -11,9 +11,10 @@ import {
   IGuthubUser,
 } from './github-api.interface';
 import { AppGithubApiService } from './github-api.service';
+import { githubUserActions } from './github-user.actions';
 import { IUserConfig } from './github-user.config';
 import { GITHUB_USER_STATE_TOKEN, IUserService } from './github-user.interface';
-import { AppGithubUserState, userActions } from './github-user.store';
+import { AppGithubUserState } from './github-user.store';
 import { AppUserConfigService } from './github-user-config.service';
 
 @Injectable({
@@ -75,7 +76,7 @@ export class AppGithubUserService implements IUserService {
       concatMap((data: IUserConfig) => {
         const userConfig = data;
         const profiles = data.profiles;
-        return this.store.dispatch(new userActions.setUserState({ userConfig, profiles })).pipe(mapTo(data));
+        return this.store.dispatch(new githubUserActions.setUserState({ userConfig, profiles })).pipe(mapTo(data));
       }),
     );
   }
@@ -88,7 +89,7 @@ export class AppGithubUserService implements IUserService {
     return this.githubApi.getProfile(username).pipe(
       concatMap((data: IGuthubUser) => {
         const github = data;
-        return this.store.dispatch(new userActions.setUserState({ github })).pipe(mapTo(data));
+        return this.store.dispatch(new githubUserActions.setUserState({ github })).pipe(mapTo(data));
       }),
     );
   }
@@ -101,7 +102,7 @@ export class AppGithubUserService implements IUserService {
     return this.githubApi.getRepos(username).pipe(
       concatMap((data: IGithubUserRepo[]) => {
         const githubRepos = data;
-        return this.store.dispatch(new userActions.setUserState({ githubRepos })).pipe(mapTo(githubRepos));
+        return this.store.dispatch(new githubUserActions.setUserState({ githubRepos })).pipe(mapTo(githubRepos));
       }),
       concatMap((repos: IGithubUserRepo[]) => {
         const languageObservables: Observable<IGithubRepoLanguages>[] = [];
@@ -149,7 +150,7 @@ export class AppGithubUserService implements IUserService {
           githubLanguagesRate[lang] = ((githubLanguages[lang] * multiplier) / githubLanguagesTotal).toFixed(fixed);
         }
         void this.store.dispatch(
-          new userActions.setUserState({
+          new githubUserActions.setUserState({
             githubLanguagesTotal,
             githubLanguages,
             imgShow,
@@ -170,7 +171,7 @@ export class AppGithubUserService implements IUserService {
     return this.githubApi.getUserOrganizations(username).pipe(
       concatMap((githubOrgs: IGithubUserOrganization[]) => {
         this.githubOrgsSubject.next(githubOrgs);
-        return this.store.dispatch(new userActions.setUserState({ githubOrgs })).pipe(mapTo(githubOrgs));
+        return this.store.dispatch(new githubUserActions.setUserState({ githubOrgs })).pipe(mapTo(githubOrgs));
       }),
     );
   }
@@ -190,7 +191,7 @@ export class AppGithubUserService implements IUserService {
             }),
           )
           .subscribe();
-        return this.store.dispatch(new userActions.setUserState({ publicEvents })).pipe(mapTo(publicEvents));
+        return this.store.dispatch(new githubUserActions.setUserState({ publicEvents })).pipe(mapTo(publicEvents));
       }),
     );
   }

@@ -12,7 +12,8 @@ module.exports = {
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
   coverageDirectory: '../../coverage/libs/backend-github',
-  coverageThreshold: { // TODO: bump unit test coverage and remove this override
+  coverageThreshold: {
+    // TODO: bump unit test coverage and remove this override
     global: {
       branches: 12.5,
       functions: 21.05,

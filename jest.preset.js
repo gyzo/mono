@@ -1,7 +1,7 @@
 const nxPreset = require('@nrwl/jest/preset');
 
 module.exports = {
-    ...nxPreset,
+  ...nxPreset,
   testMatch: ['**/+(*.)+(spec|test).+(ts|js)?(x)'],
   globals: {
     'ts-jest': {
@@ -24,15 +24,7 @@ module.exports = {
       statements: 100,
     },
   },
-  collectCoverageFrom: [
-    "**/*.ts",
-    "!**/node_modules/**",
-    "!**/coverage/**",
-    "!**/generated/**",
-    "!**/grpc/**",
-    "!**/ts/**",
-    "!**/*.js"
-  ],
+  collectCoverageFrom: ['**/*.ts', '!**/node_modules/**', '!**/coverage/**', '!**/generated/**', '!**/grpc/**', '!**/ts/**', '!**/*.js'],
   collectCoverage: true,
   cacheDirectory: '/tmp/jest_rs/mono',
 };

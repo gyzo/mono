@@ -5,13 +5,13 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/testing';
 import { AppClientMaterialModule } from '@mono/client-material';
-import { AppDummyComponent } from '@mono/client-unit-testing';
+import { AppTestingComponent } from '@mono/client-unit-testing';
 
 import { AppPortfolioOrganizationsComponent } from './organizations.component';
 
 describe('AppPortfolioOrganizationsComponent', () => {
   const testBedConfig: TestModuleMetadata = {
-    declarations: [AppPortfolioOrganizationsComponent, AppDummyComponent],
+    declarations: [AppPortfolioOrganizationsComponent, AppTestingComponent],
     imports: [BrowserDynamicTestingModule, NoopAnimationsModule, HttpClientTestingModule, AppClientMaterialModule, FlexLayoutModule],
     schemas: [CUSTOM_ELEMENTS_SCHEMA],
   };

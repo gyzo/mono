@@ -66,9 +66,8 @@ export class AppPortfolioContactComponent {
    * Report result if it was commonly closed, or modified and closed, deleted,
    * or optionally use result provided via param.
    * Parent controller should listen to this event
-   * @param [result] result returned to parent component
    */
-  public closeDialog(result?: unknown) {
-    this.dialogRef.close(Boolean(result) ? result : 'closed');
+  public closeDialog() {
+    this.dialogRef.close('closed');
   }
 }

@@ -16,7 +16,7 @@ import {
   AppSidebarState,
   AppUserConfigService,
 } from '@mono/client-store';
-import { AppDummyComponent, testingEnvironment } from '@mono/client-unit-testing';
+import { AppTestingComponent, testingEnvironment } from '@mono/client-unit-testing';
 import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@mono/client-util';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NgxsModule, Store } from '@ngxs/store';
@@ -25,7 +25,7 @@ import { AppPortfolioLanguagesComponent } from './languages.component';
 
 describe('AppPortfolioLanguagesComponent', () => {
   const testBedConfig: TestModuleMetadata = {
-    declarations: [AppPortfolioLanguagesComponent, AppDummyComponent],
+    declarations: [AppPortfolioLanguagesComponent, AppTestingComponent],
     imports: [
       BrowserDynamicTestingModule,
       NoopAnimationsModule,
@@ -33,7 +33,7 @@ describe('AppPortfolioLanguagesComponent', () => {
       AppClientMaterialModule,
       FlexLayoutModule,
       NgxsModule.forRoot([AppGithubUserState, AppSidebarState]),
-      RouterTestingModule.withRoutes([{ path: '', component: AppDummyComponent }]),
+      RouterTestingModule.withRoutes([{ path: '', component: AppTestingComponent }]),
       TranslateModule.forRoot(),
     ],
     providers: [
