@@ -15,14 +15,28 @@ export class AppHttpProgressService {
       start: () => this.startProgress(),
       stop: () => this.stopProgress(),
       tapStopperObservable: <T>() => {
-        return tap<T>(
-          () => {
+        return tap<T>({
+          next: () => {
             this.handlers.mainView.stop();
           },
-          () => {
+          error: () => {
             this.handlers.mainView.stop();
           },
-        );
+        });
+      },
+    },
+    sidebar: {
+      start: () => void 0,
+      stop: () => void 0,
+      tapStopperObservable: <T>() => {
+        return tap<T>({
+          next: () => {
+            this.handlers.sidebar.stop();
+          },
+          error: () => {
+            this.handlers.sidebar.stop();
+          },
+        });
       },
     },
   };
@@ -33,7 +47,7 @@ export class AppHttpProgressService {
     this.progressRef.attach(new ComponentPortal<AppGlobalProgressBarComponent>(AppGlobalProgressBarComponent));
   }
 
-  private detachIndicator(): void {
+  public detachIndicator(): void {
     this.progressRef.detach();
   }
 
@@ -58,7 +72,7 @@ export const httpProgressServiceProvider: Provider = {
   useFactory: (overlay: Overlay) => {
     const progressRef: OverlayRef = overlay.create({
       hasBackdrop: true,
-      backdropClass: 'global-spinner-backdrop-dark',
+      backdropClass: '',
       positionStrategy: overlay.position().global().top(),
     });
     return new AppHttpProgressService(progressRef);

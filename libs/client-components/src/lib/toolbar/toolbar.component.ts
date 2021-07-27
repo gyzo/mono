@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { chatbotActions } from '@mono/client-chatbot-store';
-import { AppSidebarState, sidebarUiActions } from '@mono/client-store';
+import { AppSidebarState, sidebarActions } from '@mono/client-store';
 import { IToolbarButton } from '@mono/client-util';
 import { Store } from '@ngxs/store';
 import { map } from 'rxjs/operators';
@@ -14,17 +14,17 @@ import { map } from 'rxjs/operators';
 export class AppToolbarComponent {
   @Input() public buttons: IToolbarButton[] = [
     {
-      routerLink: [''],
+      routerLink: [{ outlets: { primary: [''], sidebar: [] } }],
       icon: 'home',
       title: 'Home',
     },
     {
-      routerLink: ['info'],
+      routerLink: [{ outlets: { primary: ['info'], sidebar: [] } }],
       icon: 'touch_app',
       title: 'API info',
     },
     {
-      routerLink: ['chatbot'],
+      routerLink: [{ outlets: { primary: ['chatbot'], sidebar: [] } }],
       icon: 'chat',
       title: 'Chat',
     },
@@ -34,15 +34,15 @@ export class AppToolbarComponent {
 
   constructor(public readonly store: Store) {}
 
-  public sidebarCloseHandler(): void {
-    void this.store.dispatch(new sidebarUiActions.closeSidebar());
-  }
-
-  public sidebarOpenHandler(): void {
-    void this.store.dispatch(new sidebarUiActions.openSidebar());
+  public toggleSidebar(): void {
+    void this.store.dispatch(new sidebarActions.toggleSidebar());
   }
 
   public toggleChatbot(): void {
     void this.store.dispatch(new chatbotActions.toggle());
+  }
+
+  public sidebarCloseHandler(): void {
+    void this.store.dispatch(new sidebarActions.setState({ sidebarOpened: false }));
   }
 }

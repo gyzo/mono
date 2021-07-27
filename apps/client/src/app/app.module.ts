@@ -4,12 +4,13 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { AppClientComponentsModule } from '@mono/client-components';
 import { AppClientCoreModule } from '@mono/client-core';
 import { AppClientMaterialModule } from '@mono/client-material';
-import { AppClientStoreModule } from '@mono/client-store';
+import { AppClientStoreModule, AppUserState } from '@mono/client-store';
 import { AppClientTranslateModule } from '@mono/client-translate';
 import { EntityServiceClient } from '@mono/proto';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsRouterPluginModule } from '@ngxs/router-plugin';
+import { NgxsStoragePluginModule } from '@ngxs/storage-plugin';
 import { NgxsModule } from '@ngxs/store';
 
 import { environment } from '../environments/environment';
@@ -30,6 +31,9 @@ export const grpcProviders: Provider[] = [
   imports: [
     BrowserAnimationsModule,
     NgxsModule.forRoot([], { developmentMode: !environment.production }),
+    NgxsStoragePluginModule.forRoot({
+      key: [AppUserState],
+    }),
     NgxsLoggerPluginModule.forRoot({ disabled: environment.production, collapsed: true }),
     NgxsRouterPluginModule.forRoot(),
     NgxsFormPluginModule.forRoot(),

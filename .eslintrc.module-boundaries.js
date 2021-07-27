@@ -4,34 +4,15 @@
 const typeConstraints = [
   {
     sourceTag: 'type:application',
-    onlyDependOnLibsWithTags: [
-      'type:feature',
-      'type:store',
-      'type:data-access',
-      'type:ui',
-      'type:util',
-      'type:unit-testing',
-    ],
+    onlyDependOnLibsWithTags: ['type:feature', 'type:store', 'type:data-access', 'type:ui', 'type:util', 'type:unit-testing'],
   },
   {
     sourceTag: 'type:feature',
-    onlyDependOnLibsWithTags: [
-      'type:store',
-      'type:data-access',
-      'type:ui',
-      'type:util',
-      'type:unit-testing',
-    ],
+    onlyDependOnLibsWithTags: ['type:store', 'type:data-access', 'type:ui', 'type:util', 'type:unit-testing'],
   },
   {
     sourceTag: 'type:ui',
-    onlyDependOnLibsWithTags: [
-      'type:store',
-      'type:data-access',
-      'type:ui',
-      'type:util',
-      'type:unit-testing',
-    ],
+    onlyDependOnLibsWithTags: ['type:store', 'type:data-access', 'type:ui', 'type:util', 'type:unit-testing'],
   },
   {
     sourceTag: 'type:data-access',
@@ -266,11 +247,6 @@ const clientConstraints = [
  */
 exports.nxModuleBoundaryRules = {
   enforceBuildableLibDependency: true,
-  allow: ['client-unit-testing'], // TODO: remove all library imports from client-unit-testing
-  depConstraints: [
-    ...sharedConstraints,
-    ...clientConstraints,
-    ...backendConstraints,
-    ...typeConstraints,
-  ],
+  allow: [],
+  depConstraints: [...sharedConstraints, ...clientConstraints, ...backendConstraints, ...typeConstraints],
 };

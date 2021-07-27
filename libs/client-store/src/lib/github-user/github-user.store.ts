@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Action, Selector, State, StateContext } from '@ngxs/store';
 
-import { setUserState } from './github-user.actions';
+import { githubUserActions } from './github-user.actions';
 import { GITHUB_USER_STATE_TOKEN, IGithubUserState, TUserPayload } from './github-user.interface';
-
-export const userActions = {
-  setUserState,
-};
 
 @State<IGithubUserState>({
   name: GITHUB_USER_STATE_TOKEN,
@@ -48,7 +44,7 @@ export class AppGithubUserState {
    * @param ctx
    * @param param1
    */
-  @Action(setUserState)
+  @Action(githubUserActions.setUserState)
   public setUserState(ctx: StateContext<IGithubUserState>, { payload }: TUserPayload) {
     return ctx.patchState(payload);
   }

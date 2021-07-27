@@ -11,7 +11,7 @@ export interface IAppHttpApiState {
   pingMailer: string;
 }
 
-export interface IAppHttpApiStatePayload {
+export interface IPingPayload {
   pingAuth?: string;
   pingMailer?: string;
 }

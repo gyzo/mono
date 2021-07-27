@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { AppSidebarState, sidebarUiActions } from '@mono/client-store';
+import { AppSidebarState, sidebarActions } from '@mono/client-store';
 import { Store } from '@ngxs/store';
 import { map } from 'rxjs/operators';
 
@@ -15,10 +15,10 @@ export class AppContentComponent {
   constructor(private readonly store: Store) {}
 
   public sidebarCloseHandler(): void {
-    void this.store.dispatch(new sidebarUiActions.closeSidebar());
+    void this.store.dispatch(new sidebarActions.closeSidebar());
   }
 
   public sidebarOpenHandler(): void {
-    void this.store.dispatch(new sidebarUiActions.openSidebar());
+    void this.store.dispatch(new sidebarActions.openSidebar());
   }
 }

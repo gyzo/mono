@@ -3,13 +3,7 @@ import { Action, Selector, State, StateContext } from '@ngxs/store';
 import { tap } from 'rxjs/operators';
 
 import { pingAuth, pingMailer } from './http-api.actions';
-import {
-  HTTP_API_STATE_TOKEN,
-  httpApiInitialState,
-  IAppHttpApiState,
-  IAppHttpApiStatePayload,
-  THttpApiPayload,
-} from './http-api.interface';
+import { HTTP_API_STATE_TOKEN, httpApiInitialState, IAppHttpApiState, IPingPayload, THttpApiPayload } from './http-api.interface';
 import { AppHttpApiService } from './http-api.service';
 
 export const httpApiActions = {
@@ -41,7 +35,7 @@ export class AppHttpApiState {
   public pingAuth(ctx: StateContext<IAppHttpApiState>, { payload }: THttpApiPayload) {
     return this.api.pingAuth().pipe(
       tap(result => {
-        const pingPayload: IAppHttpApiStatePayload = {
+        const pingPayload: IPingPayload = {
           pingAuth: result.message,
         };
         ctx.patchState(pingPayload);
@@ -53,7 +47,7 @@ export class AppHttpApiState {
   public pingMailer(ctx: StateContext<IAppHttpApiState>, { payload }: THttpApiPayload) {
     return this.api.pingMailer().pipe(
       tap(result => {
-        const pingPayload: IAppHttpApiStatePayload = {
+        const pingPayload: IPingPayload = {
           pingMailer: result.message,
         };
         ctx.patchState(pingPayload);

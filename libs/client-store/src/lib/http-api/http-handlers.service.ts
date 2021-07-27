@@ -8,7 +8,7 @@ import memo from 'memo-decorator';
 import { Observable, throwError } from 'rxjs';
 import { catchError, finalize, take, timeout } from 'rxjs/operators';
 
-import { httpProgressActions } from '../http-progress/http-progress.store';
+import { httpProgressActions } from '../http-progress/http-progress.actions';
 
 /**
  * Handlers to work with http requests.
@@ -77,6 +77,6 @@ export class AppHttpHandlersService {
     if (unauthorized) {
       void this.store.dispatch(new Navigate(['/']));
     }
-    return throwError(new Error(errorMessage));
+    return throwError(() => new Error(errorMessage));
   }
 }

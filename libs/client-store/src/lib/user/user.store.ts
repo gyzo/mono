@@ -1,13 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Action, Selector, State, StateContext, Store } from '@ngxs/store';
+import { Action, Selector, State, StateContext } from '@ngxs/store';
 
-import { setState } from './user.actions';
+import { userActions } from './user.actions';
 import { IUserState, TUserPayload, USER_STATE_TOKEN, userInitialState } from './user.interface';
-import { AppUserService } from './user.service';
-
-export const userActions = {
-  setState,
-};
 
 @State<IUserState>({
   name: USER_STATE_TOKEN,
@@ -17,11 +12,6 @@ export const userActions = {
 })
 @Injectable()
 export class AppUserState {
-  constructor(private readonly store: Store, private readonly api: AppUserService) {
-    const user = this.api.restoreUser();
-    void this.store.dispatch(new userActions.setState(user)).subscribe();
-  }
-
   @Selector()
   public static model(state: IUserState) {
     return state;
@@ -42,14 +32,13 @@ export class AppUserState {
     return state.admin;
   }
 
-  @Action(setState)
+  @Action(userActions.setState)
   public setState(ctx: StateContext<IUserState>, { payload }: TUserPayload) {
     const currentState: IUserState = ctx.getState();
     const email = typeof payload.email !== 'undefined' ? payload.email : currentState.email;
     const admin = typeof payload.admin === 'boolean' ? payload.admin : currentState.admin;
     const token = typeof payload.token !== 'undefined' ? payload.token : currentState.token;
     const newState: IUserState = { email, admin, token };
-    this.api.saveUser(newState);
     return ctx.patchState(newState);
   }
 }

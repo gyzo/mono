@@ -11,7 +11,7 @@ import { BrowserDynamicTestingModule } from '@angular/platform-browser-dynamic/t
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientMaterialModule } from '@mono/client-material';
 import { AppEmailService, AppHttpHandlersService } from '@mono/client-store';
-import { AppDialogRefMock, AppDummyComponent, testingEnvironment } from '@mono/client-unit-testing';
+import { AppDialogRefMock, AppTestingComponent, testingEnvironment } from '@mono/client-unit-testing';
 import { IWebClientAppEnvironment, WEB_CLIENT_APP_ENV, WINDOW, windowFactory } from '@mono/client-util';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { NgxsModule, Store } from '@ngxs/store';
@@ -22,7 +22,7 @@ describe('AppPortfolioContactComponent', () => {
   const MOCKED_MODAL_DATA: Record<string, unknown> = {};
 
   const testBedConfig: TestModuleMetadata = {
-    declarations: [AppPortfolioContactComponent, AppDummyComponent],
+    declarations: [AppPortfolioContactComponent, AppTestingComponent],
     imports: [
       BrowserDynamicTestingModule,
       NoopAnimationsModule,
@@ -32,7 +32,7 @@ describe('AppPortfolioContactComponent', () => {
       AppClientMaterialModule,
       NgxsModule.forRoot([]),
       FlexLayoutModule,
-      RouterTestingModule.withRoutes([{ path: '', component: AppDummyComponent }]),
+      RouterTestingModule.withRoutes([{ path: '', component: AppTestingComponent }]),
       TranslateModule.forRoot(),
     ],
     providers: [

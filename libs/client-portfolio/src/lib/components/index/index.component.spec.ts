@@ -4,7 +4,7 @@ import { ComponentFixture, TestBed, TestModuleMetadata, waitForAsync } from '@an
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppClientMaterialModule } from '@mono/client-material';
 import { AppGithubUserService, AppGithubUserState } from '@mono/client-store';
-import { AppDummyComponent, getTestBedConfig, newTestBedMetadata } from '@mono/client-unit-testing';
+import { AppTestingComponent, getTestBedConfig, newTestBedMetadata } from '@mono/client-unit-testing';
 import { NgxsModule } from '@ngxs/store';
 import { of } from 'rxjs';
 
@@ -16,7 +16,7 @@ describe('AppPortfolioIndexComponent', () => {
     imports: [
       AppClientMaterialModule,
       NgxsModule.forFeature([AppGithubUserState]),
-      RouterTestingModule.withRoutes([{ path: '', component: AppDummyComponent }]),
+      RouterTestingModule.withRoutes([{ path: '', component: AppTestingComponent }]),
     ],
     providers: [
       {

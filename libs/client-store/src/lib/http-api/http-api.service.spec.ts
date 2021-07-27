@@ -7,7 +7,6 @@ import { of } from 'rxjs';
 
 import { AppHttpProgressStoreModule, httpProgressModuleProviders } from '../http-progress/http-progress.module';
 import { AppToasterService, toasterServiceProvider } from '../http-progress/services/toaster/toaster.service';
-import { AppUserService } from '../user/user.service';
 import { AppHttpApiService } from './http-api.service';
 import { AppHttpHandlersService } from './http-handlers.service';
 
@@ -21,7 +20,6 @@ describe('AppHttpApiService', () => {
   let service: AppHttpApiService;
   let httpHandlers: AppHttpHandlersService;
   let toaster: AppToasterService;
-  let user: AppUserService;
   let spy: {
     httpHandlers: {
       pipeHttpResponse: jest.SpyInstance;
@@ -39,7 +37,6 @@ describe('AppHttpApiService', () => {
           service = TestBed.inject(AppHttpApiService);
           toaster = TestBed.inject(AppToasterService);
           httpHandlers = TestBed.inject(AppHttpHandlersService);
-          user = TestBed.inject(AppUserService);
           spy = {
             httpHandlers: {
               pipeHttpResponse: jest.spyOn(httpHandlers, 'pipeHttpResponse').mockReturnValue(of({})),
@@ -61,6 +58,5 @@ describe('AppHttpApiService', () => {
   it('should exist', () => {
     expect(service).toBeTruthy();
     expect(toaster).toBeDefined();
-    expect(user).toBeDefined();
   });
 });
